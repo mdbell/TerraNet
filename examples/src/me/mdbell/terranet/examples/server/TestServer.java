@@ -1,4 +1,4 @@
-package me.mdbell.terranet;
+package me.mdbell.terranet.examples.server;
 
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.server.ConnectionCtx;

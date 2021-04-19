@@ -1,10 +1,9 @@
-package me.mdbell.terranet;
+package me.mdbell.terranet.examples.client;
 
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
