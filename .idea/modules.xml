@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TerraNet.iml" filepath="$PROJECT_DIR$/TerraNet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bus/bus.iml" filepath="$PROJECT_DIR$/bus/bus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bus-greenrobot/bus-greenrobot.iml" filepath="$PROJECT_DIR$/bus-greenrobot/bus-greenrobot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client-netty/client-netty.iml" filepath="$PROJECT_DIR$/client-netty/client-netty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy/proxy.iml" filepath="$PROJECT_DIR$/proxy/proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-netty/server-netty.iml" filepath="$PROJECT_DIR$/server-netty/server-netty.iml" />
+    </modules>
+  </component>
+</project>
