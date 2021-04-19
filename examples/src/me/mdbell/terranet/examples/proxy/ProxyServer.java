@@ -66,6 +66,7 @@ public class ProxyServer {
                 logger.error("Exception closing local", e);
             }
             proxyMap.remove(conn);
+            event.consume();
         }
     }
 
@@ -85,6 +86,7 @@ public class ProxyServer {
             ctx = proxyMap.get(conn);
         }
         ctx.send(message);
+        event.consume();
     }
 
     @Subscribe
@@ -96,6 +98,7 @@ public class ProxyServer {
                 .filter(entry -> entry.getValue().equals(ctx))
                 .map(Map.Entry::getKey).findFirst().get();
         conn.send(message);
+        event.consume();
     }
 
     public static void main(String[] args) throws Exception {
