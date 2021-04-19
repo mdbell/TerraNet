@@ -20,4 +20,12 @@ public class BufferedModule extends NetModuleMessage {
     public ByteBuffer buffer(){
         return buffer;
     }
+
+    @Override
+    public String toString() {
+        return "BufferedModule{" +
+                "modId=" + modId() +
+                ",buffer=" + buffer +
+                '}';
+    }
 }
