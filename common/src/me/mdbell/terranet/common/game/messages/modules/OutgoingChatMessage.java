@@ -26,6 +26,11 @@ public class OutgoingChatMessage extends NetModuleMessage {
         return text;
     }
 
+    public OutgoingChatMessage text(String text){
+        this.text = NetworkText.literal(text);
+        return this;
+    }
+
     public OutgoingChatMessage text(NetworkText text){
         this.text = text;
         return this;
