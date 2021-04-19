@@ -12,7 +12,7 @@ public class MITMProxyServer extends ProxyServer {
     }
 
     @Override
-    public void onClientMessage(ClientMessageEvent event) {
+    public void onOutgoingMessage(ClientMessageEvent event) {
         if(event.message() instanceof OutgoingChatMessage) {
             OutgoingChatMessage message = (OutgoingChatMessage)event.message();
             NetworkText text = message.text();
@@ -21,7 +21,7 @@ public class MITMProxyServer extends ProxyServer {
                 message.color(Color.GREEN);
             }
         }
-        super.onClientMessage(event);
+        super.onOutgoingMessage(event);
     }
 
     public static void main(String[] args) throws Exception {

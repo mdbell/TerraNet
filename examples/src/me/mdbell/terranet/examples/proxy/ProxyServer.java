@@ -71,7 +71,7 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onServerMessage(ServerMessageEvent event) {
+    public void onIncomingMessage(ServerMessageEvent event) {
         GameMessage message = event.message();
         ConnectionCtx conn = event.source();
         ClientCtx ctx;
@@ -90,7 +90,7 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onClientMessage(ClientMessageEvent event) {
+    public void onOutgoingMessage(ClientMessageEvent event) {
         ClientCtx ctx = event.source();
         GameMessage message = event.message();
         ConnectionCtx conn = proxyMap.entrySet()
