@@ -1,14 +1,33 @@
 package me.mdbell.terranet.examples.proxy.mitm;
 
 import me.mdbell.terranet.client.events.ClientMessageEvent;
+import me.mdbell.terranet.common.game.messages.GameMessage;
+import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.util.Color;
 import me.mdbell.terranet.common.util.NetworkText;
 import me.mdbell.terranet.examples.proxy.ProxyServer;
+import me.mdbell.terranet.server.events.ServerMessageEvent;
 
 public class MITMProxyServer extends ProxyServer {
     public MITMProxyServer(String remoteHost, int remotePort, int localPort) {
         super(remoteHost, remotePort, localPort);
+    }
+
+    @Override
+    public void onIncomingMessage(ServerMessageEvent event) {
+        GameMessage message = event.message();
+        if(message instanceof IncomingChatMessage) {
+            String text = ((IncomingChatMessage)message).message();
+            if("/ping".equalsIgnoreCase(text)) {
+                event.source().send(new OutgoingChatMessage()
+                        .author(-1)
+                        .color(Color.GREEN)
+                        .text("pong"));
+                return;
+            }
+        }
+        super.onIncomingMessage(event);
     }
 
     @Override
