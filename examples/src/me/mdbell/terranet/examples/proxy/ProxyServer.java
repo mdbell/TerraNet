@@ -1,6 +1,7 @@
 package me.mdbell.terranet.examples.proxy;
 
 import me.mdbell.bus.Subscribe;
+import me.mdbell.terranet.ConnectionState;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
@@ -9,10 +10,12 @@ import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
+import me.mdbell.terranet.server.events.ServerConnectionEvent;
 import me.mdbell.terranet.server.events.ServerMessageEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +47,26 @@ public class ProxyServer {
         logger.info("Listening for connections!");
 
         ctx.awaitClose();
+    }
+
+    @Subscribe
+    public void onServerConnectionEvent(ServerConnectionEvent event) {
+        if(event.message() == ConnectionState.DEREGISTER) {
+            ConnectionCtx conn = event.source();
+            ClientCtx ctx = proxyMap.get(conn);
+            try {
+                //TODO write disconnect message
+                ctx.close();
+            } catch (IOException e) {
+                logger.error("Exception closing remote", e);
+            }
+            try {
+                conn.close();
+            } catch (IOException e) {
+                logger.error("Exception closing local", e);
+            }
+            proxyMap.remove(conn);
+        }
     }
 
     @Subscribe
