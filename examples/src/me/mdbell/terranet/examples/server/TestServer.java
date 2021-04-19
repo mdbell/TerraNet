@@ -13,7 +13,7 @@ public class TestServer {
 
     private static final Logger logger = LoggerFactory.getLogger(TestServer.class);
 
-    private int port;
+    private final int port;
 
     public TestServer(int listenPort) {
         this.port = listenPort;

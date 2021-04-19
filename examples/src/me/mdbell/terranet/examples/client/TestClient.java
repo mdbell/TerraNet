@@ -13,8 +13,8 @@ public class TestClient {
 
     private static final Logger logger = LoggerFactory.getLogger(TestClient.class);
 
-    private String host;
-    private int port;
+    private final String host;
+    private final int port;
 
     public TestClient(String host, int port) {
         this.host = host;
