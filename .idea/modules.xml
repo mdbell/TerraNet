@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/TerraNet.iml" filepath="$PROJECT_DIR$/TerraNet.iml" />
       <module fileurl="file://$PROJECT_DIR$/bus/bus.iml" filepath="$PROJECT_DIR$/bus/bus.iml" />
       <module fileurl="file://$PROJECT_DIR$/bus-greenrobot/bus-greenrobot.iml" filepath="$PROJECT_DIR$/bus-greenrobot/bus-greenrobot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bus-internal/bus-internal.iml" filepath="$PROJECT_DIR$/bus-internal/bus-internal.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/client-netty/client-netty.iml" filepath="$PROJECT_DIR$/client-netty/client-netty.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />

@@ -2,8 +2,12 @@ package me.mdbell.bus.internal;
 
 import me.mdbell.bus.IBusEvent;
 import me.mdbell.bus.IEventBus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class InternalEventBus<S> implements IEventBus<S> {
+
+    private static final Logger logger = LoggerFactory.getLogger(InternalEventBus.class);
 
     @Override
     public <T> void post(IBusEvent<S, T> event) {
