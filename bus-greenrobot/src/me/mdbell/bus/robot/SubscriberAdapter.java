@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,13 @@ class SubscriberAdapter implements SubscriberInfoIndex {
             if (m.getParameterCount() > 1) {
                 logger.warn("Method {} has more then one parameter in bus, skipping!", m);
                 continue;
+            }
+            if (Modifier.isStatic(m.getModifiers())) {
+                logger.warn("Method {} is static, event receiver need to be non-static!", m);
+                continue;
+            }
+            if (!Modifier.isPublic(m.getModifiers())) {
+                logger.warn("Method {} is not public. We will still use it as a receiver, but this may change in a future release", m);
             }
             Class<?> eventType = m.getParameterTypes()[0];
             m.setAccessible(true);
