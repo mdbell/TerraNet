@@ -13,4 +13,12 @@ public abstract class GameMessage implements Opcodes {
     public final int getId(){
         return id;
     }
+
+    public int modId(){
+        return -1;
+    }
+
+    public boolean isServer(){
+        return false;
+    }
 }

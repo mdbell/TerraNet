@@ -2,6 +2,7 @@ package me.mdbell.terranet.examples.proxy;
 
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.ConnectionState;
+import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
@@ -75,7 +76,7 @@ public class ProxyServer {
         GameMessage message = event.message();
         ConnectionCtx conn = event.source();
         ClientCtx ctx;
-        if (message instanceof ConnectionMessage) {
+        if (message.getId() == Opcodes.OP_CONNECT) {
             if (proxyMap.containsKey(conn)) {
                 logger.debug("Attempted to open a connection on an already open one?");
                 return;

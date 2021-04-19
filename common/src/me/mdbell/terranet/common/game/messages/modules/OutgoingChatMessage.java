@@ -46,6 +46,11 @@ public class OutgoingChatMessage extends NetModuleMessage {
     }
 
     @Override
+    public final boolean isServer() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "OutgoingChatMessage{" +
                 "author=" + author +
