@@ -77,7 +77,7 @@ class SubscriberAdapter implements SubscriberInfoIndex {
 
         @Override
         public boolean shouldCheckSuperclass() {
-            return false; //TODO implement
+            return false;
         }
     }
 }
