@@ -7,7 +7,9 @@ import me.mdbell.terranet.common.net.IReceivable;
 import me.mdbell.terranet.common.net.ISendable;
 import me.mdbell.terranet.server.events.ServerMessageEvent;
 
-public abstract class ConnectionCtx implements ISendable, IReceivable {
+import java.io.Closeable;
+
+public abstract class ConnectionCtx implements ISendable, IReceivable, Closeable {
 
     private static final IEventBus<ConnectionCtx> bus = EventBusFactory.getDefaultFactory().getOrCreate(ConnectionCtx.class);
 

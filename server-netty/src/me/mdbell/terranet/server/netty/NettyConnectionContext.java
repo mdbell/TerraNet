@@ -5,6 +5,8 @@ import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
 
+import java.io.IOException;
+
 final class NettyConnectionContext extends ConnectionCtx {
 
     private final ChannelHandlerContext ctx;
@@ -17,5 +19,13 @@ final class NettyConnectionContext extends ConnectionCtx {
     @Override
     public void send(GameMessage message) {
         ctx.writeAndFlush(message);
+    }
+
+    @Override
+    public void close() throws IOException {
+        try {
+            ctx.close().sync();
+        } catch (InterruptedException ignored) {
+        }
     }
 }
