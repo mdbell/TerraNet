@@ -12,15 +12,10 @@ public final class NettyServerFactory extends ServerFactory {
     private static final Logger logger = LoggerFactory.getLogger(NettyServerFactory.class);
 
     @Override
-    public ServerCtx bind(int port) {
+    public ServerCtx newInstance() {
         NettyServerCtx ctx = new NettyServerCtx();
         ServerBootstrap bootstrap = NettyUtil.createServerBootstrap(ctx);
-        try {
-            ChannelFuture f = bootstrap.bind(port).sync();
-            ctx.setChannel(f.channel());
-        } catch (InterruptedException e) {
-            logger.debug("Exception Thrown", e);
-        }
+        ctx.setBootstrap(bootstrap);
         return ctx;
     }
 

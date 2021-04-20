@@ -22,9 +22,8 @@ public class TestClient {
     }
 
     public void run() {
-        ClientFactory factory = ClientFactory.getDefaultFactory();
-
-        ClientCtx ctx = factory.connect(host, port);
+        ClientFactory<?> factory = ClientFactory.createDefaultFactory();
+        ClientCtx<?> ctx = factory.connect(host, port);
 
         ctx.connect();
 

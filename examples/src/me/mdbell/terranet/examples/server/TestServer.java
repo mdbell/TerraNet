@@ -21,7 +21,9 @@ public class TestServer {
 
     public void run() throws Exception {
         logger.info("Starting server on port {}", port);
-        ServerCtx ctx = ServerFactory.getDefaultFactory().bind(this.port);
+        ServerCtx<?> ctx = ServerFactory.createDefaultFactory().newInstance();
+        //ctx.setAttributesFactory(MyAttributesFactory)
+        ctx.bind(port);
         logger.info("Listening for connections!");
 
         ConnectionCtx.bus().subscribe(this);

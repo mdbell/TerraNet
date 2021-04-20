@@ -1,9 +1,10 @@
 package me.mdbell.terranet.server;
 
+import me.mdbell.terranet.common.net.ConnectionAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class ServerFactory {
+public abstract class ServerFactory<T extends ConnectionAttributes> {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerFactory.class);
 
@@ -11,13 +12,13 @@ public abstract class ServerFactory {
             "me.mdbell.terranet.server.netty.NettyServerFactory"
     };
 
-    private static ServerFactory defaultFactory;
+    private static Class<?> defaultFactoryClass;
 
     static {
-        createDefaultFactory();
+        defaultFactoryClass = getDefaultFactoryClass();
     }
 
-    private static void createDefaultFactory() {
+    private static Class<?> getDefaultFactoryClass() {
         Class<?> factory = null;
         for (int i = 0; i < DEFAULT_FACTORY_CLASS_NAMES.length; i++) {
             String name = DEFAULT_FACTORY_CLASS_NAMES[i];
@@ -30,25 +31,20 @@ public abstract class ServerFactory {
         }
         if (factory == null) {
             logger.debug("No default ServerFactory found!");
-            return;
         }
+        return factory;
+    }
+
+    public static <T extends ConnectionAttributes> ServerFactory<T> createDefaultFactory() {
         try {
-            logger.debug("Setting default factory to {}", factory.getName());
-            setDefaultFactory((ServerFactory) factory.newInstance());
+            return (ServerFactory<T>) defaultFactoryClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            logger.debug("Exception loading default factory", e);
+            logger.error("Unable to create defualt factory", e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static ServerFactory getDefaultFactory() {
-        return defaultFactory;
-    }
-
-    public static void setDefaultFactory(ServerFactory factory) {
-        defaultFactory = factory;
-    }
-
-    public abstract ServerCtx bind(int port);
+    public abstract ServerCtx<T> newInstance();
 
     public abstract void shutdown();
 }

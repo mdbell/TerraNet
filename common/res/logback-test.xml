@@ -6,7 +6,10 @@
 
     </appender>
 
-    <root level="debug">
+    <logger name="me.mdbell.terranet.common.net.netty.MessageDecoder" level="OFF"/>
+    <logger name="me.mdbell.terranet.common.net.netty.MessageEncoder" level="OFF"/>
+
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

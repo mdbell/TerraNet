@@ -6,7 +6,6 @@ import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
-import me.mdbell.terranet.common.game.messages.ConnectionMessage;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
@@ -44,7 +43,8 @@ public class ProxyServer {
         ClientCtx.bus().subscribe(this);
 
         logger.info("Starting server on port {}", localPort);
-        ServerCtx ctx = ServerFactory.getDefaultFactory().bind(localPort);
+        ServerCtx<?> ctx = ServerFactory.createDefaultFactory().newInstance();
+        ctx.bind(localPort);
         logger.info("Listening for connections!");
 
         ctx.awaitClose();
@@ -52,7 +52,7 @@ public class ProxyServer {
 
     @Subscribe
     public void onServerConnectionEvent(ServerConnectionEvent event) {
-        if(event.message() == ConnectionState.DEREGISTER) {
+        if (event.message() == ConnectionState.DEREGISTER) {
             ConnectionCtx conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
@@ -75,13 +75,13 @@ public class ProxyServer {
     public void onIncomingMessage(ServerMessageEvent event) {
         GameMessage message = event.message();
         ConnectionCtx conn = event.source();
-        ClientCtx ctx;
+        ClientCtx<?> ctx;
         if (message.getId() == Opcodes.OP_CONNECT) {
             if (proxyMap.containsKey(conn)) {
                 logger.debug("Attempted to open a connection on an already open one?");
                 return;
             }
-            ctx = ClientFactory.getDefaultFactory().connect(remoteHost, remotePort);
+            ctx = ClientFactory.createDefaultFactory().connect(remoteHost, remotePort);
             proxyMap.put(conn, ctx);
         } else {
             ctx = proxyMap.get(conn);
@@ -92,7 +92,7 @@ public class ProxyServer {
 
     @Subscribe
     public void onOutgoingMessage(ClientMessageEvent event) {
-        ClientCtx ctx = event.source();
+        ClientCtx<?> ctx = event.source();
         GameMessage message = event.message();
         ConnectionCtx conn = proxyMap.entrySet()
                 .stream()

@@ -15,7 +15,7 @@ public final class NettyClientFactory extends ClientFactory {
     Bootstrap bootstrap = NettyUtil.createClientBootstrap();
 
     @Override
-    public ClientCtx connect(String host, int port) {
+    public ClientCtx connectImpl(String host, int port) {
         try {
             ChannelFuture f = bootstrap.connect(host, port).sync();
             return f.channel().pipeline().get(ClientHandler.class).getContext();
