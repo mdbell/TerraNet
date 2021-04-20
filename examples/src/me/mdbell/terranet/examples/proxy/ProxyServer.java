@@ -1,7 +1,7 @@
 package me.mdbell.terranet.examples.proxy;
 
 import me.mdbell.bus.Subscribe;
-import me.mdbell.terranet.ConnectionState;
+import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;

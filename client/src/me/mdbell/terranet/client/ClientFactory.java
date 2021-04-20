@@ -5,6 +5,8 @@ import me.mdbell.terranet.common.net.ConnectionAttributesFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
+
 public abstract class ClientFactory<T extends ConnectionAttributes> {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientFactory.class);
@@ -37,8 +39,8 @@ public abstract class ClientFactory<T extends ConnectionAttributes> {
 
     public static <T extends ConnectionAttributes> ClientFactory<T> createDefaultFactory() {
         try {
-            return (ClientFactory<T>) defaultFactory.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return (ClientFactory<T>) defaultFactory.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             logger.error("Exception creating default client factory", e);
             throw new RuntimeException(e);
         }

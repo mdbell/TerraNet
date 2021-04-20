@@ -3,7 +3,6 @@ package me.mdbell.terranet.server.netty;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import me.mdbell.bus.IEventBus;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;

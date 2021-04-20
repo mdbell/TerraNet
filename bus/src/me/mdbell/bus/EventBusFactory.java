@@ -3,6 +3,8 @@ package me.mdbell.bus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
+
 public abstract class EventBusFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(EventBusFactory.class);
@@ -35,8 +37,8 @@ public abstract class EventBusFactory {
         }
         try {
             logger.debug("Setting default factory to {}", factory.getName());
-            setDefaultFactory((EventBusFactory) factory.newInstance());
-        } catch (InstantiationException | IllegalAccessException e) {
+            setDefaultFactory((EventBusFactory) factory.getDeclaredConstructor().newInstance());
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             logger.debug("Exception loading default factory", e);
         }
     }

@@ -1,7 +1,6 @@
 package me.mdbell.terranet.server;
 
 import me.mdbell.bus.IEventBus;
-import me.mdbell.terranet.ConnectionState;
 import me.mdbell.terranet.common.net.ConnectionAttributesFactory;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
