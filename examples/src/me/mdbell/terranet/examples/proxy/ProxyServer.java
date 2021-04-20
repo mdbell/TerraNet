@@ -29,6 +29,8 @@ public class ProxyServer {
 
     private final Map<ConnectionCtx, ClientCtx> proxyMap = new HashMap<>();
 
+    private ClientFactory<?> clientFactory;
+
     public ProxyServer(String remoteHost, int remotePort, int localPort) {
         this.remoteHost = remoteHost;
         this.remotePort = remotePort;
@@ -42,8 +44,13 @@ public class ProxyServer {
         logger.info("Setting up client event handler");
         ClientCtx.bus().subscribe(this);
 
+        logger.info("Setting the ClientFactory");
+        clientFactory = ClientFactory.createDefaultFactory();
+        //clientFactory.setAttributesFactory(MyClientAttributes)
+
         logger.info("Starting server on port {}", localPort);
         ServerCtx<?> ctx = ServerFactory.createDefaultFactory().newInstance();
+        //ctx.setAttributesFactory(MyAttributes)
         ctx.bind(localPort);
         logger.info("Listening for connections!");
 
@@ -81,7 +88,7 @@ public class ProxyServer {
                 logger.debug("Attempted to open a connection on an already open one?");
                 return;
             }
-            ctx = ClientFactory.createDefaultFactory().connect(remoteHost, remotePort);
+            ctx = clientFactory.connect(remoteHost, remotePort);
             proxyMap.put(conn, ctx);
         } else {
             ctx = proxyMap.get(conn);
