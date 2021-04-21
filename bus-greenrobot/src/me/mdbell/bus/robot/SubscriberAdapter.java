@@ -1,21 +1,19 @@
 package me.mdbell.bus.robot;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import org.greenrobot.eventbus.SubscriberMethod;
 import org.greenrobot.eventbus.ThreadMode;
 import org.greenrobot.eventbus.meta.SubscriberInfo;
 import org.greenrobot.eventbus.meta.SubscriberInfoIndex;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 class SubscriberAdapter implements SubscriberInfoIndex {
-
-    private static final Logger logger = LoggerFactory.getLogger(SubscriberAdapter.class);
 
     protected static final SubscriberAdapter INSTANCE = new SubscriberAdapter();
 
@@ -45,19 +43,19 @@ class SubscriberAdapter implements SubscriberInfoIndex {
                 continue;
             }
             if (m.getParameterCount() > 1) {
-                logger.warn("Method {} has more then one parameter in bus, skipping!", m);
+                log.warn("Method {} has more then one parameter in bus, skipping!", m);
                 continue;
             }
             if (Modifier.isStatic(m.getModifiers())) {
-                logger.warn("Method {} is static, event receiver need to be non-static!", m);
+                log.warn("Method {} is static, event receiver need to be non-static!", m);
                 continue;
             }
             if (!Modifier.isPublic(m.getModifiers())) {
-                logger.warn("Method {} is not public. It needs to be", m);
+                log.warn("Method {} is not public. It needs to be", m);
                 continue;
             }
             Class<?> eventType = m.getParameterTypes()[0];
-            logger.debug("Registering event subscriber '{}' in '{}' type:{}",
+            log.debug("Registering event subscriber '{}' in '{}' type:{}",
                     m.getName(), aClass.getName(), eventType.getName());
             methods.add(new SubscriberMethod(m, eventType, THREAD_MODE, annotation.priority(), STICKY));
         }

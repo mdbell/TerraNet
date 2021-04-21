@@ -22,11 +22,11 @@ public abstract class ConnectionCtx<T extends ConnectionAttributes> implements I
         this.serverCtx = serverCtx;
     }
 
-    protected void setAttributes(T attributes){
+    protected void setAttributes(T attributes) {
         this.attrs = attributes;
     }
 
-    public final T attrs(){
+    public final T attrs() {
         return attrs;
     }
 

@@ -1,11 +1,14 @@
 package me.mdbell.terranet.examples.bus;
 
-import me.mdbell.bus.*;
+import me.mdbell.bus.AbstractBusEvent;
+import me.mdbell.bus.EventBusFactory;
+import me.mdbell.bus.IEventBus;
+import me.mdbell.bus.Subscribe;
 import me.mdbell.bus.internal.InternalEventBusFactory;
 
 public class InternalBusTest {
 
-    public void run(){
+    public void run() {
         EventBusFactory factory = new InternalEventBusFactory();
         IEventBus<InternalBusTest> bus = factory.getOrCreate(InternalBusTest.class);
 
@@ -15,11 +18,11 @@ public class InternalBusTest {
     }
 
     @Subscribe
-    public void testEvent(TestEvent event){
+    public void testEvent(TestEvent event) {
         System.out.println(event.message());
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new InternalBusTest().run();
     }
 

@@ -1,12 +1,10 @@
 package me.mdbell.terranet.server;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public abstract class ServerFactory<T extends ConnectionAttributes> {
-
-    private static final Logger logger = LoggerFactory.getLogger(ServerFactory.class);
 
     private static final String[] DEFAULT_FACTORY_CLASS_NAMES = {
             "me.mdbell.terranet.server.netty.NettyServerFactory"
@@ -26,11 +24,11 @@ public abstract class ServerFactory<T extends ConnectionAttributes> {
                 factory = Class.forName(name);
                 break;
             } catch (ClassNotFoundException e) {
-                logger.debug("Factory {} not found, skipping!", name);
+                log.debug("Factory {} not found, skipping!", name);
             }
         }
         if (factory == null) {
-            logger.debug("No default ServerFactory found!");
+            log.debug("No default ServerFactory found!");
         }
         return factory;
     }
@@ -39,7 +37,7 @@ public abstract class ServerFactory<T extends ConnectionAttributes> {
         try {
             return (ServerFactory<T>) defaultFactoryClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            logger.error("Unable to create defualt factory", e);
+            log.error("Unable to create defualt factory", e);
             throw new RuntimeException(e);
         }
     }

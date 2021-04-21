@@ -8,11 +8,11 @@ import java.util.ServiceLoader;
 
 public final class NetUtil {
 
-    private NetUtil(){
+    private NetUtil() {
 
     }
 
-    public static List<MessageTranscoder> loadTranscoders(boolean isServer){
+    public static List<MessageTranscoder> loadTranscoders(boolean isServer) {
         ArrayList<MessageTranscoder> transcoders = new ArrayList<>();
 
         ServiceLoader<MessageTranscoder> loader = ServiceLoader.load(MessageTranscoder.class);

@@ -4,19 +4,17 @@ package me.mdbell.terranet.common.net.netty;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.MessageTranscoder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 
+@Slf4j
 public class MessageDecoder extends ByteToMessageDecoder implements Opcodes {
-
-    private static final Logger logger = LoggerFactory.getLogger(MessageDecoder.class);
 
     private final List<MessageTranscoder> transcoders;
 
@@ -53,7 +51,7 @@ public class MessageDecoder extends ByteToMessageDecoder implements Opcodes {
                     (String.format("Trailing bytes at end of message %d Expected size:%d Read:%d Message:%s",
                             op, len, readSize, message));
         }
-        logger.debug("Decoded Message: {} Size: {}", message, readSize + MESSAGE_HEADER_SIZE);
+        log.debug("Decoded Message: {} Size: {}", message, readSize + MESSAGE_HEADER_SIZE);
         out.add(message);
     }
 

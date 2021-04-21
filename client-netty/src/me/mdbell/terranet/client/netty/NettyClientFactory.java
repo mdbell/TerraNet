@@ -3,14 +3,12 @@ package me.mdbell.terranet.client.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public final class NettyClientFactory extends ClientFactory {
-
-    Logger logger = LoggerFactory.getLogger(NettyClientFactory.class);
 
     Bootstrap bootstrap = NettyUtil.createClientBootstrap();
 
@@ -20,7 +18,7 @@ public final class NettyClientFactory extends ClientFactory {
             ChannelFuture f = bootstrap.connect(host, port).sync();
             return f.channel().pipeline().get(ClientHandler.class).getContext();
         } catch (InterruptedException e) {
-            logger.debug("Exception thrown in connect!", e);
+            log.debug("Exception thrown in connect!", e);
         }
         return null;
     }

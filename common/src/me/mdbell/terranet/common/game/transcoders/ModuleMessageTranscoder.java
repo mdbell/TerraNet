@@ -2,11 +2,11 @@ package me.mdbell.terranet.common.game.transcoders;
 
 import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 import me.mdbell.terranet.common.game.messages.modules.BufferedModule;
+import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
+import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.FilteredMessageTranscoder;
 import me.mdbell.terranet.common.util.IOUtil;
-import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
-import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 
 public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModuleMessage> {
 

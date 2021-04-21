@@ -1,6 +1,6 @@
 package me.mdbell.terranet.common.net;
 
-public abstract class AbstractMessageTranscoder implements MessageTranscoder{
+public abstract class AbstractMessageTranscoder implements MessageTranscoder {
 
     private boolean server = false;
 

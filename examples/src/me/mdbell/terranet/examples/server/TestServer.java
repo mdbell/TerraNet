@@ -1,17 +1,15 @@
 package me.mdbell.terranet.examples.server;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
 import me.mdbell.terranet.server.events.ServerMessageEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class TestServer {
-
-    private static final Logger logger = LoggerFactory.getLogger(TestServer.class);
 
     private final int port;
 
@@ -20,11 +18,11 @@ public class TestServer {
     }
 
     public void run() throws Exception {
-        logger.info("Starting server on port {}", port);
+        log.info("Starting server on port {}", port);
         ServerCtx<?> ctx = ServerFactory.createDefaultFactory().newInstance();
         //ctx.setAttributesFactory(MyAttributesFactory)
         ctx.bind(port);
-        logger.info("Listening for connections!");
+        log.info("Listening for connections!");
 
         ConnectionCtx.bus().subscribe(this);
         ctx.awaitClose();
@@ -33,12 +31,12 @@ public class TestServer {
 
     @Subscribe
     public void onMessage(ServerMessageEvent event) {
-        logger.info("New message from: {} Message: {}", event.source(), event.message());
+        log.info("New message from: {} Message: {}", event.source(), event.message());
     }
 
     @Subscribe
     public void onConnectionEvent(ServerConnectionEvent event) {
-        logger.info("Connection state for {} Changed to {}", event.source(), event.message());
+        log.info("Connection state for {} Changed to {}", event.source(), event.message());
     }
 
     public static void main(String[] args) throws Exception {

@@ -20,11 +20,11 @@ public abstract class ClientCtx<T extends ConnectionAttributes> implements ISend
 
     public abstract SocketAddress getRemoteAddress();
 
-    protected final void setAttributes(T attributes){
+    protected final void setAttributes(T attributes) {
         this.attributes = attributes;
     }
 
-    public final T attrs(){
+    public final T attrs() {
         return attributes;
     }
 
@@ -34,7 +34,7 @@ public abstract class ClientCtx<T extends ConnectionAttributes> implements ISend
         bus.post(event);
     }
 
-    public static IEventBus<ClientCtx> bus(){
+    public static IEventBus<ClientCtx> bus() {
         return bus;
     }
 }

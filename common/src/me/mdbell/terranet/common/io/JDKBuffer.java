@@ -158,6 +158,34 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     }
 
     @Override
+    public float readFloat() {
+        float value = buffer.order(ByteOrder.BIG_ENDIAN).getFloat(readIndex);
+        readIndex += Float.BYTES;
+        return value;
+    }
+
+    @Override
+    public float readFloatLE() {
+        float value = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat(readIndex);
+        readIndex += Float.BYTES;
+        return value;
+    }
+
+    @Override
+    public long readLong() {
+        long value = buffer.order(ByteOrder.BIG_ENDIAN).getLong(readIndex);
+        readIndex += Long.BYTES;
+        return value;
+    }
+
+    @Override
+    public long readLongLE() {
+        long value = buffer.order(ByteOrder.LITTLE_ENDIAN).getLong(readIndex);
+        readIndex += Long.BYTES;
+        return value;
+    }
+
+    @Override
     public Buffer<?> readBytes(byte[] data) {
         throw new UnsupportedOperationException("Unimplemented");
     }

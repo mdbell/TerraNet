@@ -1,15 +1,13 @@
 package me.mdbell.terranet.client;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.common.net.ConnectionAttributesFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
+@Slf4j
 public abstract class ClientFactory<T extends ConnectionAttributes> {
-
-    private static final Logger logger = LoggerFactory.getLogger(ClientFactory.class);
 
     private static final Class<?> defaultFactory;
 
@@ -31,7 +29,7 @@ public abstract class ClientFactory<T extends ConnectionAttributes> {
                 factory = Class.forName(name);
                 break;
             } catch (ClassNotFoundException e) {
-                logger.debug("Factory {} not found, skipping!", name);
+                log.debug("Factory {} not found, skipping!", name);
             }
         }
         return factory;
@@ -41,12 +39,12 @@ public abstract class ClientFactory<T extends ConnectionAttributes> {
         try {
             return (ClientFactory<T>) defaultFactory.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            logger.error("Exception creating default client factory", e);
+            log.error("Exception creating default client factory", e);
             throw new RuntimeException(e);
         }
     }
 
-    public final void setAttributeFactory(ConnectionAttributesFactory<T> factory){
+    public final void setAttributeFactory(ConnectionAttributesFactory<T> factory) {
         this.attributeFactory = factory;
     }
 

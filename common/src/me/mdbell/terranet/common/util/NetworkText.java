@@ -8,28 +8,28 @@ public final class NetworkText {
     private String text = "";
     private NetworkText[] sub;
 
-    public NetworkText mode(Mode mode){
+    public NetworkText mode(Mode mode) {
         this.mode = mode;
         return this;
     }
 
-    public Mode mode(){
+    public Mode mode() {
         return mode;
     }
 
-    public NetworkText text(String text){
-        if(text == null){
+    public NetworkText text(String text) {
+        if (text == null) {
             text = "";
         }
         this.text = text;
         return this;
     }
 
-    public String text(){
+    public String text() {
         return text;
     }
 
-    public NetworkText[] sub(){
+    public NetworkText[] sub() {
         return sub;
     }
 
@@ -38,7 +38,7 @@ public final class NetworkText {
         return this;
     }
 
-    public static NetworkText literal(String text){
+    public static NetworkText literal(String text) {
         return new NetworkText().mode(Mode.LITERAL).text(text);
     }
 
@@ -51,7 +51,7 @@ public final class NetworkText {
                 '}';
     }
 
-    public enum Mode{
+    public enum Mode {
         LITERAL, FORMAT, LOCAL
     }
 }

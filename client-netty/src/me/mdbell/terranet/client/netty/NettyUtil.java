@@ -7,7 +7,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import me.mdbell.terranet.common.net.MessageTranscoder;
 import me.mdbell.terranet.common.util.NetUtil;
-import me.mdbell.terranet.client.netty.ClientInitializer;
 
 import java.util.List;
 

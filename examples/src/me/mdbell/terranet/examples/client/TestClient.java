@@ -1,17 +1,15 @@
 package me.mdbell.terranet.examples.client;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+@Slf4j
 public class TestClient {
-
-    private static final Logger logger = LoggerFactory.getLogger(TestClient.class);
 
     private final String host;
     private final int port;
@@ -33,7 +31,7 @@ public class TestClient {
 
     @Subscribe
     public void onClientMessage(ClientMessageEvent event) throws IOException {
-        logger.info("Message Received from: {} Message:{}", event.source(), event.message());
+        log.info("Message Received from: {} Message:{}", event.source(), event.message());
         event.source().close();
     }
 

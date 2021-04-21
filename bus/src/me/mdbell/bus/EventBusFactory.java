@@ -1,13 +1,12 @@
 package me.mdbell.bus;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 
+@Slf4j
 public abstract class EventBusFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(EventBusFactory.class);
 
     private static final String[] DEFAULT_FACTORY_CLASS_NAMES = {
             "me.mdbell.bus.robot.RobotEventBusFactory",
@@ -28,18 +27,18 @@ public abstract class EventBusFactory {
                 factory = Class.forName(name);
                 break;
             } catch (ClassNotFoundException e) {
-                logger.debug("Factory {} not found, skipping!", name);
+                log.debug("Factory {} not found, skipping!", name);
             }
         }
         if (factory == null) {
-            logger.debug("No default EventBusFactory found!");
+            log.debug("No default EventBusFactory found!");
             return;
         }
         try {
-            logger.debug("Setting default factory to {}", factory.getName());
+            log.debug("Setting default factory to {}", factory.getName());
             setDefaultFactory((EventBusFactory) factory.getDeclaredConstructor().newInstance());
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            logger.debug("Exception loading default factory", e);
+            log.debug("Exception loading default factory", e);
         }
     }
 

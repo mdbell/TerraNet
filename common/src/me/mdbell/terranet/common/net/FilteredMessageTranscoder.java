@@ -1,19 +1,19 @@
 package me.mdbell.terranet.common.net;
 
-import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.game.messages.GameMessage;
+import me.mdbell.terranet.common.io.Buffer;
 
 public abstract class FilteredMessageTranscoder<T extends GameMessage> extends AbstractMessageTranscoder {
 
     private final int id;
 
-    public FilteredMessageTranscoder(int id){
+    public FilteredMessageTranscoder(int id) {
         this.id = id;
     }
 
     @Override
     public final GameMessage decode(int id, int size, Buffer<?> buff) {
-        if(id != this.id) {
+        if (id != this.id) {
             return null;
         }
         return filteredDecode(size, buff);
@@ -21,7 +21,7 @@ public abstract class FilteredMessageTranscoder<T extends GameMessage> extends A
 
     @Override
     public final boolean encode(Buffer<?> to, GameMessage message) {
-        if(message.getOpcode() != this.id) {
+        if (message.getOpcode() != this.id) {
             return false;
         }
         return filteredEncode(to, (T) message);

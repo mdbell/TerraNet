@@ -1,8 +1,8 @@
 package me.mdbell.terranet.common.game.transcoders;
 
-import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.game.messages.BufferedMessage;
+import me.mdbell.terranet.common.game.messages.GameMessage;
+import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.AbstractMessageTranscoder;
 
 public class BufferTranscoder extends AbstractMessageTranscoder {

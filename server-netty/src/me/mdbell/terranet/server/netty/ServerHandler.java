@@ -3,14 +3,12 @@ package me.mdbell.terranet.server.netty;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;
-import me.mdbell.terranet.server.ConnectionCtx;
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.game.messages.GameMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import me.mdbell.terranet.server.ConnectionCtx;
 
+@Slf4j
 public final class ServerHandler extends SimpleChannelInboundHandler<GameMessage> {
-
-    private static final Logger logger = LoggerFactory.getLogger(ServerHandler.class);
 
     private static final AttributeKey<ConnectionCtx> CONNECTION_CTX = AttributeKey.valueOf(ServerHandler.class, "conn");
 
@@ -22,13 +20,13 @@ public final class ServerHandler extends SimpleChannelInboundHandler<GameMessage
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        logger.debug("Exception in server handler", cause);
+        log.debug("Exception in server handler", cause);
         ctx.close();
     }
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) {
-        logger.debug("Connection {} registered", ctx.channel().remoteAddress());
+        log.debug("Connection {} registered", ctx.channel().remoteAddress());
         ConnectionCtx conn = server.newInstance(ctx);
         ctx.channel().attr(CONNECTION_CTX).set(conn);
         server.register(conn);
@@ -36,7 +34,7 @@ public final class ServerHandler extends SimpleChannelInboundHandler<GameMessage
 
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) {
-        logger.debug("Connection {} unregistered", ctx.channel().remoteAddress());
+        log.debug("Connection {} unregistered", ctx.channel().remoteAddress());
         ConnectionCtx conn = ctx.channel().attr(CONNECTION_CTX).getAndSet(null);
         server.deregister(conn);
     }

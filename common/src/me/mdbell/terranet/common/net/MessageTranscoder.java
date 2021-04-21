@@ -1,8 +1,8 @@
 package me.mdbell.terranet.common.net;
 
 import me.mdbell.terranet.Opcodes;
-import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.game.messages.GameMessage;
+import me.mdbell.terranet.common.io.Buffer;
 
 public interface MessageTranscoder extends Opcodes {
 

@@ -16,7 +16,7 @@ public final class BufferedMessage extends GameMessage {
     @Getter
     Buffer<?> buffer;
 
-    public BufferedMessage(int id, int size){
+    public BufferedMessage(int id, int size) {
         this(id, Buffer.allocate(size));
     }
 

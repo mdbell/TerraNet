@@ -28,7 +28,7 @@ public final class IOUtil {
     }
 
     public static void writeString(String str, Buffer<?> to, Charset charset) {
-        if(str.length() > 255){
+        if (str.length() > 255) {
             throw new IllegalStateException("Max String size is 255! String size:" + str.length());
         }
         byte[] bytes = str.getBytes(charset);
@@ -36,7 +36,7 @@ public final class IOUtil {
         to.writeBytes(bytes);
     }
 
-    public static Color readColor(Buffer<?> buf){
+    public static Color readColor(Buffer<?> buf) {
         int red = buf.readUnsignedByte();
         int green = buf.readUnsignedByte();
         int blue = buf.readUnsignedByte();
@@ -44,7 +44,7 @@ public final class IOUtil {
     }
 
     public static void writeColor(Color color, Buffer<?> to) {
-        if(color == null){
+        if (color == null) {
             color = Color.BLACK;
         }
         to.writeByte(color.getRed());
@@ -52,15 +52,15 @@ public final class IOUtil {
         to.writeByte(color.getBlue());
     }
 
-    public static NetworkText readText(Buffer<?> buffer){
+    public static NetworkText readText(Buffer<?> buffer) {
         int m = buffer.readUnsignedByte();
         String text = buffer.readString();
         NetworkText.Mode mode = NetworkText.Mode.values()[m];
         NetworkText res = new NetworkText().mode(mode).text(text);
-        if(mode != NetworkText.Mode.LITERAL) {
+        if (mode != NetworkText.Mode.LITERAL) {
             int subLen = buffer.readUnsignedByte();
             NetworkText[] sub = new NetworkText[subLen];
-            for(int i = 0; i < subLen; i++) {
+            for (int i = 0; i < subLen; i++) {
                 sub[i] = readText(buffer);
             }
             res.sub(sub);
@@ -71,7 +71,7 @@ public final class IOUtil {
     public static void writeText(NetworkText text, Buffer<?> to) {
         to.writeByte(text.mode().ordinal());
         to.writeString(text.text());
-        if(text.mode() != NetworkText.Mode.LITERAL) {
+        if (text.mode() != NetworkText.Mode.LITERAL) {
             NetworkText[] subs = text.sub();
             to.writeByte(subs.length);
             for (NetworkText sub : subs) {

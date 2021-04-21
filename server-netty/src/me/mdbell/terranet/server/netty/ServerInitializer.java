@@ -2,8 +2,8 @@ package me.mdbell.terranet.server.netty;
 
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import me.mdbell.terranet.common.net.netty.BaseInitializer;
 import me.mdbell.terranet.common.net.MessageTranscoder;
+import me.mdbell.terranet.common.net.netty.BaseInitializer;
 
 import java.util.List;
 

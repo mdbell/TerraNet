@@ -18,7 +18,7 @@ public final class NettyUtil {
 
     }
 
-    public static ServerBootstrap createServerBootstrap(NettyServerCtx server){
+    public static ServerBootstrap createServerBootstrap(NettyServerCtx server) {
         return createServerBootstrap(server, NetUtil.loadTranscoders(true));
     }
 

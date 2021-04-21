@@ -20,34 +20,34 @@ public class OutgoingChatMessage extends NetModuleMessage {
         return MOD_TEXT;
     }
 
-    public int author(){
+    public int author() {
         return author;
     }
 
-    public OutgoingChatMessage author(int author){
+    public OutgoingChatMessage author(int author) {
         this.author = author;
         return this;
     }
 
-    public NetworkText text(){
+    public NetworkText text() {
         return text;
     }
 
-    public OutgoingChatMessage text(String text){
+    public OutgoingChatMessage text(String text) {
         this.text = NetworkText.literal(text);
         return this;
     }
 
-    public OutgoingChatMessage text(NetworkText text){
+    public OutgoingChatMessage text(NetworkText text) {
         this.text = text;
         return this;
     }
 
-    public Color color(){
+    public Color color() {
         return color;
     }
 
-    public OutgoingChatMessage color(Color color){
+    public OutgoingChatMessage color(Color color) {
         this.color = color;
         return this;
     }

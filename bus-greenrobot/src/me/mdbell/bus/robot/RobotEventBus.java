@@ -8,7 +8,7 @@ final class RobotEventBus implements IEventBus {
 
     private final EventBus bus;
 
-    RobotEventBus(EventBus bus){
+    RobotEventBus(EventBus bus) {
         this.bus = bus;
     }
 

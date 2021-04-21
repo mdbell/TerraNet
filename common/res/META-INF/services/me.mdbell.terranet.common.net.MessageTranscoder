@@ -1,5 +1,8 @@
 #Needed for decoding/encoding modules, such as chat messages
 me.mdbell.terranet.common.game.transcoders.ModuleMessageTranscoder
 
+# World metadata
+me.mdbell.terranet.common.game.transcoders.WorldMetadataTranscoder
+
 #handle all other messages
 me.mdbell.terranet.common.game.transcoders.DefaultTranscoder

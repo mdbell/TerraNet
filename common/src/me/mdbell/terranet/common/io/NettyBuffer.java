@@ -105,7 +105,7 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
-    public Buffer<?> readerIndex(int newIndex){
+    public Buffer<?> readerIndex(int newIndex) {
         buffer.readerIndex(newIndex);
         return this;
     }
@@ -163,17 +163,37 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
+    public float readFloat() {
+        return buffer.readFloat();
+    }
+
+    @Override
+    public float readFloatLE() {
+        return buffer.readFloatLE();
+    }
+
+    @Override
+    public long readLong() {
+        return buffer.readLong();
+    }
+
+    @Override
+    public long readLongLE() {
+        return buffer.readLongLE();
+    }
+
+    @Override
     public Buffer<?> readBytes(byte[] data) {
         buffer.readBytes(data);
         return this;
     }
 
-    public Buffer<?> readBytes(ByteBuffer bytes){
+    public Buffer<?> readBytes(ByteBuffer bytes) {
         buffer.readBytes(bytes);
         return this;
     }
 
-    public Buffer<?> readBytes(ByteBuf bytes){
+    public Buffer<?> readBytes(ByteBuf bytes) {
         buffer.readBytes(bytes);
         return this;
     }

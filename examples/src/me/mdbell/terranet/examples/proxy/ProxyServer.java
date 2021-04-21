@@ -1,27 +1,25 @@
 package me.mdbell.terranet.examples.proxy;
 
+import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
-import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
+import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
 import me.mdbell.terranet.server.events.ServerMessageEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class ProxyServer {
-
-    private final Logger logger = LoggerFactory.getLogger(ProxyServer.class);
 
     private final String remoteHost;
     private final int remotePort;
@@ -39,20 +37,20 @@ public class ProxyServer {
 
     public void run() throws Exception {
 
-        logger.info("Setting up server event handler");
+        log.info("Setting up server event handler");
         ConnectionCtx.bus().subscribe(this);
-        logger.info("Setting up client event handler");
+        log.info("Setting up client event handler");
         ClientCtx.bus().subscribe(this);
 
-        logger.info("Setting the ClientFactory");
+        log.info("Setting the ClientFactory");
         clientFactory = ClientFactory.createDefaultFactory();
         //clientFactory.setAttributesFactory(MyClientAttributes)
 
-        logger.info("Starting server on port {}", localPort);
+        log.info("Starting server on port {}", localPort);
         ServerCtx<?> ctx = ServerFactory.createDefaultFactory().newInstance();
         //ctx.setAttributesFactory(MyAttributes)
         ctx.bind(localPort);
-        logger.info("Listening for connections!");
+        log.info("Listening for connections!");
 
         ctx.awaitClose();
     }
@@ -66,12 +64,12 @@ public class ProxyServer {
                 ctx.disconnect("Remote server closed connection.");
                 ctx.close();
             } catch (IOException e) {
-                logger.error("Exception closing remote", e);
+                log.error("Exception closing remote", e);
             }
             try {
                 conn.close();
             } catch (IOException e) {
-                logger.error("Exception closing local", e);
+                log.error("Exception closing local", e);
             }
             proxyMap.remove(conn);
             event.consume();
@@ -85,7 +83,7 @@ public class ProxyServer {
         ClientCtx<?> ctx;
         if (message.getOpcode() == Opcodes.OP_CONNECT) {
             if (proxyMap.containsKey(conn)) {
-                logger.debug("Attempted to open a connection on an already open one?");
+                log.debug("Attempted to open a connection on an already open one?");
                 return;
             }
             ctx = clientFactory.connect(remoteHost, remotePort);
