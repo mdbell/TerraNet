@@ -1,11 +1,10 @@
 package me.mdbell.terranet.common.game.messages;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @EqualsAndHashCode(callSuper = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Data
 public final class UUIDMessage extends GameMessage {

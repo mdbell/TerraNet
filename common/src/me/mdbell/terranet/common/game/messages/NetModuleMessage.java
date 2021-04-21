@@ -1,10 +1,8 @@
 package me.mdbell.terranet.common.game.messages;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 public abstract class NetModuleMessage extends GameMessage {
 
     protected abstract int getModIdImpl();

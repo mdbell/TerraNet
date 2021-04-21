@@ -1,14 +1,16 @@
 package me.mdbell.terranet.common.game.messages;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @EqualsAndHashCode(callSuper = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Data
 public final class UpdateBuffsMessage extends GameMessage {
 
-    private int id;
-    private final int[] buffs = new int[MAX_BUFFS];
+    int id;
+    final int[] buffs = new int[MAX_BUFFS];
 
     @Override
     public int getOpcode() {

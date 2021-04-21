@@ -1,12 +1,11 @@
 package me.mdbell.terranet.common.game.messages;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import me.mdbell.terranet.common.util.Color;
 
 @EqualsAndHashCode(callSuper = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Data
 public final class PlayerInfoMessage extends GameMessage {
@@ -29,7 +28,6 @@ public final class PlayerInfoMessage extends GameMessage {
 
     int difficulty;
     int torches;
-
 
     @Override
     public int getOpcode() {
