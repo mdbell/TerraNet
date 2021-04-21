@@ -1,4 +1,5 @@
 module me.mdbell.terranet.common {
+    uses me.mdbell.terranet.common.net.MessageTranscoder;
     exports me.mdbell.terranet;
     exports me.mdbell.terranet.common.net;
     exports me.mdbell.terranet.common.game.messages;

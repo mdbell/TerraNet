@@ -68,11 +68,6 @@ public abstract class Buffer<T> {
         }
     }
 
-    public final Buffer<?> writeString(String str) {
-        IOUtil.writeString(str, this);
-        return this;
-    }
-
     public abstract int writerIndex();
 
     public abstract Buffer<?> writerIndex(int newIndex);
@@ -110,11 +105,6 @@ public abstract class Buffer<T> {
     public abstract long readLong();
 
     public abstract long readLongLE();
-
-
-    public final String readString() {
-        return IOUtil.readString(this);
-    }
 
     public abstract Buffer<?> readBytes(byte[] data);
 

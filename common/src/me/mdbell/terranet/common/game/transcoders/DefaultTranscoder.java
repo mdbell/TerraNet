@@ -1,9 +1,11 @@
 package me.mdbell.terranet.common.game.transcoders;
 
+import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.util.IOUtil;
 
+@ExtensionMethod({IOUtil.class})
 public final class DefaultTranscoder extends BufferTranscoder {
 
     @Override
@@ -100,7 +102,7 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeString(((ConnectionMessage) message).getVersion());
                 return true;
             case OP_DISCONNECT:
-                IOUtil.writeText(((DisconnectMessage) message).getReason(), to);
+                IOUtil.writeText(to, ((DisconnectMessage) message).getReason());
                 return true;
             case OP_SET_USER_SLOT:
                 to.writeByte(((UserSlotMessage) message).getSlot());
@@ -116,13 +118,13 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeByte(p.getHideVisual1());
                 to.writeByte(p.getHideVisual2());
                 to.writeByte(p.getHideMisc());
-                IOUtil.writeColor(p.getHairColor(), to);
-                IOUtil.writeColor(p.getSkinColor(), to);
-                IOUtil.writeColor(p.getEyeColor(), to);
-                IOUtil.writeColor(p.getShirtColor(), to);
-                IOUtil.writeColor(p.getUnderShirtColor(), to);
-                IOUtil.writeColor(p.getPantsColor(), to);
-                IOUtil.writeColor(p.getShoesColor(), to);
+                IOUtil.writeColor(to, p.getHairColor());
+                IOUtil.writeColor(to, p.getSkinColor());
+                IOUtil.writeColor(to, p.getEyeColor());
+                IOUtil.writeColor(to, p.getShirtColor());
+                IOUtil.writeColor(to, p.getUnderShirtColor());
+                IOUtil.writeColor(to, p.getPantsColor());
+                IOUtil.writeColor(to, p.getShoesColor());
                 to.writeByte(p.getDifficulty());
                 to.writeByte(p.getTorches());
                 return true;

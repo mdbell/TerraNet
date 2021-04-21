@@ -1,5 +1,6 @@
 package me.mdbell.terranet.common.game.transcoders;
 
+import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 import me.mdbell.terranet.common.game.messages.modules.BufferedModule;
 import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
@@ -8,6 +9,7 @@ import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.FilteredMessageTranscoder;
 import me.mdbell.terranet.common.util.IOUtil;
 
+@ExtensionMethod({IOUtil.class})
 public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModuleMessage> {
 
     public ModuleMessageTranscoder() {
@@ -28,8 +30,8 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
                 } else {
                     return OutgoingChatMessage.builder()
                             .author(buff.readByte())
-                            .text(IOUtil.readText(buff))
-                            .color(IOUtil.readColor(buff))
+                            .text(buff.readText())
+                            .color(buff.readColor())
                             .build();
                 }
             default:
@@ -53,9 +55,9 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
                     return true;
                 }
                 OutgoingChatMessage text = (OutgoingChatMessage) mod;
-                to.writeByte(text.author());
-                IOUtil.writeText(text.text(), to);
-                IOUtil.writeColor(text.color(), to);
+                to.writeByte(text.author())
+                        .writeText(text.text())
+                        .writeColor(text.color());
                 return true;
             default:
                 if (!(mod instanceof BufferedModule)) {

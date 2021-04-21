@@ -1,18 +1,16 @@
 package me.mdbell.terranet.common.util;
 
+import lombok.experimental.UtilityClass;
 import me.mdbell.terranet.common.net.MessageTranscoder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 
-public final class NetUtil {
+@UtilityClass
+public class NetUtil {
 
-    private NetUtil() {
-
-    }
-
-    public static List<MessageTranscoder> loadTranscoders(boolean isServer) {
+    public List<MessageTranscoder> loadTranscoders(boolean isServer) {
         ArrayList<MessageTranscoder> transcoders = new ArrayList<>();
 
         ServiceLoader<MessageTranscoder> loader = ServiceLoader.load(MessageTranscoder.class);
