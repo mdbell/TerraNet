@@ -1,20 +1,15 @@
 package me.mdbell.terranet.common.game.messages;
 
+import lombok.*;
 import me.mdbell.terranet.Opcodes;
 
+@ToString
+@EqualsAndHashCode
 public abstract class GameMessage implements Opcodes {
 
-    private final int id;
+    public abstract int getOpcode();
 
-    public GameMessage(int id){
-        this.id = id;
-    }
-
-    public final int getId(){
-        return id;
-    }
-
-    public int modId(){
+    public int getModId(){
         return -1;
     }
 

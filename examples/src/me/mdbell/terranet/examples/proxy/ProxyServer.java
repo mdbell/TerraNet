@@ -63,7 +63,7 @@ public class ProxyServer {
             ConnectionCtx conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
-                //TODO write disconnect message
+                ctx.disconnect("Remote server closed connection.");
                 ctx.close();
             } catch (IOException e) {
                 logger.error("Exception closing remote", e);
@@ -83,7 +83,7 @@ public class ProxyServer {
         GameMessage message = event.message();
         ConnectionCtx conn = event.source();
         ClientCtx<?> ctx;
-        if (message.getId() == Opcodes.OP_CONNECT) {
+        if (message.getOpcode() == Opcodes.OP_CONNECT) {
             if (proxyMap.containsKey(conn)) {
                 logger.debug("Attempted to open a connection on an already open one?");
                 return;

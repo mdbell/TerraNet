@@ -53,10 +53,10 @@ class SubscriberAdapter implements SubscriberInfoIndex {
                 continue;
             }
             if (!Modifier.isPublic(m.getModifiers())) {
-                logger.warn("Method {} is not public. We will still use it as a receiver, but this may change in a future release", m);
+                logger.warn("Method {} is not public. It needs to be", m);
+                continue;
             }
             Class<?> eventType = m.getParameterTypes()[0];
-            m.setAccessible(true);
             logger.debug("Registering event subscriber '{}' in '{}' type:{}",
                     m.getName(), aClass.getName(), eventType.getName());
             methods.add(new SubscriberMethod(m, eventType, THREAD_MODE, annotation.priority(), STICKY));

@@ -3,9 +3,7 @@ package me.mdbell.terranet.client;
 import me.mdbell.bus.EventBusFactory;
 import me.mdbell.bus.IBusEvent;
 import me.mdbell.bus.IEventBus;
-import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
-import me.mdbell.terranet.common.game.messages.ConnectionMessage;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.common.net.IReceivable;
@@ -21,11 +19,6 @@ public abstract class ClientCtx<T extends ConnectionAttributes> implements ISend
     private T attributes;
 
     public abstract SocketAddress getRemoteAddress();
-
-    public void connect(){
-        //TODO not use default version, perhaps pass it in from the factory?
-        send(new ConnectionMessage().version(Opcodes.DEFAULT_VERSION));
-    }
 
     protected final void setAttributes(T attributes){
         this.attributes = attributes;

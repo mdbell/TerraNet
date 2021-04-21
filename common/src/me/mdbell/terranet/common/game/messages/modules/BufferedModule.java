@@ -1,5 +1,7 @@
 package me.mdbell.terranet.common.game.messages.modules;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 
 import java.nio.ByteBuffer;
@@ -8,12 +10,15 @@ import java.nio.ByteOrder;
 public class BufferedModule extends NetModuleMessage {
     private final ByteBuffer buffer;
 
+    @Getter
+    private final int modIdImpl;
+
     public BufferedModule(int id, int size){
         this(id, ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN));
     }
 
     public BufferedModule(int id, ByteBuffer buffer) {
-        super(id);
+        modIdImpl = id;
         this.buffer = buffer;
     }
 
@@ -24,7 +29,7 @@ public class BufferedModule extends NetModuleMessage {
     @Override
     public String toString() {
         return "BufferedModule{" +
-                "modId=" + modId() +
+                "modId=" + getModId() +
                 ",buffer=" + buffer +
                 '}';
     }

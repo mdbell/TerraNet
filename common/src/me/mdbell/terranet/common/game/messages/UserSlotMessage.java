@@ -1,39 +1,19 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class UserSlotMessage extends GameMessage {
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
-    public static final int DEFAULT_SLOT = 0;
-
-    private int slot;
-    private boolean flag;
-
-    public UserSlotMessage() {
-        super(OP_SET_USER_SLOT);
-    }
-
-    public UserSlotMessage slot(int slot) {
-        this.slot = slot;
-        return this;
-    }
-
-    public int slot() {
-        return slot;
-    }
-
-    public UserSlotMessage flag(boolean flag) {
-        this.flag = flag;
-        return this;
-    }
-
-    public boolean flag(){
-        return flag;
-    }
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class UserSlotMessage extends GameMessage {
+    int slot;
+    boolean flag;
 
     @Override
-    public String toString() {
-        return "UserSlotMessage{" +
-                "slot=" + slot +
-                ", flag=" + flag +
-                '}';
+    public int getOpcode() {
+        return OP_SET_USER_SLOT;
     }
 }

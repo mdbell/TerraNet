@@ -1,48 +1,21 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class PlayerManaMessage extends GameMessage {
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
-    private int id;
-    private int mana;
-    private int maxMana;
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class PlayerManaMessage extends GameMessage {
 
-    public PlayerManaMessage() {
-        super(OP_PLAYER_MANA);
-    }
-
-    public int id(){
-        return id;
-    }
-
-    public PlayerManaMessage id(int id){
-        this.id = id;
-        return this;
-    }
-
-    public int mana(){
-        return mana;
-    }
-
-    public PlayerManaMessage mana(int mana){
-        this.mana = mana;
-        return this;
-    }
-
-    public int maxMana(){
-        return maxMana;
-    }
-
-    public PlayerManaMessage maxMana(int maxMana){
-        this.maxMana = maxMana;
-        return this;
-    }
+    int id;
+    int mana;
+    int maxMana;
 
     @Override
-    public String toString() {
-        return "PlayerManaMessage{" +
-                "id=" + id +
-                ", mana=" + mana +
-                ", maxMana=" + maxMana +
-                '}';
+    public int getOpcode() {
+        return OP_PLAYER_MANA;
     }
 }

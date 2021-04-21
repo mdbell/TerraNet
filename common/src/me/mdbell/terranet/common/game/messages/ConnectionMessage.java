@@ -1,26 +1,16 @@
 package me.mdbell.terranet.common.game.messages;
 
+import lombok.*;
+
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
 public final class ConnectionMessage extends GameMessage {
 
-    private String version = DEFAULT_VERSION;
-
-    public ConnectionMessage(){
-        super(OP_CONNECT);
-    }
-
-    public ConnectionMessage version(String version){
-        this.version = version;
-        return this;
-    }
-
-    public String version(){
-        return version;
-    }
+    String version;
 
     @Override
-    public String toString() {
-        return "ConnectionMessage{" +
-                "version='" + version + '\'' +
-                '}';
+    public int getOpcode() {
+        return OP_CONNECT;
     }
 }

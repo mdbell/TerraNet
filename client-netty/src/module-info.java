@@ -3,4 +3,5 @@ module me.mdbell.terranet.client.netty {
     requires me.mdbell.terranet.common;
     requires me.mdbell.terranet.client;
     requires slf4j.api;
+    requires lombok;
 }

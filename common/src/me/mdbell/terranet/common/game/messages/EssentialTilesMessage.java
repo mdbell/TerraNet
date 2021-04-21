@@ -1,36 +1,18 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class EssentialTilesMessage extends GameMessage {
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
-    private int x = -1, y = -1;
-
-    public EssentialTilesMessage() {
-        super(OP_ESSENTIAL_TILES);
-    }
-
-    public int x() {
-        return x;
-    }
-
-    public int y() {
-        return y;
-    }
-
-    public EssentialTilesMessage x(int x) {
-        this.x = x;
-        return this;
-    }
-
-    public EssentialTilesMessage y(int y) {
-        this.y = y;
-        return this;
-    }
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class EssentialTilesMessage extends GameMessage {
+    int x = -1, y = -1;
 
     @Override
-    public String toString() {
-        return "EssentialTilesMessage{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public int getOpcode() {
+        return OP_ESSENTIAL_TILES;
     }
 }

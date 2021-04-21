@@ -1,25 +1,18 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class UUIDMessage extends GameMessage {
-    private String uuid;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
-    public UUIDMessage() {
-        super(OP_UUID);
-    }
-
-    public UUIDMessage uuid(String uuid){
-        this.uuid = uuid;
-        return this;
-    }
-
-    public String uuid(){
-        return uuid;
-    }
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class UUIDMessage extends GameMessage {
+    String uuid;
 
     @Override
-    public String toString() {
-        return "UUIDMessage{" +
-                "uuid='" + uuid + '\'' +
-                '}';
+    public int getOpcode() {
+        return OP_UUID;
     }
 }

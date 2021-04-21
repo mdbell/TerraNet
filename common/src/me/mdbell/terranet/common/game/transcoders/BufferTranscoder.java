@@ -9,7 +9,7 @@ public class BufferTranscoder extends AbstractMessageTranscoder {
     @Override
     public GameMessage decode(int id, int size, Buffer<?> in) {
         BufferedMessage msg = new BufferedMessage(id, size);
-        msg.buffer().writeBytes(in);
+        msg.getBuffer().writeBytes(in);
         return msg;
     }
 
@@ -19,7 +19,7 @@ public class BufferTranscoder extends AbstractMessageTranscoder {
             throw new IllegalStateException("Unsupported Packet Type:" + message.getClass().getName()
                     + " Did you forget to add a case?");
         }
-        out.writeBytes(((BufferedMessage) message).buffer());
+        out.writeBytes(((BufferedMessage) message).getBuffer());
         return true;
     }
 }

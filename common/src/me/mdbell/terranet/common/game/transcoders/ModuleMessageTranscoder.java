@@ -21,12 +21,16 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
         switch (modId) {
             case MOD_TEXT:
                 if (this.isServer()) {
-                    return new IncomingChatMessage().command(IOUtil.readString(buff)).message(IOUtil.readString(buff));
+                    return IncomingChatMessage.builder()
+                            .command(buff.readString())
+                            .message(buff.readString())
+                            .build();
                 } else {
-                    OutgoingChatMessage text = new OutgoingChatMessage();
-                    return text.author(buff.readByte())
+                    return OutgoingChatMessage.builder()
+                            .author(buff.readByte())
                             .text(IOUtil.readText(buff))
-                            .color(IOUtil.readColor(buff));
+                            .color(IOUtil.readColor(buff))
+                            .build();
                 }
             default:
                 BufferedModule mod = new BufferedModule(modId, size);
@@ -38,13 +42,14 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
     @Override
     protected boolean filteredEncode(Buffer<?> to, NetModuleMessage mod) {
         to.markWriterIndex();
-        to.writeShortLE(mod.modId());
-        switch (mod.modId()) {
+        int modId = mod.getModId();
+        to.writeShortLE(modId);
+        switch (modId) {
             case MOD_TEXT:
                 if (mod instanceof IncomingChatMessage) {
                     IncomingChatMessage msg = (IncomingChatMessage) mod;
-                    to.writeString(msg.command());
-                    to.writeString(msg.message());
+                    to.writeString(msg.getCommand());
+                    to.writeString(msg.getMessage());
                     return true;
                 }
                 OutgoingChatMessage text = (OutgoingChatMessage) mod;

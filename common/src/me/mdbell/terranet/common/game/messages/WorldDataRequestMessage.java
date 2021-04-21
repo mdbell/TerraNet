@@ -1,12 +1,16 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class WorldDataRequestMessage extends GameMessage {
-    public WorldDataRequestMessage() {
-        super(OP_REQUEST_WORLD);
-    }
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class WorldDataRequestMessage extends GameMessage {
     @Override
-    public String toString() {
-        return "WorldDataRequestMessage{}";
+    public int getOpcode() {
+        return OP_REQUEST_WORLD;
     }
 }

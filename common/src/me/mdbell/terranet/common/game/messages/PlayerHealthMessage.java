@@ -1,46 +1,20 @@
 package me.mdbell.terranet.common.game.messages;
 
-public class PlayerHealthMessage extends GameMessage {
-    private int id;
-    private int hp;
-    private int maxHp;
-    public PlayerHealthMessage() {
-        super(OP_PLAYER_HP);
-    }
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 
-    public int id(){
-        return id;
-    }
-
-    public PlayerHealthMessage id(int id){
-        this.id = id;
-        return this;
-    }
-
-    public int hp(){
-        return hp;
-    }
-
-    public PlayerHealthMessage hp(int hp){
-        this.hp = hp;
-        return this;
-    }
-
-    public int maxHp(){
-        return maxHp;
-    }
-
-    public PlayerHealthMessage maxHp(int maxHp){
-        this.maxHp = maxHp;
-        return this;
-    }
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
+public final class PlayerHealthMessage extends GameMessage {
+    int id;
+    int hp;
+    int maxHp;
 
     @Override
-    public String toString() {
-        return "PlayerHealthMessage{" +
-                "id=" + id +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                '}';
+    public int getOpcode() {
+        return OP_PLAYER_HP;
     }
 }

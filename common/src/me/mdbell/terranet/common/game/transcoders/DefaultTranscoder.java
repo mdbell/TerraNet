@@ -10,14 +10,20 @@ public final class DefaultTranscoder extends BufferTranscoder {
     public GameMessage decode(int id, int size, Buffer<?> buff) {
         switch (id) {
             case OP_CONNECT:
-                return new ConnectionMessage().version(IOUtil.readString(buff));
+                return ConnectionMessage.builder()
+                        .version(buff.readString())
+                        .build();
             case OP_DISCONNECT:
-                return new DisconnectMessage().reason(IOUtil.readText(buff));
+                return DisconnectMessage.builder()
+                        .reason(IOUtil.readText(buff))
+                        .build();
             case OP_SET_USER_SLOT:
-                return new UserSlotMessage().slot(buff.readUnsignedByte())
-                        .flag(buff.readBoolean());
+                return UserSlotMessage.builder()
+                        .slot(buff.readUnsignedByte())
+                        .flag(buff.readBoolean())
+                        .build();
             case OP_PLAYER_INFO:
-                return new PlayerInfoMessage()
+                return PlayerInfoMessage.builder()
                         .id(buff.readUnsignedByte())
                         .skin(buff.readUnsignedByte())
                         .hair(buff.readUnsignedByte())
@@ -34,42 +40,53 @@ public final class DefaultTranscoder extends BufferTranscoder {
                         .pantsColor(IOUtil.readColor(buff))
                         .shoesColor(IOUtil.readColor(buff))
                         .difficulty(buff.readUnsignedByte())
-                        .torches(buff.readUnsignedByte());
+                        .torches(buff.readUnsignedByte())
+                        .build();
             case OP_SET_INVENTORY_SLOT:
-                return new SlotMessage().id(buff.readUnsignedByte())
+                return SlotMessage.builder()
+                        .id(buff.readUnsignedByte())
                         .slot(buff.readUnsignedShortLE())
                         .count(buff.readUnsignedShortLE())
                         .prefix(buff.readUnsignedByte())
-                        .netId(buff.readUnsignedShortLE());
+                        .netId(buff.readUnsignedShortLE())
+                        .build();
             case OP_REQUEST_WORLD:
-                return new WorldDataRequestMessage();
+                return WorldDataRequestMessage.builder()
+                        .build();
             // TODO opcode 7
             case OP_ESSENTIAL_TILES:
-                return new EssentialTilesMessage()
+                return EssentialTilesMessage.builder()
                         .x(buff.readIntLE())
-                        .y(buff.readIntLE());
+                        .y(buff.readIntLE())
+                        .build();
             //TODO opcodes 9-15
             case OP_PLAYER_HP:
-                return new PlayerHealthMessage()
+                return PlayerHealthMessage.builder()
                         .id(buff.readUnsignedByte())
                         .hp(buff.readShortLE())
-                        .maxHp(buff.readShortLE());
+                        .maxHp(buff.readShortLE())
+                        .build();
             //TODO opcodes 17 - 41
             case OP_PLAYER_MANA:
-                return new PlayerManaMessage()
+                return PlayerManaMessage.builder()
                         .id(buff.readUnsignedByte())
                         .mana(buff.readShortLE())
-                        .maxMana(buff.readShortLE());
+                        .maxMana(buff.readShortLE())
+                        .build();
             //TODO opcodes 43 - 49
             case OP_UPDATE_BUFFS:
-                UpdateBuffsMessage buffs = new UpdateBuffsMessage().id(buff.readByte());
+                UpdateBuffsMessage buffs = UpdateBuffsMessage.builder()
+                        .id(buff.readByte())
+                        .build();
                 for (int i = 0; i < MAX_BUFFS; i++) {
-                    buffs.buff(i, buff.readUnsignedShortLE());
+                    buffs.setBuff(i, buff.readUnsignedShortLE());
                 }
                 return buffs;
             //TODO opcodes 51-67
             case OP_UUID:
-                return new UUIDMessage().uuid(IOUtil.readString(buff));
+                return UUIDMessage.builder()
+                        .uuid(buff.readString())
+                        .build();
             //TODO opcodes 69-255
             default:
                 return super.decode(id, size, buff);
@@ -78,78 +95,78 @@ public final class DefaultTranscoder extends BufferTranscoder {
 
     @Override
     public boolean encode(Buffer<?> to, GameMessage message) {
-        switch (message.getId()) {
+        switch (message.getOpcode()) {
             case OP_CONNECT:
-                to.writeString(((ConnectionMessage) message).version());
+                to.writeString(((ConnectionMessage) message).getVersion());
                 return true;
             case OP_DISCONNECT:
-                IOUtil.writeText(((DisconnectMessage) message).reason(), to);
+                IOUtil.writeText(((DisconnectMessage) message).getReason(), to);
                 return true;
             case OP_SET_USER_SLOT:
-                to.writeByte(((UserSlotMessage) message).slot());
-                to.writeBoolean(((UserSlotMessage) message).flag());
+                to.writeByte(((UserSlotMessage) message).getSlot());
+                to.writeBoolean(((UserSlotMessage) message).isFlag());
                 return true;
             case OP_PLAYER_INFO:
                 PlayerInfoMessage p = (PlayerInfoMessage) message;
-                to.writeByte(p.id());
-                to.writeByte(p.skin());
-                to.writeByte(p.hair());
-                to.writeString(p.name());
-                to.writeByte(p.hairDye());
-                to.writeByte(p.hideVisual1());
-                to.writeByte(p.hideVisual2());
-                to.writeByte(p.hideMisc());
-                IOUtil.writeColor(p.hairColor(), to);
-                IOUtil.writeColor(p.skinColor(), to);
-                IOUtil.writeColor(p.eyeColor(), to);
-                IOUtil.writeColor(p.shirtColor(), to);
-                IOUtil.writeColor(p.underShirtColor(), to);
-                IOUtil.writeColor(p.pantsColor(), to);
-                IOUtil.writeColor(p.shoesColor(), to);
-                to.writeByte(p.difficulty());
-                to.writeByte(p.torches());
+                to.writeByte(p.getOpcode());
+                to.writeByte(p.getSkin());
+                to.writeByte(p.getHair());
+                to.writeString(p.getName());
+                to.writeByte(p.getHairDye());
+                to.writeByte(p.getHideVisual1());
+                to.writeByte(p.getHideVisual2());
+                to.writeByte(p.getHideMisc());
+                IOUtil.writeColor(p.getHairColor(), to);
+                IOUtil.writeColor(p.getSkinColor(), to);
+                IOUtil.writeColor(p.getEyeColor(), to);
+                IOUtil.writeColor(p.getShirtColor(), to);
+                IOUtil.writeColor(p.getUnderShirtColor(), to);
+                IOUtil.writeColor(p.getPantsColor(), to);
+                IOUtil.writeColor(p.getShoesColor(), to);
+                to.writeByte(p.getDifficulty());
+                to.writeByte(p.getTorches());
                 return true;
             case OP_SET_INVENTORY_SLOT:
                 SlotMessage slot = (SlotMessage) message;
-                to.writeByte(slot.id());
-                to.writeShortLE(slot.slot());
-                to.writeShortLE(slot.count());
-                to.writeByte(slot.prefix());
-                to.writeShortLE(slot.netId());
+                to.writeByte(slot.getOpcode());
+                to.writeShortLE(slot.getSlot());
+                to.writeShortLE(slot.getCount());
+                to.writeByte(slot.getPrefix());
+                to.writeShortLE(slot.getNetId());
                 return true;
             case OP_REQUEST_WORLD:
                 return true;
             //TODO opcode 7
             case OP_ESSENTIAL_TILES:
                 EssentialTilesMessage ess = (EssentialTilesMessage) message;
-                to.writeIntLE(ess.x());
-                to.writeIntLE(ess.y());
+                to.writeIntLE(ess.getX());
+                to.writeIntLE(ess.getY());
                 return true;
             //TODO opcodes 9-15
             case OP_PLAYER_HP:
                 PlayerHealthMessage php = (PlayerHealthMessage) message;
-                to.writeByte(php.id());
-                to.writeShortLE(php.hp());
-                to.writeShortLE(php.maxHp());
+                to.writeByte(php.getId());
+                to.writeShortLE(php.getHp());
+                to.writeShortLE(php.getMaxHp());
                 return true;
             //TODO opcodes 17 - 41
             case OP_PLAYER_MANA:
                 PlayerManaMessage pmp = (PlayerManaMessage) message;
-                to.writeByte(pmp.id());
-                to.writeShortLE(pmp.mana());
-                to.writeShortLE(pmp.maxMana());
+                to.writeByte(pmp.getId());
+                to.writeShortLE(pmp.getMana());
+                to.writeShortLE(pmp.getMaxMana());
                 return true;
             //TODO opcodes 43 - 49
             case OP_UPDATE_BUFFS:
                 UpdateBuffsMessage buffs = (UpdateBuffsMessage) message;
-                to.writeByte(buffs.id());
+                to.writeByte(buffs.getId());
                 for (int i = 0; i < MAX_BUFFS; i++) {
-                    to.writeShortLE(buffs.buff(i));
+                    to.writeShortLE(buffs.getBuff(i));
                 }
                 return true;
             //TODO opcodes 51-67
             case OP_UUID:
-                to.writeString(((UUIDMessage) message).uuid());
+                to.writeString(((UUIDMessage) message).getUuid());
                 return true;
             //TODO opcodes 69-81
             default:

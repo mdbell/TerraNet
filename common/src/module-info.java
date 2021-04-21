@@ -8,4 +8,5 @@ module me.mdbell.terranet.common {
     requires me.mdbell.bus;
     requires io.netty.all;
     requires slf4j.api;
+    requires lombok;
 }

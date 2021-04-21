@@ -1,16 +1,23 @@
 package me.mdbell.terranet.common.game.messages.modules;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 import me.mdbell.terranet.common.util.Color;
 import me.mdbell.terranet.common.util.NetworkText;
 
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@Data
 public class OutgoingChatMessage extends NetModuleMessage {
     private int author;
     private NetworkText text;
     private Color color;
 
-    public OutgoingChatMessage() {
-        super(MOD_TEXT);
+    @Override
+    protected final int getModIdImpl() {
+        return MOD_TEXT;
     }
 
     public int author(){

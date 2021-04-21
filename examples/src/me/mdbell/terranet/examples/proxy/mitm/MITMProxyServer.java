@@ -18,13 +18,14 @@ public class MITMProxyServer extends ProxyServer {
     @Override
     public void onIncomingMessage(ServerMessageEvent event) {
         GameMessage message = event.message();
-        if(message.modId() == Opcodes.MOD_TEXT && !message.isServer()) {
-            String text = ((IncomingChatMessage)message).message();
-            if("/ping".equalsIgnoreCase(text)) {
-                event.source().send(new OutgoingChatMessage()
+        if (message.getModId() == Opcodes.MOD_TEXT && !message.isServer()) {
+            String text = ((IncomingChatMessage) message).getMessage();
+            if ("/ping".equalsIgnoreCase(text)) {
+                event.source().send(OutgoingChatMessage.builder()
                         .author(-1)
                         .color(Color.GREEN)
-                        .text("pong"));
+                        .text(NetworkText.literal("pong"))
+                        .build());
                 return;
             }
         }
@@ -34,10 +35,10 @@ public class MITMProxyServer extends ProxyServer {
     @Override
     public void onOutgoingMessage(ClientMessageEvent event) {
         GameMessage message = event.message();
-        if(message.modId() == Opcodes.MOD_TEXT && message.isServer()) {
-            OutgoingChatMessage ocm = (OutgoingChatMessage)event.message();
+        if (message.getModId() == Opcodes.MOD_TEXT && message.isServer()) {
+            OutgoingChatMessage ocm = (OutgoingChatMessage) event.message();
             NetworkText text = ocm.text();
-            if(text.mode() == NetworkText.Mode.FORMAT && "{0} {1}!".equals(text.text())) {
+            if (text.mode() == NetworkText.Mode.FORMAT && "{0} {1}!".equals(text.text())) {
                 ocm.text(NetworkText.literal("Welcome to the Jungle"));
                 ocm.color(Color.GREEN);
             }

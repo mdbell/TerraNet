@@ -1,14 +1,21 @@
 package me.mdbell.terranet.common.game.messages;
 
-public abstract class NetModuleMessage extends GameMessage {
-    private final int id;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
-    public NetModuleMessage(int id) {
-        super(OP_LOAD_MODULE);
-        this.id = id;
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+public abstract class NetModuleMessage extends GameMessage {
+
+    protected abstract int getModIdImpl();
+
+    @Override
+    public final int getModId() {
+        return getModIdImpl();
     }
 
-    public final int modId(){
-        return this.id;
+    @Override
+    public final int getOpcode() {
+        return OP_LOAD_MODULE;
     }
 }

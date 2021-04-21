@@ -21,7 +21,7 @@ public abstract class FilteredMessageTranscoder<T extends GameMessage> extends A
 
     @Override
     public final boolean encode(Buffer<?> to, GameMessage message) {
-        if(message.getId() != this.id) {
+        if(message.getOpcode() != this.id) {
             return false;
         }
         return filteredEncode(to, (T) message);

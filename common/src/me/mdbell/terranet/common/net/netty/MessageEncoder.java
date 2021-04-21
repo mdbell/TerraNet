@@ -28,7 +28,7 @@ public class MessageEncoder extends MessageToByteEncoder<GameMessage> implements
         Buffer<ByteBuf> out = Buffer.wrap(n);
         int startIndex = out.writerIndex();
         out.writeShortLE(0);
-        out.writeByte(message.getId());
+        out.writeByte(message.getOpcode());
 
         boolean written = false;
         for(MessageTranscoder t : transcoders) {
