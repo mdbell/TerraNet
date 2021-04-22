@@ -3,19 +3,14 @@ package me.mdbell.terranet.common.io;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import lombok.Setter;
-import me.mdbell.terranet.common.util.IOUtil;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
 public abstract class Buffer<T> {
 
-    private int bitByte;
+    private int readBitByte = 0, writeBitByte = 0;
     private int bitReadPos = Byte.SIZE, bitWritePos = 0;
-
-    @Getter
-    @Setter
-    private BitMode bitMode = BitMode.ONE_TRUE;
 
     public static Buffer<ByteBuf> wrap(ByteBuf buffer) {
         return new NettyBuffer(buffer);
@@ -51,11 +46,42 @@ public abstract class Buffer<T> {
 
     public abstract Buffer<?> writeIntLE(int value);
 
+    public abstract Buffer<?> writeFloat(float value);
+
+    public abstract Buffer<?> writeFloatLE(float value);
+
+    public abstract Buffer<?> writeLong(long value);
+
+    public abstract Buffer<?> writeLongLE(long value);
+
     public abstract Buffer<?> writeBytes(byte[] bytes);
 
     public abstract Buffer<?> writeBytes(ByteBuffer bytes);
 
     public abstract Buffer<?> writeBytes(ByteBuf bytes);
+
+
+    public Buffer<?> writeBit(boolean bit){
+        if(bitWritePos == Byte.SIZE) {
+            writeBits();
+        }
+        int mask = 1 << bitWritePos;
+        if(bit){
+            writeBitByte |= mask;
+        }else{
+            mask ^= 0xFF;
+            writeBitByte &= mask;
+        }
+        bitWritePos++;
+        return this;
+    }
+
+    public Buffer<?> writeBits(){
+        writeByte(writeBitByte); //TODO
+        writeBitByte = 0;
+        bitWritePos = 0;
+        return this;
+    }
 
     public final Buffer<?> writeBytes(Buffer<?> bytes) {
         Object b = bytes.getBuffer();
@@ -124,21 +150,17 @@ public abstract class Buffer<T> {
     }
 
     public final boolean readBit() {
-        if (bitReadPos == Byte.SIZE) {
-            bitByte = readUnsignedByte();
-            bitReadPos = 0;
+        while (bitReadPos >= Byte.SIZE) {
+            readBitByte = readUnsignedByte();
+            bitReadPos -= Byte.SIZE;
         }
-        int value = (bitByte >> bitReadPos) & 1;
+        int value = (readBitByte >> bitReadPos) & 1;
         bitReadPos++;
-        return value == bitMode.ordinal();
+        return value == 1;
     }
 
     public final Buffer<?> skipReaderBits(int count) {
         bitReadPos += count;
-        while (bitReadPos >= Byte.SIZE) {
-            bitByte = readUnsignedByte();
-            bitReadPos -= Byte.SIZE;
-        }
         return this;
     }
 
@@ -157,9 +179,4 @@ public abstract class Buffer<T> {
 
     public abstract Buffer<?> resetReaderIndex();
 
-    public UUID readGuid() {
-        byte[] data = new byte[16];
-        readBytes(data);
-        return UUID.nameUUIDFromBytes(data);
-    }
 }
