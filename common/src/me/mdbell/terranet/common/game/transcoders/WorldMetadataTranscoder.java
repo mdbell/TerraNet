@@ -17,10 +17,10 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
     @Override
     protected WorldMetadataMessage filteredDecode(int size, Buffer<?> buff) {
         int[] treeX = new int[3];
-        byte[] treeStyle = new byte[4];
+        int[] treeStyle = new int[4];
         int[] caveBackX = new int[3];
-        byte[] caveBackStyle = new byte[4];
-        byte[] treetopTypes = new byte[13];
+        int[] caveBackStyle = new int[4];
+        int[] treetopTypes = new int[13];
 
         WorldMetadataMessage.WorldMetadataMessageBuilder builder = WorldMetadataMessage.builder()
                 .worldTime(buff.readIntLE())
@@ -60,10 +60,11 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .numClouds(buff.readUnsignedByte());
 
         buff.readInto(treeX, Buffer::readIntLE);
-        buff.readBytes(treeStyle);
+        buff.readInto(treeStyle, Buffer::readUnsignedByte);
+
         buff.readInto(caveBackX, Buffer::readIntLE);
-        buff.readBytes(caveBackStyle);
-        buff.readBytes(treetopTypes);
+        buff.readInto(caveBackStyle, Buffer::readUnsignedByte);
+        buff.readInto(treetopTypes, Buffer::readUnsignedByte);
 
         builder.maxRaining(buff.readFloatLE())
                 .shadowOrbSmashed(buff.readBit())
@@ -72,7 +73,8 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .downedBoss3(buff.readBit())
                 .hardmode(buff.readBit())
                 .downedClown(buff.readBit())
-                .downedPlantera(buff.skipReaderBits(1).readBit())
+                .serverSideChar(buff.readBit())
+                .downedPlantera(buff.readBit())
                 .downedMechBoss1(buff.readBit())
                 .downedMechBoss2(buff.readBit())
                 .downedMechBoss3(buff.readBit())
@@ -90,6 +92,7 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .downedAncientCultist(buff.readBit())
                 .downedMoonlord(buff.readBit())
                 .downedHalloweenKing(buff.readBit())
+                .downedHaloweenTree(buff.readBit())
                 .downedIceQueen(buff.readBit())
                 .downedSantank(buff.readBit())
                 .downedChristmasTree(buff.readBit())
@@ -117,7 +120,7 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .freeCake(buff.readBit())
                 .drunkWorld(buff.readBit())
                 .downedEmpress(buff.readBit())
-                .downedQueen(buff.readBit())
+                .downedQueenSlime(buff.readBit())
                 .goodWorld(buff.readBit())
                 .copperOreTier(buff.resetBitPosition().readShortLE())
                 .ironOreTier(buff.readShortLE())
@@ -179,10 +182,10 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .writeFloatLE(message.getWindSpeedTarget())
                 .writeByte(message.getNumClouds())
                 .writeInto(message.getTreeX(), Buffer::writeIntLE)
-                .writeBytes(message.getTreeStyle())
+                .writeInto(message.getTreeStyle(), Buffer::writeByte)
                 .writeInto(message.getCaveBackX(), Buffer::writeIntLE)
-                .writeBytes(message.getCaveBackStyle())
-                .writeBytes(message.getTreetopTypes())
+                .writeInto(message.getCaveBackStyle(), Buffer::writeByte)
+                .writeInto(message.getTreetopTypes(), Buffer::writeByte)
                 .writeFloatLE(message.getMaxRaining())
                 .writeBit(message.isShadowOrbSmashed())
                 .writeBit(message.isDownedBoss1())
@@ -190,7 +193,7 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .writeBit(message.isDownedBoss3())
                 .writeBit(message.isHardmode())
                 .writeBit(message.isDownedClown())
-                .writeBit(false) // Unused
+                .writeBit(message.isServerSideChar())
                 .writeBit(message.isDownedPlantera())
                 .writeBit(message.isDownedMechBoss1())
                 .writeBit(message.isDownedMechBoss2())
@@ -210,6 +213,7 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .writeBit(message.isDownedAncientCultist())
                 .writeBit(message.isDownedMoonlord())
                 .writeBit(message.isDownedHalloweenKing())
+                .writeBit(message.isDownedHaloweenTree())
                 .writeBit(message.isDownedIceQueen())
                 .writeBit(message.isDownedSantank())
                 .writeBit(message.isDownedChristmasTree())
@@ -237,7 +241,7 @@ public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMeta
                 .writeBit(message.isFreeCake())
                 .writeBit(message.isDrunkWorld())
                 .writeBit(message.isDownedEmpress())
-                .writeBit(message.isDownedQueen())
+                .writeBit(message.isDownedQueenSlime())
                 .writeBit(message.isGoodWorld())
                 .writeBits()
                 .writeShortLE(message.getCopperOreTier())
