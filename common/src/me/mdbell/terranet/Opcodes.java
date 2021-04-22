@@ -2,7 +2,9 @@ package me.mdbell.terranet;
 
 public interface Opcodes {
 
-    String DEFAULT_VERSION = "Terraria236";
+    int DEFAULT_REV = 236;
+
+    String DEFAULT_VERSION = "Terraria" + DEFAULT_REV;
 
     int MESSAGE_HEADER_SIZE = 3;
 

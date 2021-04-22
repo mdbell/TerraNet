@@ -1,6 +1,7 @@
 package me.mdbell.terranet.files;
 
 import lombok.*;
+import me.mdbell.terranet.Opcodes;
 
 @EqualsAndHashCode
 @ToString
@@ -9,10 +10,10 @@ import lombok.*;
 @Setter
 public class SharedHeaderNode implements SharedHeaderVisitor {
 
-    private String magic;
-    private FileType type;
-    private int revision;
-    private boolean favorite;
+    private String magic = FileConstants.HEADER_MAGIC;
+    private FileType type = FileType.NONE;
+    private int revision = Opcodes.DEFAULT_REV;
+    private boolean favorite = false;
 
     @Override
     public void visitStart() {

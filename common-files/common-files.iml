@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.projectlombok:lombok:1.18.20" level="project" />
+    <orderEntry type="module" module-name="common" />
   </component>
 </module>
