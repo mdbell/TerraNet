@@ -56,9 +56,9 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onServerConnectionEvent(ServerConnectionEvent event) {
+    public void onServerConnectionEvent(ServerConnectionEvent<?> event) {
         if (event.message() == ConnectionState.DEREGISTER) {
-            ConnectionCtx conn = event.source();
+            ConnectionCtx<?> conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
                 ctx.disconnect("Remote server closed connection.");
@@ -77,9 +77,9 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onIncomingMessage(ServerMessageEvent event) {
+    public void onIncomingMessage(ServerMessageEvent<?> event) {
         GameMessage message = event.message();
-        ConnectionCtx conn = event.source();
+        ConnectionCtx<?> conn = event.source();
         ClientCtx<?> ctx;
         if (message.getOpcode() == Opcodes.OP_CONNECT) {
             if (proxyMap.containsKey(conn)) {
@@ -96,7 +96,7 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onOutgoingMessage(ClientMessageEvent event) {
+    public void onOutgoingMessage(ClientMessageEvent<?> event) {
         ClientCtx<?> ctx = event.source();
         GameMessage message = event.message();
         ConnectionCtx conn = proxyMap.entrySet()

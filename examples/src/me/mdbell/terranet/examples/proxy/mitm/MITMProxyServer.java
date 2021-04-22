@@ -16,7 +16,7 @@ public class MITMProxyServer extends ProxyServer {
     }
 
     @Override
-    public void onIncomingMessage(ServerMessageEvent event) {
+    public void onIncomingMessage(ServerMessageEvent<?> event) {
         GameMessage message = event.message();
         if (message.getModId() == Opcodes.MOD_TEXT && !message.isServer()) {
             String text = ((IncomingChatMessage) message).getMessage();
@@ -33,7 +33,7 @@ public class MITMProxyServer extends ProxyServer {
     }
 
     @Override
-    public void onOutgoingMessage(ClientMessageEvent event) {
+    public void onOutgoingMessage(ClientMessageEvent<?> event) {
         GameMessage message = event.message();
         if (message.getModId() == Opcodes.MOD_TEXT && message.isServer()) {
             OutgoingChatMessage ocm = (OutgoingChatMessage) event.message();

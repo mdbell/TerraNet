@@ -55,13 +55,19 @@ public final class DefaultTranscoder extends BufferTranscoder {
             case OP_REQUEST_WORLD:
                 return WorldDataRequestMessage.builder()
                         .build();
-            // TODO opcode 7
             case OP_ESSENTIAL_TILES:
                 return EssentialTilesMessage.builder()
                         .x(buff.readIntLE())
                         .y(buff.readIntLE())
                         .build();
-            //TODO opcodes 9-15
+            case OP_UPDATE_LOADING_STATUS:
+                return UpdateLoadingStatus.builder()
+                        .delta(buff.readIntLE())
+                        .text(buff.readText())
+                        .specialFlag1(buff.readBit())
+                        .specialFlag2(buff.readBit())
+                        .build();
+            //TODO opcodes 10-15
             case OP_PLAYER_HP:
                 return PlayerHealthMessage.builder()
                         .id(buff.readUnsignedByte())
@@ -118,13 +124,13 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeByte(p.getHideVisual1());
                 to.writeByte(p.getHideVisual2());
                 to.writeByte(p.getHideMisc());
-                IOUtil.writeColor(to, p.getHairColor());
-                IOUtil.writeColor(to, p.getSkinColor());
-                IOUtil.writeColor(to, p.getEyeColor());
-                IOUtil.writeColor(to, p.getShirtColor());
-                IOUtil.writeColor(to, p.getUnderShirtColor());
-                IOUtil.writeColor(to, p.getPantsColor());
-                IOUtil.writeColor(to, p.getShoesColor());
+                to.writeColor(p.getHairColor());
+                to.writeColor(p.getSkinColor());
+                to.writeColor(p.getEyeColor());
+                to.writeColor(p.getShirtColor());
+                to.writeColor(p.getUnderShirtColor());
+                to.writeColor(p.getPantsColor());
+                to.writeColor(p.getShoesColor());
                 to.writeByte(p.getDifficulty());
                 to.writeByte(p.getTorches());
                 return true;
@@ -144,7 +150,15 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeIntLE(ess.getX());
                 to.writeIntLE(ess.getY());
                 return true;
-            //TODO opcodes 9-15
+            case OP_UPDATE_LOADING_STATUS:
+                UpdateLoadingStatus uls = (UpdateLoadingStatus) message;
+                to.writeIntLE(uls.getDelta());
+                to.writeText(uls.getText());
+                to.writeBit(uls.isSpecialFlag1());
+                to.writeBit(uls.isSpecialFlag2());
+                to.writeBits();
+                return true;
+            //TODO opcodes 10-15
             case OP_PLAYER_HP:
                 PlayerHealthMessage php = (PlayerHealthMessage) message;
                 to.writeByte(php.getId());
