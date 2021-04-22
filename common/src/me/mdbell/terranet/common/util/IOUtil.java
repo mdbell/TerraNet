@@ -7,9 +7,34 @@ import me.mdbell.terranet.common.io.Buffer;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 @UtilityClass
 public class IOUtil {
+
+    public void copyTo(int[] source, int[] dest) {
+        System.arraycopy(source, 0, dest, 0, source.length);
+    }
+
+    public void copyTo(byte[] source, byte[] dest) {
+        System.arraycopy(source, 0, dest, 0, source.length);
+    }
+
+    public Buffer<?> readInto(Buffer<?> source, int[] array, Function<Buffer<?>, Integer> func) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = func.apply(source);
+        }
+        return source;
+    }
+
+    public Buffer<?> writeInto(Buffer<?> source, int[] array, BiConsumer<Buffer<?>, Integer> func) {
+        for (int j : array) {
+            func.accept(source, j);
+        }
+        return source;
+    }
 
     public String readString(Buffer<?> buf) {
         return readString(buf, StandardCharsets.UTF_8);
@@ -22,17 +47,18 @@ public class IOUtil {
         return new String(data, charset);
     }
 
-    public void writeString(Buffer<?> to, String str) {
-        writeString(to, str, StandardCharsets.UTF_8);
+    public Buffer<?> writeString(Buffer<?> to, String str) {
+        return writeString(to, str, StandardCharsets.UTF_8);
     }
 
-    public void writeString(Buffer<?> to, String str, Charset charset) {
+    public Buffer<?> writeString(Buffer<?> to, String str, Charset charset) {
         if (str.length() > 255) {
             throw new IllegalStateException("Max String size is 255! String size:" + str.length());
         }
         byte[] bytes = str.getBytes(charset);
         to.writeByte(bytes.length);
         to.writeBytes(bytes);
+        return to;
     }
 
     public Color readColor(Buffer<?> buf) {
@@ -75,5 +101,16 @@ public class IOUtil {
             }
         }
         return to;
+    }
+
+    public Buffer<?> writeGuid(Buffer<?> to, UUID id){
+        return to.writeLong(id.getMostSignificantBits())
+                .writeLong(id.getLeastSignificantBits());
+    }
+
+    public UUID readGuid(Buffer<?> from) {
+        byte[] data = new byte[16];
+        from.readBytes(data);
+        return UUID.nameUUIDFromBytes(data);
     }
 }

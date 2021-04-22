@@ -62,6 +62,34 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     }
 
     @Override
+    public Buffer<?> writeFloat(float value) {
+        buffer.order(ByteOrder.BIG_ENDIAN).putFloat(writeIndex, value);
+        writeIndex += Float.BYTES;
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeFloatLE(float value) {
+        buffer.order(ByteOrder.LITTLE_ENDIAN).putFloat(writeIndex, value);
+        writeIndex += Float.BYTES;
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeLong(long value) {
+        buffer.order(ByteOrder.BIG_ENDIAN).putLong(writeIndex, value);
+        writeIndex += Long.BYTES;
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeLongLE(long value) {
+        buffer.order(ByteOrder.LITTLE_ENDIAN).putLong(writeIndex, value);
+        writeIndex += Long.BYTES;
+        return this;
+    }
+
+    @Override
     public Buffer<?> writeBytes(byte[] bytes) {
         int old = buffer.position();
         buffer.position(writeIndex);

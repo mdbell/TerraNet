@@ -44,9 +44,9 @@ public final class WorldMetadataMessage extends GameMessage {
     float windSpeedTarget;
     int numClouds;
     final int[] treeX = new int[3];
-    final int[] treeStyle = new int[4];
+    final byte[] treeStyle = new byte[4];
     final int[] caveBackX = new int[3];
-    final int[] caveBackStyle = new int[4];
+    final byte[] caveBackStyle = new byte[4];
     final byte[] treetopTypes = new byte[13];
     float maxRaining;
     boolean shadowOrbSmashed;
@@ -61,7 +61,7 @@ public final class WorldMetadataMessage extends GameMessage {
     boolean frostMoon;
     boolean fastFowardTime;
     boolean slimeRain;
-    boolean downedSlimKing;
+    boolean downedSlimeKing;
     boolean downedQueenBee;
     boolean downedFishron;
     boolean downedMartians;
@@ -77,7 +77,7 @@ public final class WorldMetadataMessage extends GameMessage {
     boolean downedPirates;
     boolean downedFrontmoon;
     boolean downedGoblins;
-    boolean standstorm;
+    boolean sandstorm;
     boolean invasionOngoing;
     boolean downedInvasionT1, downedInvasionT2, downedInvasionT3;
     boolean combatBookUsed;

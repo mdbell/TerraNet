@@ -54,6 +54,30 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
+    public Buffer<?> writeFloat(float value) {
+        buffer.writeFloat(value);
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeFloatLE(float value) {
+        buffer.writeFloatLE(value);
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeLong(long value) {
+        buffer.writeLong(value);
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeLongLE(long value) {
+        buffer.writeLongLE(value);
+        return this;
+    }
+
+    @Override
     public Buffer<?> writeBytes(byte[] bytes) {
         buffer.writeBytes(bytes);
         return this;
