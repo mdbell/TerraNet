@@ -2,11 +2,15 @@ package me.mdbell.terranet.examples.world;
 
 import lombok.SneakyThrows;
 import me.mdbell.terranet.common.io.Buffer;
+import me.mdbell.terranet.common.util.Tuple;
 import me.mdbell.terranet.world.WorldReader;
 import me.mdbell.terranet.world.WorldVisitor;
 import me.mdbell.terranet.world.log.LoggingWorldVisitor;
 import me.mdbell.terranet.world.tree.WorldNode;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.FileInputStream;
 import java.io.RandomAccessFile;
 
 public class WorldTest {
@@ -19,14 +23,15 @@ public class WorldTest {
 
     @SneakyThrows
     public void run(){
-        Buffer<RandomAccessFile> worldBuffer = Buffer.wrap(new RandomAccessFile(file, "rw"));
+        Buffer<?> worldBuffer = Buffer.wrap(new FileInputStream(file));
+        //Buffer<RandomAccessFile> worldBuffer = Buffer.wrap(new RandomAccessFile(file, "rw"));
         WorldNode world = new WorldNode();
         WorldVisitor visitor = new LoggingWorldVisitor(world);
         WorldReader reader = new WorldReader(worldBuffer);
 
         reader.accept(visitor);
 
-        System.out.println(world);
+//        /System.out.println(world);
     }
 
     public static void main(String[] args){

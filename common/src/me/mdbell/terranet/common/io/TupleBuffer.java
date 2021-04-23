@@ -184,6 +184,27 @@ class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
 
     @SneakyThrows
     @Override
+    public Buffer<?> readerIndex(int newIndex) {
+        if(newIndex >= readIndex){
+            in().skipBytes(newIndex - readIndex);
+            readIndex = newIndex;
+            return this;
+        }
+        throw new UnsupportedOperationException("Can't rewind DataInput");
+    }
+
+    @Override
+    public Buffer<?> markReaderIndex() {
+        throw new UnsupportedOperationException("Can't mark DataInput");
+    }
+
+    @Override
+    public Buffer<?> resetReaderIndex() {
+        throw new UnsupportedOperationException("Can't mark DataInput");
+    }
+
+    @SneakyThrows
+    @Override
     protected Buffer<?> writeBuffer(int len) {
         out().write(tmp.array(), 0, len);
         writeIndex += len;
