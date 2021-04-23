@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
@@ -30,6 +31,10 @@ public abstract class Buffer<T> {
 
     public static Buffer<ByteBuffer> wrap(ByteBuffer buffer) {
         return new JDKBuffer(buffer);
+    }
+
+    public static Buffer<RandomAccessFile> wrap(RandomAccessFile raf){
+        return new RAFBuffer(raf);
     }
 
     public abstract T getBuffer();

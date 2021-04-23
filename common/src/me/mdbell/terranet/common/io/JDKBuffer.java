@@ -5,11 +5,9 @@ import io.netty.buffer.ByteBuf;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-final class JDKBuffer extends Buffer<ByteBuffer> {
+final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
 
     private ByteBuffer buffer;
-    private int writeIndex, readIndex;
-    private int writeMark, readMark;
 
     JDKBuffer(ByteBuffer buffer) {
         this.buffer = buffer;
@@ -120,29 +118,6 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     }
 
     @Override
-    public int writerIndex() {
-        return writeIndex;
-    }
-
-    @Override
-    public Buffer<?> writerIndex(int newIndex) {
-        this.writeIndex = newIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> markWriterIndex() {
-        writeMark = writeIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> resetWriterIndex() {
-        writeIndex = writeMark;
-        return this;
-    }
-
-    @Override
     public boolean isWritable() {
         return !buffer.isReadOnly();
     }
@@ -231,28 +206,5 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     @Override
     public boolean readBoolean() {
         return readByte() != 0;
-    }
-
-    @Override
-    public int readerIndex() {
-        return readIndex;
-    }
-
-    @Override
-    public Buffer<?> readerIndex(int newIndex) {
-        readIndex = newIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> markReaderIndex() {
-        readMark = readIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> resetReaderIndex() {
-        readIndex = readMark;
-        return this;
     }
 }
