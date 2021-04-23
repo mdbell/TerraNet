@@ -2,6 +2,7 @@ package me.mdbell.terranet.world;
 
 import me.mdbell.terranet.files.GameMode;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface MetadataVisitor {
@@ -77,6 +78,78 @@ public interface MetadataVisitor {
     void visitEventCompleteFlags(boolean goblen, boolean pumpkinMoon, boolean frostMoon, boolean pirates);
 
     void visitShadowOrbSmashed(boolean smashed);
+
+    void visitMeteor(boolean spawned);
+
+    void visitShadowOrbCount(int count);
+
+    void visitAlterCount(int alterCount);
+
+    void visitHardmode(boolean hardmode);
+
+    void visitInvasion(int delay, int size, int type, double x);
+
+    void visitSlimerainTime(double time);
+
+    void visitSundialCooldown(int cooldown);
+
+    void visitRain(boolean raining, int time, float max);
+
+    void visitOreTiers1(int cobalt, int mythril, int adamantite);
+
+    void visitBG(int index, int value);
+
+    void visitClouds(float active, int num);
+
+    void visitWindSpeedTarget(float target);
+
+    void visitAnglerQuest(List<String> finished, int current);
+
+    void visitSavedNpcsFlags2(boolean angler, boolean stylist, boolean taxCollector, boolean golfer);
+
+    void visitInvasionSizeStart(int size);
+
+    void visitCultistDelay(int delay);
+
+    void visitKillCounts(List<Integer> counts);
+
+    void visitFastForward(boolean fastForward);
+
+    void visitEndgameBossFlags(boolean fishron, boolean martians, boolean ancientCultist, boolean moonlord,
+                               boolean hallowenKing, boolean halloweenTree, boolean christmasIceQueen, boolean santank,
+                               boolean christmasTree);
+
+    void visitDownedTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust);
+
+    void visitActiveTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust);
+
+    void visitApocalypse(boolean ongoing);
+
+    void visitParty(boolean ongoing, boolean genuine, int cooldown, List<Integer> partying);
+
+    void visitSandstorm(boolean happening, int timeLeft, float severity, float intendedSeverity);
+
+    void visitDungeonDefense(boolean savedBartender, boolean invasionT1, boolean invasionT2, boolean invasionT3);
+
+    //setBG(8)
+    //setBG(9)
+    //setBG(10)
+    //setBG(11)
+    //setBG(12)
+
+    void visitCombatBook(boolean used);
+
+    void visitLantern(int cooldown, boolean genuine, boolean manual, boolean nextNightGenuine);
+
+    void visitTreetopStyle(int index, int style);
+
+    void visitForceEvents(boolean halloween, boolean christmas);
+
+    void visitOreTiers2(int copper, int iron, int silver, int gold);
+
+    void visitBoughtPets(boolean cat, boolean dog, boolean bunny);
+
+    void visitHallowBosses(boolean empress, boolean slimeQueen);
 
     void visitEnd();
 }

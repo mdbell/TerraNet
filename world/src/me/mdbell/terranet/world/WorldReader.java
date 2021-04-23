@@ -8,6 +8,8 @@ import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @ExtensionMethod({IOUtil.class})
@@ -271,10 +273,17 @@ public class WorldReader {
         visitor.visitMoonPhase(buffer.readIntLE());
         visitor.visitBloodmoon(buffer.readBoolean());
         visitor.visitEclipse(buffer.readBoolean());
-        visitor.visitDungeonLocation(buffer.readIntLE(), buffer.readIntLE());
+        visitor.visitDungeonLocation(buffer.readIntLE(),
+                buffer.readIntLE());
         visitor.visitCrimson(buffer.readBoolean());
-        visitor.visitNormalBossFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
-        visitor.visitMechBossFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
+        visitor.visitNormalBossFlags(buffer.readBoolean()
+                , buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+        visitor.visitMechBossFlags(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
         boolean plant = buffer.readBoolean();
         boolean golem = buffer.readBoolean();
         boolean slime = false;
@@ -282,15 +291,232 @@ public class WorldReader {
             slime = buffer.readBoolean();
         }
         visitor.visitHardmodeBossFlags(plant, golem, slime);
-        visitor.visitSavedNpcsFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
-        visitor.visitEventCompleteFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
+
+        visitor.visitSavedNpcsFlags(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+        visitor.visitEventCompleteFlags(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+
         visitor.visitShadowOrbSmashed(buffer.readBoolean());
 
-        //holy shit this is only half the metadata
+        visitor.visitMeteor(buffer.readBoolean());
+
+        visitor.visitShadowOrbCount(buffer.readByte());
+
+        visitor.visitAlterCount(buffer.readIntLE());
+        visitor.visitHardmode(buffer.readBoolean());
+        visitor.visitInvasion(buffer.readIntLE(),
+                buffer.readIntLE(),
+                buffer.readIntLE(),
+                buffer.readDoubleLE());
+
+        if (version >= 118) {
+            visitor.visitSlimerainTime(buffer.readDoubleLE());
+        } else {
+            visitor.visitSlimerainTime(0);
+        }
+
+        if (version >= 113) {
+            visitor.visitSundialCooldown(buffer.readByte());
+        } else {
+            visitor.visitSundialCooldown(0);
+        }
+
+        visitor.visitRain(buffer.readBoolean(),
+                buffer.readIntLE(),
+                buffer.readFloatLE());
+
+        visitor.visitOreTiers1(buffer.readIntLE(),
+                buffer.readIntLE(),
+                buffer.readIntLE());
+
+        for (int i = 0; i < 8; i++) {
+            visitor.visitBG(i, buffer.readByte());
+        }
+
+        visitor.visitClouds((float) buffer.readIntLE(),
+                buffer.readShortLE());
+
+        visitor.visitWindSpeedTarget(buffer.readFloatLE());
+
+        if (version < 95) {
+            visitor.visitEnd();
+            return;
+        }
+        List<String> fished = new LinkedList<>();
+        boolean angler = false;
+        boolean stylist = false;
+        boolean taxCollector = false;
+        boolean golfer = false;
+        int quest = 0;
+        int count = buffer.readIntLE();
+        for (int i = 0; i < count; i++) {
+            fished.add(buffer.readString());
+        }
+        if (version >= 99) {
+            angler = buffer.readBoolean();
+        }
+        if (version >= 101) {
+            quest = buffer.readIntLE();
+            stylist = buffer.readBoolean();
+        }
+        if (version >= 129) {
+            taxCollector = buffer.readBoolean();
+        }
+        if (version >= 201) {
+            golfer = buffer.readBoolean();
+        }
+        visitor.visitAnglerQuest(fished, quest);
+        visitor.visitSavedNpcsFlags2(angler, stylist, taxCollector, golfer);
+
+        if (version < 104) {
+            visitor.visitEnd();
+            return;
+        }
+        if (version >= 107) {
+            visitor.visitInvasionSizeStart(buffer.readIntLE());
+        }
+
+        if (version >= 109) {
+            visitor.visitCultistDelay(buffer.readIntLE());
+        } else {
+            visitor.visitCultistDelay(86400);
+            visitor.visitEnd();
+            return;
+        }
+        List<Integer> killCounts = new LinkedList<>();
+        count = buffer.readUnsignedShortLE();
+        for (int i = 0; i < count; i++) {
+            killCounts.add(buffer.readIntLE());
+        }
+        visitor.visitKillCounts(killCounts);
+
+        if (version < 128) {
+            visitor.visitEnd();
+            return;
+        }
+        visitor.visitFastForward(buffer.readBoolean());
+
+        if (version < 131) {
+            visitor.visitEnd();
+            return;
+        }
+
+        visitor.visitEndgameBossFlags(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+
+        if (version < 140) {
+            visitor.visitEnd();
+            return;
+        }
+
+        visitor.visitDownedTowers(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+
+        visitor.visitActiveTowers(buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean(),
+                buffer.readBoolean());
+
+        visitor.visitApocalypse(buffer.readBoolean());
+
+        if (version > 169) {
+            boolean ongoing = buffer.readBoolean();
+            boolean genuine = buffer.readBoolean();
+            int cooldown = buffer.readIntLE();
+            count = buffer.readIntLE();
+            List<Integer> partying = new LinkedList<>();
+            for (int i = 0; i < count; i++) {
+                partying.add(buffer.readIntLE());
+            }
+            visitor.visitParty(ongoing, genuine, cooldown, partying);
+        }
+
+        if (version > 173) {
+            visitor.visitSandstorm(buffer.readBoolean(),
+                    buffer.readIntLE(),
+                    buffer.readFloatLE(),
+                    buffer.readFloatLE());
+        }
+
+        if (version > 177) {
+            visitor.visitDungeonDefense(buffer.readBoolean(),
+                    buffer.readBoolean(),
+                    buffer.readBoolean(),
+                    buffer.readBoolean());
+        }
+
+        if (version > 194) {
+            visitor.visitBG(8, buffer.readUnsignedByte());
+        }
+
+        if (version >= 215) {
+            visitor.visitBG(9, buffer.readUnsignedByte());
+        }
+
+        if (version > 195) {
+            visitor.visitBG(10, buffer.readUnsignedByte());
+            visitor.visitBG(11, buffer.readUnsignedByte());
+            visitor.visitBG(12, buffer.readUnsignedByte());
+        }
+
+        if (version > 204) {
+            visitor.visitCombatBook(buffer.readBoolean());
+        }
+
+        if (version >= 207) {
+            visitor.visitLantern(buffer.readIntLE(),
+                    buffer.readBoolean(),
+                    buffer.readBoolean(),
+                    buffer.readBoolean());
+        }
+
+        if (version >= 211) {
+            count = buffer.readIntLE();
+            for (int i = 0; i < count; i++) {
+                visitor.visitTreetopStyle(i, buffer.readIntLE());
+            }
+        }
+
+        if (version >= 212) {
+            visitor.visitForceEvents(buffer.readBoolean(),
+                    buffer.readBoolean());
+        }
+
+        if (version >= 216) {
+            visitor.visitOreTiers2(buffer.readIntLE(),
+                    buffer.readIntLE(),
+                    buffer.readIntLE(),
+                    buffer.readIntLE());
+        }
+
+        if (version >= 217) {
+            visitor.visitBoughtPets(buffer.readBoolean(),
+                    buffer.readBoolean(),
+                    buffer.readBoolean());
+        }
+
+        if (version >= 223) {
+            visitor.visitHallowBosses(buffer.readBoolean(),
+                    buffer.readBoolean());
+        }
+
         visitor.visitEnd();
     }
 
-    private void visitHeader(SharedHeaderVisitor visitor){
+    private void visitHeader(SharedHeaderVisitor visitor) {
         byte[] magicBytes = new byte[7];
         buffer.readBytes(magicBytes);
         String magic = new String(magicBytes, StandardCharsets.UTF_8);

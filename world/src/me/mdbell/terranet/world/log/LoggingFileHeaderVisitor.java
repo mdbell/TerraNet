@@ -5,6 +5,7 @@ import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.AbstractMetadataVisitor;
 import me.mdbell.terranet.world.MetadataVisitor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -232,6 +233,202 @@ public class LoggingFileHeaderVisitor extends AbstractMetadataVisitor {
     public void visitShadowOrbSmashed(boolean smashed) {
         log.info("visitShadowOrbSmashed({})", smashed);
         super.visitShadowOrbSmashed(smashed);
+    }
+
+    @Override
+    public void visitMeteor(boolean spawned) {
+        log.info("visitMeteor({})", spawned);
+        super.visitMeteor(spawned);
+    }
+
+    @Override
+    public void visitShadowOrbCount(int count) {
+        log.info("visitShadowOrbCount({})", count);
+        super.visitShadowOrbCount(count);
+    }
+
+    @Override
+    public void visitAlterCount(int alterCount) {
+        log.info("visitAlterCount({})", alterCount);
+        super.visitAlterCount(alterCount);
+    }
+
+    @Override
+    public void visitHardmode(boolean hardmode) {
+        log.info("visitHardmode({})", hardmode);
+        super.visitHardmode(hardmode);
+    }
+
+    @Override
+    public void visitInvasion(int delay, int size, int type, double x) {
+        log.info("visitInvasion({}, {}, {}, {})", delay, size, type, x);
+        super.visitInvasion(delay, size, type, x);
+    }
+
+    @Override
+    public void visitSlimerainTime(double time) {
+        log.info("visitSlimerainTime({})", time);
+        super.visitSlimerainTime(time);
+    }
+
+    @Override
+    public void visitSundialCooldown(int cooldown) {
+        log.info("visitSundialCooldown({})", cooldown);
+        super.visitSundialCooldown(cooldown);
+    }
+
+    @Override
+    public void visitRain(boolean raining, int time, float max) {
+        log.info("visitRain({}, {}, {})", raining, time, max);
+        super.visitRain(raining, time, max);
+    }
+
+    @Override
+    public void visitOreTiers1(int cobalt, int mythril, int adamantite) {
+        log.info("visitOreTiers1({}, {}, {})", cobalt, mythril, adamantite);
+        super.visitOreTiers1(cobalt, mythril, adamantite);
+    }
+
+    @Override
+    public void visitBG(int index, int value) {
+        log.info("visitBG({}, {})", index, value);
+        super.visitBG(index, value);
+    }
+
+    @Override
+    public void visitClouds(float active, int num) {
+        log.info("visitClouds({}, {})", active, num);
+        super.visitClouds(active, num);
+    }
+
+    @Override
+    public void visitWindSpeedTarget(float target) {
+        log.info("visitWindSpeedTarget({})", target);
+        super.visitWindSpeedTarget(target);
+    }
+
+    @Override
+    public void visitAnglerQuest(List<String> finished, int current) {
+        log.info("visitAnglerQuest({}, {})", finished, current);
+        super.visitAnglerQuest(finished, current);
+    }
+
+    @Override
+    public void visitSavedNpcsFlags2(boolean angler, boolean stylist, boolean taxCollector, boolean golfer) {
+        log.info("visitSavedNpcsFlags2({}, {}, {}, {})", angler, stylist, taxCollector, golfer);
+        super.visitSavedNpcsFlags2(angler, stylist, taxCollector, golfer);
+    }
+
+    @Override
+    public void visitInvasionSizeStart(int size) {
+        log.info("visitInvasionSizeStart({})", size);
+        super.visitInvasionSizeStart(size);
+    }
+
+    @Override
+    public void visitCultistDelay(int delay) {
+        log.info("visitCultistDelay({})", delay);
+        super.visitCultistDelay(delay);
+    }
+
+    @Override
+    public void visitKillCounts(List<Integer> counts) {
+        log.info("visitKillCounts({})", counts);
+        super.visitKillCounts(counts);
+    }
+
+    @Override
+    public void visitFastForward(boolean fastForward) {
+        log.info("visitFastForward({})", fastForward);
+        super.visitFastForward(fastForward);
+    }
+
+    @Override
+    public void visitEndgameBossFlags(boolean fishron, boolean martians, boolean ancientCultist, boolean moonlord,
+                                      boolean hallowenKing, boolean halloweenTree, boolean christmasIceQueen,
+                                      boolean santank, boolean christmasTree) {
+        log.info("visitEndgameBossFlags({}, {}, {}, {}, {}, {}, {}, {}, {})", fishron, martians, ancientCultist,
+                martians, halloweenTree, halloweenTree, christmasIceQueen, santank, christmasIceQueen);
+        super.visitEndgameBossFlags(fishron, martians, ancientCultist, moonlord, hallowenKing, halloweenTree,
+                christmasIceQueen, santank, christmasTree);
+    }
+
+    @Override
+    public void visitDownedTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
+        log.info("visitDownedTowers({}, {}, {}, {})", solar, vortex, nebula, solar);
+        super.visitDownedTowers(solar, vortex, nebula, stardust);
+    }
+
+    @Override
+    public void visitActiveTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
+        log.info("visitActiveTowers({}, {}, {}, {})", solar, vortex, nebula, stardust);
+        super.visitActiveTowers(solar, vortex, nebula, stardust);
+    }
+
+    @Override
+    public void visitApocalypse(boolean ongoing) {
+        log.info("visitApocalypse({})", ongoing);
+        super.visitApocalypse(ongoing);
+    }
+
+    @Override
+    public void visitParty(boolean ongoing, boolean genuine, int cooldown, List<Integer> partying) {
+        log.info("visitParty({}, {}, {}, {})", ongoing, genuine, cooldown, partying);
+        super.visitParty(ongoing, genuine, cooldown, partying);
+    }
+
+    @Override
+    public void visitSandstorm(boolean happening, int timeLeft, float severity, float intendedSeverity) {
+        log.info("visitSandstorm({}, {}, {}, {})", happening, timeLeft, severity, intendedSeverity);
+        super.visitSandstorm(happening, timeLeft, severity, intendedSeverity);
+    }
+
+    @Override
+    public void visitDungeonDefense(boolean savedBartender, boolean invasionT1, boolean invasionT2, boolean invasionT3) {
+        log.info("visitDungeonDefense({}, {}, {}, {})", savedBartender, invasionT1, invasionT2, invasionT3);
+        super.visitDungeonDefense(savedBartender, invasionT1, invasionT2, invasionT3);
+    }
+
+    @Override
+    public void visitCombatBook(boolean used) {
+        log.info("visitCombatBook({})", used);
+        super.visitCombatBook(used);
+    }
+
+    @Override
+    public void visitLantern(int cooldown, boolean genuine, boolean manual, boolean nextNightGenuine) {
+        log.info("visitLantern({}, {}, {}, {})", cooldown, genuine, manual, nextNightGenuine);
+        super.visitLantern(cooldown, genuine, manual, nextNightGenuine);
+    }
+
+    @Override
+    public void visitTreetopStyle(int index, int style) {
+        log.info("visitTreetopStyle({}, {})", index, style);
+        super.visitTreetopStyle(index, style);
+    }
+
+    @Override
+    public void visitForceEvents(boolean halloween, boolean christmas) {
+        log.info("visitForceEvents({}, {})", halloween, christmas);
+        super.visitForceEvents(halloween, christmas);
+    }
+
+    @Override
+    public void visitOreTiers2(int copper, int iron, int silver, int gold) {
+        log.info("visitOreTiers2({}, {}, {}, {})", copper, iron, silver, gold);
+        super.visitOreTiers2(copper, iron, silver, gold);
+    }
+
+    @Override
+    public void visitBoughtPets(boolean cat, boolean dog, boolean bunny) {
+        log.info("visitBoughtPets({}, {}, {})", cat, dog, bunny);
+        super.visitBoughtPets(cat, dog, bunny);
+    }
+
+    @Override
+    public void visitHallowBosses(boolean empress, boolean slimeQueen) {
+        log.info("visitHallowBosses({}, {})", empress, slimeQueen);
+        super.visitHallowBosses(empress, slimeQueen);
     }
 
     @Override

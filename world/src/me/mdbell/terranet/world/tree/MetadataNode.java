@@ -4,6 +4,7 @@ import lombok.*;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.MetadataVisitor;
 
+import java.util.List;
 import java.util.UUID;
 
 @EqualsAndHashCode
@@ -244,6 +245,166 @@ public class MetadataNode implements MetadataVisitor {
     @Override
     public void visitShadowOrbSmashed(boolean smashed) {
         this.shadowOrbSmashed = smashed;
+    }
+
+    @Override
+    public void visitMeteor(boolean spawned) {
+
+    }
+
+    @Override
+    public void visitShadowOrbCount(int count) {
+
+    }
+
+    @Override
+    public void visitAlterCount(int alterCount) {
+
+    }
+
+    @Override
+    public void visitHardmode(boolean hardmode) {
+
+    }
+
+    @Override
+    public void visitInvasion(int delay, int size, int type, double x) {
+
+    }
+
+    @Override
+    public void visitSlimerainTime(double time) {
+
+    }
+
+    @Override
+    public void visitSundialCooldown(int cooldown) {
+
+    }
+
+    @Override
+    public void visitRain(boolean raining, int time, float max) {
+
+    }
+
+    @Override
+    public void visitOreTiers1(int cobalt, int mythril, int adamantite) {
+
+    }
+
+    @Override
+    public void visitBG(int index, int value) {
+
+    }
+
+    @Override
+    public void visitClouds(float active, int num) {
+
+    }
+
+    @Override
+    public void visitWindSpeedTarget(float target) {
+
+    }
+
+    @Override
+    public void visitAnglerQuest(List<String> finished, int current) {
+
+    }
+
+    @Override
+    public void visitSavedNpcsFlags2(boolean angler, boolean stylist, boolean taxCollector, boolean golfer) {
+
+    }
+
+    @Override
+    public void visitInvasionSizeStart(int size) {
+
+    }
+
+    @Override
+    public void visitCultistDelay(int delay) {
+
+    }
+
+    @Override
+    public void visitKillCounts(List<Integer> counts) {
+
+    }
+
+    @Override
+    public void visitFastForward(boolean fastForward) {
+
+    }
+
+    @Override
+    public void visitEndgameBossFlags(boolean fishron, boolean martians, boolean ancientCultist, boolean moonlord, boolean hallowenKing, boolean halloweenTree, boolean christmasIceQueen, boolean santank, boolean christmasTree) {
+
+    }
+
+    @Override
+    public void visitDownedTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
+
+    }
+
+    @Override
+    public void visitActiveTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
+
+    }
+
+    @Override
+    public void visitApocalypse(boolean ongoing) {
+
+    }
+
+    @Override
+    public void visitParty(boolean ongoing, boolean genuine, int cooldown, List<Integer> partying) {
+
+    }
+
+    @Override
+    public void visitSandstorm(boolean happening, int timeLeft, float severity, float intendedSeverity) {
+
+    }
+
+    @Override
+    public void visitDungeonDefense(boolean savedBartender, boolean invasionT1, boolean invasionT2, boolean invasionT3) {
+
+    }
+
+    @Override
+    public void visitCombatBook(boolean used) {
+
+    }
+
+    @Override
+    public void visitLantern(int cooldown, boolean genuine, boolean manual, boolean nextNightGenuine) {
+
+    }
+
+    @Override
+    public void visitTreetopStyle(int index, int style) {
+
+    }
+
+    @Override
+    public void visitForceEvents(boolean halloween, boolean christmas) {
+
+    }
+
+    @Override
+    public void visitOreTiers2(int copper, int iron, int silver, int gold) {
+
+    }
+
+    @Override
+    public void visitBoughtPets(boolean cat, boolean dog, boolean bunny) {
+
+    }
+
+    @Override
+    public void visitHallowBosses(boolean empress, boolean slimeQueen) {
+
     }
 
 
