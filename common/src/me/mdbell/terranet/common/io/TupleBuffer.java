@@ -2,24 +2,30 @@ package me.mdbell.terranet.common.io;
 
 import io.netty.buffer.ByteBuf;
 import lombok.SneakyThrows;
+import me.mdbell.terranet.common.util.Tuple;
 
-import java.io.RandomAccessFile;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.nio.ByteBuffer;
 
+class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
 
-final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
-
-
-    RAFBuffer(RandomAccessFile buffer){
-        super(buffer);
+    TupleBuffer(DataInput in, DataOutput out){
+        super(new Tuple<>(in, out));
     }
 
+    private DataInput in() {
+        return buffer.getFirst();
+    }
+
+    private DataOutput out() {
+        return buffer.getSecond();
+    }
 
     @SneakyThrows
     @Override
     public Buffer<?> writeBoolean(boolean value) {
-        buffer.seek(writeIndex);
-        buffer.writeBoolean(value);
+        out().writeBoolean(value);
         writeIndex++;
         return this;
     }
@@ -27,8 +33,7 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
     @SneakyThrows
     @Override
     public Buffer<?> writeByte(int value) {
-        buffer.seek(writeIndex);
-        buffer.writeByte(value);
+        out().writeByte(value);
         writeIndex++;
         return this;
     }
@@ -36,46 +41,41 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
     @SneakyThrows
     @Override
     public Buffer<?> writeShort(int value) {
-        buffer.seek(writeIndex);
-        buffer.writeShort(value);
-        writeIndex+= Short.BYTES;
+        out().writeShort(value);
+        writeIndex += Short.BYTES;
         return this;
     }
 
     @SneakyThrows
     @Override
     public Buffer<?> writeInt(int value) {
-        buffer.seek(writeIndex);
-        buffer.writeInt(value);
-        writeIndex+= Integer.BYTES;
+        out().writeInt(value);
+        writeIndex += Integer.BYTES;
         return this;
     }
 
     @SneakyThrows
     @Override
     public Buffer<?> writeFloat(float value) {
-        buffer.seek(writeIndex);
-        buffer.writeFloat(value);
-        writeIndex+= Float.BYTES;
-        return this;
+        out().writeFloat(value);
+        writeIndex += Float.BYTES;
+        return null;
     }
 
     @SneakyThrows
     @Override
     public Buffer<?> writeLong(long value) {
-        buffer.seek(writeIndex);
-        buffer.writeLong(value);
-        writeIndex+= Short.BYTES;
-        return this;
+        out().writeLong(value);
+        writeIndex += Long.BYTES;
+        return null;
     }
 
     @SneakyThrows
     @Override
     public Buffer<?> writeBytes(byte[] bytes) {
-        buffer.seek(writeIndex);
-        buffer.write(bytes);
+        out().write(bytes);
         writeIndex += bytes.length;
-        return this;
+        return null;
     }
 
     @Override
@@ -90,67 +90,78 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
 
     @Override
     public boolean isWritable() {
-        return true; //TODO actually check if it's writable
+        return out() != null;
+    }
+
+    @Override
+    public Buffer<?> writerIndex(int newIndex) {
+        throw new UnsupportedOperationException("Unable to set index in " + getClass().getName());
+    }
+
+    @Override
+    public Buffer<?> markWriterIndex() {
+        throw new UnsupportedOperationException("Unable to set mark index in " + getClass().getName());
+    }
+
+    @Override
+    public Buffer<?> resetWriterIndex() {
+        throw new UnsupportedOperationException("Unable to set index in " + getClass().getName());
     }
 
     @SneakyThrows
     @Override
     public byte readByte() {
-        buffer.seek(readIndex);
         readIndex++;
-        return buffer.readByte();
+        return in().readByte();
     }
 
+    @SneakyThrows
     @Override
     public int readUnsignedByte() {
-        return readByte() & 0xFF;
+        readIndex++;
+        return in().readUnsignedByte();
     }
 
     @SneakyThrows
     @Override
     public short readShort() {
-        buffer.seek(readIndex);
         readIndex += Short.BYTES;
-        return buffer.readShort();
+        return in().readShort();
     }
 
     @SneakyThrows
     @Override
     public int readInt() {
-        buffer.seek(readIndex);
         readIndex += Integer.BYTES;
-        return buffer.readInt();
+        return in().readInt();
     }
 
     @SneakyThrows
     @Override
     public float readFloat() {
-        buffer.seek(readIndex);
         readIndex += Float.BYTES;
-        return buffer.readFloat();
+        return in().readFloat();
     }
 
     @SneakyThrows
     @Override
     public double readDouble() {
-        buffer.seek(readIndex);
         readIndex += Double.BYTES;
-        return buffer.readDouble();
+        return in().readDouble();
     }
 
     @SneakyThrows
     @Override
     public long readLong() {
-        buffer.seek(readIndex);
         readIndex += Long.BYTES;
-        return buffer.readLong();
+        return in().readLong();
     }
 
     @SneakyThrows
     @Override
     public Buffer<?> readBytes(byte[] data) {
-        buffer.readFully(data);
         readIndex += data.length;
+        in().readFully(data);
         return this;
     }
 
@@ -167,24 +178,22 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
     @SneakyThrows
     @Override
     public boolean readBoolean() {
-        return readByte() != 0;
-    }
-
-
-    @SneakyThrows
-    @Override
-    protected void readIntoBuffer(int len){
-        buffer.seek(readIndex);
-        buffer.read(tmp.array(), 0, len);
-        readIndex += len;
+        readIndex++;
+        return in().readBoolean();
     }
 
     @SneakyThrows
     @Override
-    protected Buffer<?> writeBuffer(int len){
-        buffer.seek(writeIndex);
-        buffer.write(tmp.array(), 0, len);
+    protected Buffer<?> writeBuffer(int len) {
+        out().write(tmp.array(), 0, len);
         writeIndex += len;
         return this;
+    }
+
+    @SneakyThrows
+    @Override
+    protected void readIntoBuffer(int len) {
+        readIndex += len;
+        in().readFully(tmp.array(), 0, len);
     }
 }

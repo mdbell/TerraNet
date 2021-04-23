@@ -6,11 +6,23 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-abstract class TrackedBuffer<T> extends Buffer<T>{
+abstract class AbstractBuffer<T> extends Buffer<T>{
+
+    protected final T buffer;
+
+    AbstractBuffer(T buffer){
+        this.buffer = buffer;
+    }
+
     protected int writeIndex, readIndex;
     protected int writeMark, readMark;
 
     final ByteBuffer tmp = ByteBuffer.wrap(new byte[Long.BYTES]).order(ByteOrder.LITTLE_ENDIAN);
+
+    @Override
+    public final T getBuffer(){
+        return buffer;
+    }
 
     @Override
     public final int writerIndex() {
@@ -18,19 +30,19 @@ abstract class TrackedBuffer<T> extends Buffer<T>{
     }
 
     @Override
-    public final Buffer<?> writerIndex(int newIndex) {
+    public Buffer<?> writerIndex(int newIndex) {
         this.writeIndex = newIndex;
         return this;
     }
 
     @Override
-    public final Buffer<?> markWriterIndex() {
+    public Buffer<?> markWriterIndex() {
         writeMark = writeIndex;
         return this;
     }
 
     @Override
-    public final Buffer<?> resetWriterIndex() {
+    public Buffer<?> resetWriterIndex() {
         writeIndex = writeMark;
         return this;
     }
@@ -67,19 +79,19 @@ abstract class TrackedBuffer<T> extends Buffer<T>{
     }
 
     @Override
-    public final Buffer<?> readerIndex(int newIndex) {
+    public Buffer<?> readerIndex(int newIndex) {
         readIndex = newIndex;
         return this;
     }
 
     @Override
-    public final Buffer<?> markReaderIndex() {
+    public Buffer<?> markReaderIndex() {
         readMark = readIndex;
         return this;
     }
 
     @Override
-    public final Buffer<?> resetReaderIndex() {
+    public Buffer<?> resetReaderIndex() {
         readIndex = readMark;
         return this;
     }

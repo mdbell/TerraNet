@@ -4,18 +4,11 @@ import io.netty.buffer.ByteBuf;
 
 import java.nio.ByteBuffer;
 
-final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
-
-    private final ByteBuffer buffer;
+final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     JDKBuffer(ByteBuffer buffer) {
-        this.buffer = buffer;
+        super(buffer);
         this.writeIndex = this.readIndex = buffer.position();
-    }
-
-    @Override
-    public ByteBuffer getBuffer() {
-        return buffer;
     }
 
     @Override
