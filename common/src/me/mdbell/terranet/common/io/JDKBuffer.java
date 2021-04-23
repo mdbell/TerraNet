@@ -3,11 +3,10 @@ package me.mdbell.terranet.common.io;
 import io.netty.buffer.ByteBuf;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
 
-    private ByteBuffer buffer;
+    private final ByteBuffer buffer;
 
     JDKBuffer(ByteBuffer buffer) {
         this.buffer = buffer;
@@ -33,56 +32,28 @@ final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
 
     @Override
     public Buffer<?> writeShort(int value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putShort(writeIndex, (short) value);
-        writeIndex += Short.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeShortLE(int value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putShort(writeIndex, (short) value);
+        buffer.putShort(writeIndex, (short) value);
         writeIndex += Short.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeInt(int value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putInt(writeIndex, value);
-        writeIndex += Integer.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeIntLE(int value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putInt(writeIndex, value);
+        buffer.putInt(writeIndex, value);
         writeIndex += Integer.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeFloat(float value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putFloat(writeIndex, value);
-        writeIndex += Float.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeFloatLE(float value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putFloat(writeIndex, value);
+        buffer.putFloat(writeIndex, value);
         writeIndex += Float.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeLong(long value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putLong(writeIndex, value);
-        writeIndex += Long.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeLongLE(long value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putLong(writeIndex, value);
+        buffer.putLong(writeIndex, value);
         writeIndex += Long.BYTES;
         return this;
     }
@@ -134,69 +105,35 @@ final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
 
     @Override
     public short readShort() {
-        short value = buffer.order(ByteOrder.BIG_ENDIAN).getShort(readIndex);
-        readIndex += Short.BYTES;
-        return value;
-    }
-
-    @Override
-    public short readShortLE() {
-        short value = buffer.order(ByteOrder.LITTLE_ENDIAN).getShort(readIndex);
+        short value = buffer.getShort(readIndex);
         readIndex += Short.BYTES;
         return value;
     }
 
     @Override
     public int readInt() {
-        int value = buffer.order(ByteOrder.BIG_ENDIAN).getInt(readIndex);
-        readIndex += Integer.BYTES;
-        return value;
-    }
-
-    @Override
-    public int readIntLE() {
-        int value = buffer.order(ByteOrder.LITTLE_ENDIAN).getInt(readIndex);
+        int value = buffer.getInt(readIndex);
         readIndex += Integer.BYTES;
         return value;
     }
 
     @Override
     public float readFloat() {
-        float value = buffer.order(ByteOrder.BIG_ENDIAN).getFloat(readIndex);
+        float value = buffer.getFloat(readIndex);
         readIndex += Float.BYTES;
         return value;
     }
 
-    @Override
-    public float readFloatLE() {
-        float value = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat(readIndex);
-        readIndex += Float.BYTES;
-        return value;
-    }
     @Override
     public double readDouble() {
-        double value =  buffer.order(ByteOrder.BIG_ENDIAN).getDouble(readIndex);
-        readIndex += Double.BYTES;
-        return value;
-    }
-
-    @Override
-    public double readDoubleLE() {
-        double value =  buffer.order(ByteOrder.LITTLE_ENDIAN).getDouble(readIndex);
+        double value = buffer.getDouble(readIndex);
         readIndex += Double.BYTES;
         return value;
     }
 
     @Override
     public long readLong() {
-        long value = buffer.order(ByteOrder.BIG_ENDIAN).getLong(readIndex);
-        readIndex += Long.BYTES;
-        return value;
-    }
-
-    @Override
-    public long readLongLE() {
-        long value = buffer.order(ByteOrder.LITTLE_ENDIAN).getLong(readIndex);
+        long value = buffer.getLong(readIndex);
         readIndex += Long.BYTES;
         return value;
     }
@@ -219,5 +156,18 @@ final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
     @Override
     public boolean readBoolean() {
         return readByte() != 0;
+    }
+
+    @Override
+    protected Buffer<?> writeBuffer(int len) {
+        buffer.put(tmp.array(), 0, len);
+        writeIndex += len;
+        return this;
+    }
+
+    @Override
+    protected void readIntoBuffer(int len) {
+        buffer.get(tmp.array(), 0, len);
+        readIndex += len;
     }
 }

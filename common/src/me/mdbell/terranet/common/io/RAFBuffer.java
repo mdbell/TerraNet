@@ -12,7 +12,6 @@ import java.nio.ByteOrder;
 final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     private final RandomAccessFile buffer;
-    private final ByteBuffer tmp = ByteBuffer.wrap(new byte[Long.BYTES]).order(ByteOrder.LITTLE_ENDIAN);
 
     RAFBuffer(RandomAccessFile buffer){
         this.buffer = buffer;
@@ -52,25 +51,11 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
-    public Buffer<?> writeShortLE(int value) {
-        tmp.putShort(0, (short) value);
-        return writeBuffer(Short.BYTES);
-    }
-
-    @SneakyThrows
-    @Override
     public Buffer<?> writeInt(int value) {
         buffer.seek(writeIndex);
         buffer.writeInt(value);
         writeIndex+= Integer.BYTES;
         return this;
-    }
-
-    @SneakyThrows
-    @Override
-    public Buffer<?> writeIntLE(int value) {
-        tmp.putInt(0, value);
-        return writeBuffer(Integer.BYTES);
     }
 
     @SneakyThrows
@@ -84,25 +69,11 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
-    public Buffer<?> writeFloatLE(float value) {
-        tmp.putFloat(0, value);
-        return writeBuffer(Float.BYTES);
-    }
-
-    @SneakyThrows
-    @Override
     public Buffer<?> writeLong(long value) {
         buffer.seek(writeIndex);
         buffer.writeLong(value);
         writeIndex+= Short.BYTES;
         return this;
-    }
-
-    @SneakyThrows
-    @Override
-    public Buffer<?> writeLongLE(long value) {
-        tmp.putLong(0, value);
-        return writeBuffer(Long.BYTES);
     }
 
     @SneakyThrows
@@ -152,24 +123,10 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
-    public short readShortLE() {
-        readIntoBuffer(Short.BYTES);
-        return tmp.getShort(0);
-    }
-
-    @SneakyThrows
-    @Override
     public int readInt() {
         buffer.seek(readIndex);
         readIndex += Integer.BYTES;
         return buffer.readInt();
-    }
-
-    @SneakyThrows
-    @Override
-    public int readIntLE() {
-        readIntoBuffer(Integer.BYTES);
-        return tmp.getInt(0);
     }
 
     @SneakyThrows
@@ -182,13 +139,6 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
-    public float readFloatLE() {
-        readIntoBuffer(Float.BYTES);
-        return tmp.getFloat(0);
-    }
-
-    @SneakyThrows
-    @Override
     public double readDouble() {
         buffer.seek(readIndex);
         readIndex += Double.BYTES;
@@ -197,24 +147,10 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
-    public double readDoubleLE() {
-        readIntoBuffer(Double.BYTES);
-        return tmp.getDouble(0);
-    }
-
-    @SneakyThrows
-    @Override
     public long readLong() {
         buffer.seek(readIndex);
         readIndex += Long.BYTES;
         return buffer.readLong();
-    }
-
-    @SneakyThrows
-    @Override
-    public long readLongLE() {
-        readIntoBuffer(Long.BYTES);
-        return tmp.getLong(0);
     }
 
     @SneakyThrows
@@ -241,12 +177,18 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
         return readByte() != 0;
     }
 
-    private void readIntoBuffer(int len) throws IOException {
+
+    @SneakyThrows
+    @Override
+    protected void readIntoBuffer(int len){
+        buffer.seek(readIndex);
         buffer.read(tmp.array(), 0, len);
         readIndex += len;
     }
 
-    private Buffer<?> writeBuffer(int len) throws IOException {
+    @SneakyThrows
+    @Override
+    protected Buffer<?> writeBuffer(int len){
         buffer.seek(writeIndex);
         buffer.write(tmp.array(), 0, len);
         writeIndex += len;
