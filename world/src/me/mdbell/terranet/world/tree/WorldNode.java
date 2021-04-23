@@ -90,4 +90,9 @@ public class WorldNode implements WorldVisitor {
     public void visitEnd() {
 
     }
+
+    @Override
+    public void visitFooter(boolean flag, String name, int id) {
+        //ignored
+    }
 }

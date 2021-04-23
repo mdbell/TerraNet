@@ -89,6 +89,12 @@ public class LoggingWorldVisitor extends AbstractWorldVisitor {
     }
 
     @Override
+    public void visitFooter(boolean flag, String name, int id) {
+        log.info("visitFooter({}, {}, {})", flag, name, id);
+        super.visitFooter(flag, name, id);
+    }
+
+    @Override
     public void visitEnd() {
         super.visitEnd();
     }

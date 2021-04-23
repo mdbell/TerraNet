@@ -125,6 +125,13 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
     }
 
     @Override
+    public void visitFooter(boolean flag, String name, int id) {
+        if(visitor != null){
+            visitor.visitFooter(flag, name, id);
+        }
+    }
+
+    @Override
     public void visitEnd() {
 
     }

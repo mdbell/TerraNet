@@ -1,10 +1,8 @@
 package me.mdbell.terranet.world;
 
 import lombok.experimental.ExtensionMethod;
-import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.util.IOUtil;
-import me.mdbell.terranet.files.FileConstants;
 import me.mdbell.terranet.files.FileType;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
@@ -13,12 +11,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @ExtensionMethod({IOUtil.class})
-@Slf4j
 public class WorldReader {
 
     public static final int SUPPORTED_VERSION = 237;
 
     private static final int METADATA_OFFSET = 0;
+    private static final int TILES_OFFSET = 1;
+    private static final int CHESTS_OFFSET = 2;
+    private static final int SIGNS_OFFSET = 3;
+    private static final int NPC_OFFSET = 4;
+    private static final int ENTITIES_OFFSET = 5;
+    private static final int PRESSURE_PLATE_OFFSET = 6;
+    private static final int TOWN_OFFSET = 7;
+    private static final int BESTIARY_OFFSET = 8;
+    private static final int CREATIVE_OFFSET = 9;
+    private static final int FOOTER_OFFSET = 10;
 
     private final Buffer<?> buffer;
 
@@ -36,14 +43,11 @@ public class WorldReader {
         visitHeader(header);
         int count = buffer.readUnsignedShortLE();
         int[] offsets = new int[count];
-        log.debug("Reading {} offsets", count);
         for (int i = 0; i < count; i++) {
             offsets[i] = buffer.readIntLE();
-            log.debug("offset[{}] = {}", i, offsets[i]);
         }
         count = buffer.readUnsignedShortLE();
         boolean[] important = new boolean[count];
-        log.debug("Reading {} important flags", count);
         byte somethingElse = 0;
         byte something = (byte) 128;
         for (int i = 0; i < count; i++) {
@@ -68,16 +72,117 @@ public class WorldReader {
                     MetadataVisitor metadata = visitor.visitMetadata();
                     if (metadata != null) {
                         visitMetadata(metadata, version);
-                    } else {
-                        buffer.readerIndex(offsets[i + 1]);
+                        continue;
                     }
                     break;
+                case TILES_OFFSET:
+                    TileDataVisitor tiles = visitor.visitTileData();
+                    if (tiles != null) {
+                        visitTiles(tiles, version, important);
+                        continue;
+                    }
+                    break;
+                case CHESTS_OFFSET:
+                    ChestVisitor chests = visitor.visitChests();
+                    if (chests != null) {
+                        visitChests(chests, version);
+                        continue;
+                    }
+                    break;
+                case SIGNS_OFFSET:
+                    SignsVisitor signs = visitor.visitSigns();
+                    if (signs != null) {
+                        visitSigns(signs, version);
+                        continue;
+                    }
+                    break;
+                case NPC_OFFSET:
+                    NPCVisitor npcs = visitor.visitNpcs();
+                    if (npcs != null) {
+                        visitNpcs(npcs, version);
+                        continue;
+                    }
+                    break;
+                case ENTITIES_OFFSET:
+                    TileEntitiesVisitor entities = visitor.visitEntities();
+                    if (entities != null) {
+                        visitEntities(entities, version);
+                        continue;
+                    }
+                    break;
+                case PRESSURE_PLATE_OFFSET:
+                    PressurePlatesVisitor plates = visitor.visitPressurePlates();
+                    if (plates != null) {
+                        visitPlates(plates, version);
+                        continue;
+                    }
+                    break;
+                case TOWN_OFFSET:
+                    TownVisitor town = visitor.visitTown();
+                    if (town != null) {
+                        visitTown(town, version);
+                        continue;
+                    }
+                    break;
+                case BESTIARY_OFFSET:
+                    BestiaryVistor bestiary = visitor.visitBestiary();
+                    if (bestiary != null) {
+                        visitBestiary(bestiary, version);
+                        continue;
+                    }
+                    break;
+                case CREATIVE_OFFSET:
+                    CreativePowersVisitor creative = visitor.visitCreativePowers();
+                    if (creative != null) {
+                        visitCreative(creative, version);
+                        continue;
+                    }
+                    break;
+                case FOOTER_OFFSET:
+                    visitor.visitFooter(buffer.readBoolean(), buffer.readString(), buffer.readIntLE());
+                    continue;
                 default:
                     throw new ReaderException("Unexpected offset! index:" + i + " offset:" + offset);
             }
+            buffer.readerIndex(offsets[i + 1]);
         }
-        log.debug("Position: {} Expected:{}", buffer.readerIndex(), offsets[0]);
         visitor.visitEnd();
+    }
+
+    private void visitCreative(CreativePowersVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitBestiary(BestiaryVistor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitTown(TownVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitPlates(PressurePlatesVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitEntities(TileEntitiesVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitNpcs(NPCVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitSigns(SignsVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitChests(ChestVisitor visitor, int version) {
+        throw new UnsupportedOperationException("Unimplemented");
+    }
+
+    private void visitTiles(TileDataVisitor visitor, int version, boolean[] important) {
+        throw new UnsupportedOperationException("Unimplemented");
     }
 
     private void visitMetadata(MetadataVisitor visitor, int version) {
@@ -124,9 +229,9 @@ public class WorldReader {
             }
         } else {
             GameMode mode;
-            if(version < 112){
+            if (version < 112) {
                 mode = GameMode.NORMAL;
-            }else {
+            } else {
                 mode = buffer.readBoolean() ? GameMode.EXPERT : GameMode.NORMAL;
             }
             if (version == 208 && buffer.readBoolean()) {
@@ -146,13 +251,13 @@ public class WorldReader {
         for (int i = 0; i < 3; i++) {
             visitor.visitTreeX(i, buffer.readIntLE());
         }
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             visitor.visitTreeStyle(i, buffer.readIntLE());
         }
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             visitor.visitCaveBackX(i, buffer.readIntLE());
         }
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             visitor.visitCaveBackStyle(i, buffer.readIntLE());
         }
         visitor.visitIceBackStyle(buffer.readIntLE());
@@ -173,35 +278,25 @@ public class WorldReader {
         boolean plant = buffer.readBoolean();
         boolean golem = buffer.readBoolean();
         boolean slime = false;
-        if(version >= 118){
+        if (version >= 118) {
             slime = buffer.readBoolean();
         }
         visitor.visitHardmodeBossFlags(plant, golem, slime);
         visitor.visitSavedNpcsFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
         visitor.visitEventCompleteFlags(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
         visitor.visitShadowOrbSmashed(buffer.readBoolean());
+
+        //holy shit this is only half the metadata
         visitor.visitEnd();
     }
 
-    private void visitHeader(SharedHeaderVisitor visitor) throws ReaderException {
+    private void visitHeader(SharedHeaderVisitor visitor){
         byte[] magicBytes = new byte[7];
         buffer.readBytes(magicBytes);
         String magic = new String(magicBytes, StandardCharsets.UTF_8);
-
-        if (!FileConstants.HEADER_MAGIC.equals(magic)) {
-            throw new ReaderException("Invalid magic value:" + magic);
-        }
-
         FileType type = FileType.values()[buffer.readUnsignedByte()];
-
-        if (type != FileType.WORLD) {
-            throw new ReaderException("Unexpected world type:" + type);
-        }
-
         int revision = buffer.readIntLE();
-
         boolean favorite = (buffer.readLongLE() & 1) == 1;
-
         if (visitor != null) {
             visitor.visitStart();
             visitor.visitMagic(magic);
