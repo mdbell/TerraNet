@@ -197,6 +197,16 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
+    public double readDouble() {
+        return buffer.readDouble();
+    }
+
+    @Override
+    public double readDoubleLE() {
+        return buffer.readDoubleLE();
+    }
+
+    @Override
     public long readLong() {
         return buffer.readLong();
     }

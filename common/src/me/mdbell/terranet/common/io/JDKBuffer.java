@@ -173,6 +173,19 @@ final class JDKBuffer extends TrackedBuffer<ByteBuffer> {
         readIndex += Float.BYTES;
         return value;
     }
+    @Override
+    public double readDouble() {
+        double value =  buffer.order(ByteOrder.BIG_ENDIAN).getDouble(readIndex);
+        readIndex += Double.BYTES;
+        return value;
+    }
+
+    @Override
+    public double readDoubleLE() {
+        double value =  buffer.order(ByteOrder.LITTLE_ENDIAN).getDouble(readIndex);
+        readIndex += Double.BYTES;
+        return value;
+    }
 
     @Override
     public long readLong() {

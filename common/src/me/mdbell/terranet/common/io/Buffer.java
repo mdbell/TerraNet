@@ -133,6 +133,10 @@ public abstract class Buffer<T> {
 
     public abstract float readFloatLE();
 
+    public abstract double readDouble();
+
+    public abstract double readDoubleLE();
+
     public abstract long readLong();
 
     public abstract long readLongLE();
@@ -183,5 +187,4 @@ public abstract class Buffer<T> {
     public abstract Buffer<?> markReaderIndex();
 
     public abstract Buffer<?> resetReaderIndex();
-
 }

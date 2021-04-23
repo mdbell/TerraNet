@@ -161,7 +161,7 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
     @Override
     public int readInt() {
         buffer.seek(readIndex);
-        readIndex += Short.BYTES;
+        readIndex += Integer.BYTES;
         return buffer.readInt();
     }
 
@@ -176,7 +176,7 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
     @Override
     public float readFloat() {
         buffer.seek(readIndex);
-        readIndex += Short.BYTES;
+        readIndex += Float.BYTES;
         return buffer.readFloat();
     }
 
@@ -189,9 +189,24 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
 
     @SneakyThrows
     @Override
+    public double readDouble() {
+        buffer.seek(readIndex);
+        readIndex += Double.BYTES;
+        return buffer.readDouble();
+    }
+
+    @SneakyThrows
+    @Override
+    public double readDoubleLE() {
+        readIntoBuffer(Double.BYTES);
+        return tmp.getDouble(0);
+    }
+
+    @SneakyThrows
+    @Override
     public long readLong() {
         buffer.seek(readIndex);
-        readIndex += Short.BYTES;
+        readIndex += Long.BYTES;
         return buffer.readLong();
     }
 
@@ -223,9 +238,7 @@ final class RAFBuffer extends TrackedBuffer<RandomAccessFile>{
     @SneakyThrows
     @Override
     public boolean readBoolean() {
-        buffer.seek(readIndex);
-        readIndex++;
-        return buffer.readBoolean();
+        return readByte() != 0;
     }
 
     private void readIntoBuffer(int len) throws IOException {
