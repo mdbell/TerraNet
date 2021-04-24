@@ -13,5 +13,7 @@
     <orderEntry type="library" name="ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="module" module-name="bus-internal" />
     <orderEntry type="module" module-name="world" />
+    <orderEntry type="module" module-name="metadata-gson" />
+    <orderEntry type="module" module-name="common-files" />
   </component>
 </module>

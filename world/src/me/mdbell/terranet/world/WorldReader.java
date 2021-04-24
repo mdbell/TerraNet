@@ -399,8 +399,10 @@ public class WorldReader {
                     TileVisitor tv = visitor.visitTile(index1, index2);
                     if (tv != null) {
                         tv.visitStart();
+                        tv.visitActive(active);
                         if (active) {
-                            tv.visitActive(active);
+                            tv.visitActive(true);
+                            tv.visitType(type);
                             tv.visitFrame(frameX, frameY);
                         }
                         if (color != -1) {
