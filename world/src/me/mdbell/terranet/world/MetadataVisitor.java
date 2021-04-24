@@ -21,7 +21,7 @@ public interface MetadataVisitor {
 
     void visitDimensions(int left, int right, int top, int bottom);
 
-    void visitSize(int width, int height);
+    void visitSize(int height, int width);
 
     void visitGameMode(GameMode mode);
 

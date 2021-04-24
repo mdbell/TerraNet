@@ -14,7 +14,7 @@ public interface WorldVisitor {
 
     TileDataVisitor visitTileData();
 
-    ChestVisitor visitChests();
+    ChestDataVisitor visitChests();
 
     SignsVisitor visitSigns();
 

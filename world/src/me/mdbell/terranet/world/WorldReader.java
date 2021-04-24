@@ -6,6 +6,8 @@ import me.mdbell.terranet.common.util.IOUtil;
 import me.mdbell.terranet.files.FileType;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
+import me.mdbell.terranet.files.metadata.TileMetadata;
+import me.mdbell.terranet.files.metadata.TileMetadataFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
@@ -29,7 +31,23 @@ public class WorldReader {
     private static final int CREATIVE_OFFSET = 9;
     private static final int FOOTER_OFFSET = 10;
 
+    private static final int BIT_1_MASK = 1;
+    private static final int ACTIVE_BIT = 2;
+
+    private static final int WALL_BIT = 4;
+
+    private static final int WALL_COLOR_BIT = 16;
+
+    private static final int TILE_COLOR_BIT = 8;
+
+    private static final int WIDE_TYPE_BIT = 32;
+
     private final Buffer<?> buffer;
+
+    private int width, height;
+    private double worldSurface;
+
+    private static TileMetadata[] tileMetadata = TileMetadataFactory.getDefaultFactory().getMetadata();
 
     public WorldReader(Buffer<?> buffer) {
         this.buffer = buffer;
@@ -85,7 +103,7 @@ public class WorldReader {
                     }
                     break;
                 case CHESTS_OFFSET:
-                    ChestVisitor chests = visitor.visitChests();
+                    ChestDataVisitor chests = visitor.visitChests();
                     if (chests != null) {
                         visitChests(chests, version);
                         continue;
@@ -179,12 +197,240 @@ public class WorldReader {
         throw new UnsupportedOperationException("Unimplemented");
     }
 
-    private void visitChests(ChestVisitor visitor, int version) {
-        throw new UnsupportedOperationException("Unimplemented");
+    private void visitChests(ChestDataVisitor visitor, int version) {
+        visitor.visitStart();
+        int chestCount = buffer.readUnsignedShortLE();
+        int itemCount = buffer.readUnsignedShortLE();
+        int num3;
+        int num4;
+        if (itemCount < 40) {
+            num3 = itemCount;
+            num4 = 0;
+        } else {
+            num3 = 40;
+            num4 = itemCount - 40;
+        }
+        for (int i = 0; i < chestCount; i++) {
+            ChestVisitor cv = visitor.visitChest();
+            int x = buffer.readIntLE();
+            int y = buffer.readIntLE();
+            String name = buffer.readString();
+            if (cv != null) {
+                cv.visitStart();
+                cv.visitLocation(x, y);
+                cv.visitName(name);
+            }
+            visitItems(cv, num3, num4);
+        }
+        visitor.visitEnd();
+    }
+
+    private void visitItems(ChestVisitor cv, int itemCount, int num4) {
+        for (int j = 0; j < itemCount; j++) {
+            int stack = buffer.readUnsignedShortLE();
+            int id;
+            int prefix;
+            if (stack != 0) {
+                if (stack < 0) {
+                    stack = 1;
+                }
+                id = buffer.readIntLE();
+                prefix = buffer.readByte();
+                if(cv != null){
+                    ItemVisitor iv = cv.visitItem();
+                    visitItem(iv, id, prefix, stack);
+                }
+            }
+            for(int i = 0; i < num4; i++){
+                if(buffer.readShortLE() > 0){
+                    buffer.readIntLE();
+                    buffer.readByte();
+                }
+            }
+        }
+    }
+
+    private void visitItem(ItemVisitor item, int id, int prefix, int stack) {
+        if(item == null){
+            return;
+        }
+        item.visitStart();
+        item.visitId(id);
+        item.visitCount(stack);
+        item.visitPrefix(prefix);
+        item.visitEnd();
     }
 
     private void visitTiles(TileDataVisitor visitor, int version, boolean[] important) {
-        throw new UnsupportedOperationException("Unimplemented");
+        visitor.visitStart();
+
+        for (int index1 = 0; index1 < width; index1++) {
+            for (int index2 = 0; index2 < height; ) {
+                int type = 0;
+                boolean active = false;
+                int frameX = -1, frameY = -1;
+                int color = -1;
+                int wall = -1, wallColor = -1;
+                int liquidQuantity = -1;
+                LiquidType liquidType = LiquidType.WATER;
+                boolean wire1 = false, wire2 = false, wire3 = false;
+                boolean halfBrick = false;
+                int slope = -1;
+                boolean actuator = false, inactive = false, wire4 = false;
+
+                int index3 = -1;
+                byte num2;
+                byte num3 = num2 = 0;
+
+                byte num4 = buffer.readByte();
+                if ((num4 & 1) == 1) {
+                    num3 = buffer.readByte();
+                    if ((num3 & 1) == 1) {
+                        num2 = buffer.readByte();
+                    }
+                }
+                if ((num4 & 2) == 2) {
+                    active = true;
+                    if ((num4 & 32) == 32) {
+                        index3 = buffer.readUnsignedShortLE();
+                    } else {
+                        index3 = buffer.readUnsignedByte();
+                    }
+                    type = index3;
+                    if (important[index3]) {
+                        frameX = buffer.readShort();
+                        frameY = buffer.readShort();
+                        if (frameY == 144) {
+                            frameY = 0;
+                        }
+                    } else {
+                        frameX = -1;
+                        frameY = -1;
+                    }
+                    if ((num2 & 8) == 8) {
+                        color = buffer.readByte();
+                    }
+                }
+                if ((num4 & 4) == 4) {
+                    wall = buffer.readByte();
+                    if ((num2 & 16) == 16) {
+                        wallColor = buffer.readByte();
+                    }
+                }
+                byte num6 = (byte) (((int) num4 & 24) >> 3);
+                if (num6 != 0) {
+                    liquidQuantity = buffer.readUnsignedByte();
+                    if (num6 > 1) {
+                        liquidType = LiquidType.LAVA;
+                    } else {
+                        liquidType = LiquidType.HONEY;
+                    }
+                }
+                if (num3 > 1) {
+                    if (((int) num3 & 2) == 2) {
+                        wire1 = true;
+                    }
+                    if (((int) num3 & 4) == 4) {
+                        wire2 = true;
+                    }
+                    if (((int) num3 & 8) == 8) {
+                        wire3 = true;
+                    }
+                    byte num5 = (byte) (((int) num3 & 112) >> 4);
+                    if (num5 != 0 && (tileMetadata[type].solid || tileMetadata[type].forceSaveSlope)) {
+                        if (num5 == (byte) 1) {
+                            halfBrick = true;
+                        } else {
+                            slope = num5 - 1;
+                        }
+                    }
+                }
+                if (num2 > 0) {
+                    if (((int) num2 & 2) == 2) {
+                        actuator = true;
+                    }
+                    if (((int) num2 & 4) == 4) {
+                        inactive = true;
+                    }
+                    if (((int) num2 & 32) == 32) {
+                        wire4 = true;
+                    }
+                    if ((num2 & 64) == 64) {
+                        byte num5 = buffer.readByte();
+                        wall <<= 8;
+                        wall |= num5;
+                        if (wall >= 316) {
+                            wall = 0;
+                        }
+                    }
+                }
+                int num7;
+                switch (((int) num4 & 192) >> 6) {
+                    case 0:
+                        num7 = 0;
+                        break;
+                    case 1:
+                        num7 = buffer.readUnsignedByte();
+                        break;
+                    default:
+                        num7 = buffer.readUnsignedShortLE();
+                        break;
+                }
+//                if (index3 != -1)
+//                {
+//                    if ((double) index2 <= Main.worldSurface)
+//                    {
+//                        if ((double) (index2 + num7) <= Main.worldSurface)
+//                        {
+//                            WorldGen.tileCounts[index3] += (num7 + 1) * 5;
+//                        }
+//                        else
+//                        {
+//                            int num5 = (int) (Main.worldSurface - (double) index2 + 1.0);
+//                            int num8 = num7 + 1 - num5;
+//                            WorldGen.tileCounts[index3] += num5 * 5 + num8;
+//                        }
+//                    }
+//                    else
+//                        WorldGen.tileCounts[index3] += num7 + 1;
+//                }
+                for (; num7 >= 0; --num7) {
+                    TileVisitor tv = visitor.visitTile(index1, index2);
+                    if (tv != null) {
+                        tv.visitStart();
+                        if (active) {
+                            tv.visitActive(active);
+                            tv.visitFrame(frameX, frameY);
+                        }
+                        if (color != -1) {
+                            tv.visitColor(color);
+                        }
+                        if (wall != -1) {
+                            tv.visitWall(wall);
+                        }
+                        if (wallColor != -1) {
+                            tv.visitWallColor(wallColor);
+                        }
+                        if (liquidQuantity != -1) {
+                            tv.visitLiquid(liquidType, liquidQuantity);
+                        }
+                        if (slope != -1) {
+                            tv.visitSlope(slope);
+                        } else if (halfBrick) {
+                            tv.visitBrick();
+                        }
+                        tv.visitWire(wire1, wire2, wire3, wire4);
+                        if (actuator) {
+                            tv.visitActuator(inactive);
+                        }
+                        tv.visitEnd();
+                    }
+                    ++index2;
+                    //Main.tile[index1, index2].CopyFrom(from);
+                }
+            }
+        }
+        visitor.visitEnd();
     }
 
     private void visitMetadata(MetadataVisitor visitor, int version) {
@@ -215,7 +461,7 @@ public class WorldReader {
 
         visitor.visitDimensions(buffer.readIntLE(), buffer.readIntLE(), buffer.readIntLE(), buffer.readIntLE());
 
-        visitor.visitSize(buffer.readIntLE(), buffer.readIntLE());
+        visitor.visitSize(height = buffer.readIntLE(), width = buffer.readIntLE());
 
         if (version > 209) {
             visitor.visitGameMode(GameMode.values()[buffer.readIntLE()]);
@@ -266,7 +512,7 @@ public class WorldReader {
         visitor.visitJungleBackStyle(buffer.readIntLE());
         visitor.visitHellBackStyle(buffer.readIntLE());
         visitor.visitSpawnLocation(buffer.readIntLE(), buffer.readIntLE());
-        visitor.visitSurface(buffer.readDoubleLE());
+        visitor.visitSurface(worldSurface = buffer.readDoubleLE());
         visitor.visitRockLayer(buffer.readDoubleLE());
         visitor.visitTime(buffer.readDoubleLE());
         visitor.visitDaytime(buffer.readBoolean());

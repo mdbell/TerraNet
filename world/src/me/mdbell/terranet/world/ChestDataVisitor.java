@@ -1,10 +1,11 @@
 package me.mdbell.terranet.world;
 
-public interface TileDataVisitor {
+public interface ChestDataVisitor {
 
     void visitStart();
 
-    TileVisitor visitTile(int x, int y);
+    ChestVisitor visitChest();
 
     void visitEnd();
+
 }

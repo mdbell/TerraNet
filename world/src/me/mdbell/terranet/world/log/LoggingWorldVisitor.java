@@ -40,12 +40,12 @@ public class LoggingWorldVisitor extends AbstractWorldVisitor {
 
     @Override
     public TileDataVisitor visitTileData() {
-        return super.visitTileData();
+        return new LoggingTileDataVisitor(super.visitTileData());
     }
 
     @Override
-    public ChestVisitor visitChests() {
-        return super.visitChests();
+    public ChestDataVisitor visitChests() {
+        return new LoggingChestDataVisitor(super.visitChests());
     }
 
     @Override

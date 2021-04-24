@@ -5,7 +5,8 @@ import me.mdbell.terranet.files.SharedHeaderNode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
 
-import java.util.UUID;
+import java.util.LinkedList;
+import java.util.List;
 
 @EqualsAndHashCode
 @ToString
@@ -15,6 +16,8 @@ public class WorldNode implements WorldVisitor {
 
     private final SharedHeaderNode header = new SharedHeaderNode();
     private final MetadataNode metadata = new MetadataNode();
+    private TileNode[][] tiles;
+    private final List<ChestNode> chests = new LinkedList<>();
 
     @Override
     public void visitStart() {
@@ -38,12 +41,44 @@ public class WorldNode implements WorldVisitor {
 
     @Override
     public TileDataVisitor visitTileData() {
-        return null;
+        return new TileDataVisitor() {
+            @Override
+            public void visitStart() {
+                tiles = new TileNode[metadata.getHeight()][metadata.getWidth()];
+            }
+
+            @Override
+            public TileVisitor visitTile(int x, int y) {
+                return tiles[x][y] = new TileNode();
+            }
+
+            @Override
+            public void visitEnd() {
+
+            }
+        };
     }
 
     @Override
-    public ChestVisitor visitChests() {
-        return null;
+    public ChestDataVisitor visitChests() {
+        return new ChestDataVisitor() {
+            @Override
+            public void visitStart() {
+
+            }
+
+            @Override
+            public ChestVisitor visitChest() {
+                ChestNode node = new ChestNode();
+                chests.add(node);
+                return node;
+            }
+
+            @Override
+            public void visitEnd() {
+
+            }
+        };
     }
 
     @Override

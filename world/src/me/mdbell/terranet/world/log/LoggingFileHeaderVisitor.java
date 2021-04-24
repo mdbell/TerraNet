@@ -62,9 +62,9 @@ public class LoggingFileHeaderVisitor extends AbstractMetadataVisitor {
     }
 
     @Override
-    public void visitSize(int width, int height) {
-        log.info("visitSize({}, {})", width, height);
-        super.visitSize(width, height);
+    public void visitSize(int height, int width) {
+        log.info("visitSize({}, {})", height, width);
+        super.visitSize(height, width);
     }
 
     @Override

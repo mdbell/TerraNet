@@ -67,9 +67,9 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
     }
 
     @Override
-    public void visitSize(int width, int height) {
+    public void visitSize(int height, int width) {
         if (visitor != null) {
-            visitor.visitSize(width, height);
+            visitor.visitSize(height, width);
         }
     }
 
@@ -492,6 +492,8 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
             visitor.visitHallowBosses(empress, slimeQueen);
         }
     }
+
+
 
     @Override
     public void visitEnd() {

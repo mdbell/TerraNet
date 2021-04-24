@@ -53,7 +53,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
     }
 
     @Override
-    public ChestVisitor visitChests() {
+    public ChestDataVisitor visitChests() {
         if(visitor != null){
             return visitor.visitChests();
         }
