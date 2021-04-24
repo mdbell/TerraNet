@@ -32,7 +32,5 @@ public interface WorldVisitor {
 
     CreativePowersVisitor visitCreativePowers();
 
-    void visitFooter(boolean flag, String name, int id);
-
     void visitEnd();
 }

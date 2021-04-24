@@ -93,4 +93,8 @@ public class TileNode implements TileVisitor {
     public void visitEnd() {
 
     }
+
+    public void accept(TileVisitor visitor) {
+
+    }
 }

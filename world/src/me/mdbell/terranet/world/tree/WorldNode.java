@@ -1,6 +1,9 @@
 package me.mdbell.terranet.world.tree;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.mdbell.terranet.files.SharedHeaderNode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
@@ -130,8 +133,42 @@ public class WorldNode implements WorldVisitor {
 
     }
 
-    @Override
-    public void visitFooter(boolean flag, String name, int id) {
-        //ignored
+    public void accept(WorldVisitor visitor) {
+        visitor.visitStart();
+
+        SharedHeaderVisitor headerVisitor = visitor.visitFileHeader();
+
+        if (headerVisitor != null) {
+            header.accept(headerVisitor);
+        }
+
+        MetadataVisitor metadataVisitor = visitor.visitMetadata();
+
+        if (metadataVisitor != null) {
+            metadata.accept(metadataVisitor);
+        }
+
+        TileDataVisitor tileVisitor = visitor.visitTileData();
+        if (tileVisitor != null) {
+            accept(tileVisitor);
+        }
+
+        visitor.visitEnd();
+    }
+
+    private void accept(TileDataVisitor visitor) {
+        visitor.visitStart();
+        for (int x = 0; x < tiles.length; x++) {
+            visitor.visitTileX(x);
+            for (int y = 0; y < tiles[x].length; y++) {
+                if (tiles[x][y] != null) {
+                    TileVisitor tv = visitor.visitTile(x, y);
+                    if (tv != null) {
+                        tiles[x][y].accept(tv);
+                    }
+                }
+            }
+        }
+        visitor.visitEnd();
     }
 }

@@ -412,4 +412,8 @@ public class MetadataNode implements MetadataVisitor {
     public void visitEnd() {
 
     }
+
+    public void accept(MetadataVisitor visitor) {
+
+    }
 }

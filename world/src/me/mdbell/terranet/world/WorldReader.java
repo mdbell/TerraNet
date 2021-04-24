@@ -44,6 +44,8 @@ public class WorldReader {
 
     private final Buffer<?> buffer;
 
+    private String name = null;
+    private int id = -1;
     private int width, height;
     private double worldSurface;
 
@@ -159,7 +161,18 @@ public class WorldReader {
                     }
                     break;
                 case FOOTER_OFFSET:
-                    visitor.visitFooter(buffer.readBoolean(), buffer.readString(), buffer.readIntLE());
+                    boolean b = buffer.readBoolean();
+                    if (!b) {
+                        throw new ReaderException("Invalid footer flag");
+                    }
+                    String name = buffer.readString();
+                    if (!name.equals(this.name)) {
+                        throw new ReaderException("Invalid footer name");
+                    }
+                    int id = buffer.readIntLE();
+                    if (id != this.id) {
+                        throw new ReaderException("Invalid footer id");
+                    }
                     continue;
                 default:
                     throw new ReaderException("Unexpected offset! index:" + i + " offset:" + offset);
@@ -236,13 +249,13 @@ public class WorldReader {
                 }
                 id = buffer.readIntLE();
                 prefix = buffer.readByte();
-                if(cv != null){
+                if (cv != null) {
                     ItemVisitor iv = cv.visitItem();
                     visitItem(iv, id, prefix, stack);
                 }
             }
-            for(int i = 0; i < num4; i++){
-                if(buffer.readShortLE() > 0){
+            for (int i = 0; i < num4; i++) {
+                if (buffer.readShortLE() > 0) {
                     buffer.readIntLE();
                     buffer.readByte();
                 }
@@ -251,7 +264,7 @@ public class WorldReader {
     }
 
     private void visitItem(ItemVisitor item, int id, int prefix, int stack) {
-        if(item == null){
+        if (item == null) {
             return;
         }
         item.visitStart();
@@ -438,7 +451,7 @@ public class WorldReader {
 
     private void visitMetadata(MetadataVisitor visitor, int version) {
         visitor.visitStart();
-        visitor.visitName(buffer.readString());
+        visitor.visitName(this.name = buffer.readString());
 
         String seed = "";
         if (version == 179) {
@@ -460,7 +473,7 @@ public class WorldReader {
             visitor.visitGuid(UUID.randomUUID());
         }
 
-        visitor.visitId(buffer.readIntLE());
+        visitor.visitId(this.id = buffer.readIntLE());
 
         visitor.visitDimensions(buffer.readIntLE(), buffer.readIntLE(), buffer.readIntLE(), buffer.readIntLE());
 

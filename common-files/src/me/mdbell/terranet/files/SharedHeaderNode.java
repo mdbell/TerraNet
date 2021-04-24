@@ -44,4 +44,7 @@ public class SharedHeaderNode implements SharedHeaderVisitor {
     public void visitEnd() {
 
     }
+
+    public void accept(SharedHeaderVisitor visitor) {
+    }
 }
