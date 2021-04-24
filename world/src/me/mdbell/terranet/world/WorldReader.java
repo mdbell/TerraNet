@@ -414,7 +414,6 @@ public class WorldReader {
                         tv.visitStart();
                         tv.visitActive(active);
                         if (active) {
-                            tv.visitActive(true);
                             tv.visitType(type);
                             tv.visitFrame(frameX, frameY);
                         }

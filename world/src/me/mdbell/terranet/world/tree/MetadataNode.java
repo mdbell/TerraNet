@@ -46,6 +46,25 @@ public class MetadataNode implements MetadataVisitor {
     private boolean savedGoblin, savedWizard, savedMechanic;
     private boolean downedGoblinArmy, downedPumpkinMoon, downedFrostMoon, downedPirates;
     private boolean shadowOrbSmashed;
+    private boolean meteorSpawned;
+    private int shadowOrbCount;
+    private int alterCount;
+    private boolean hardmode;
+    private int invasionDelay;
+    private int invasionSize;
+    private int invasionType;
+    private double invasionX;
+    private double slimeRainTime;
+    private int sundialCooldown;
+    private boolean raining;
+    private int rainTime;
+    private float maxRain;
+    private int cobaltOreTier, mythrilOreTier, adamantiteOreTier;
+    private final int[] bg = new int[13];
+    private float cloudsActive;
+    private int cloudsCount;
+    private float windSpeedTarget;
+
 
 
     @Override
@@ -249,62 +268,70 @@ public class MetadataNode implements MetadataVisitor {
 
     @Override
     public void visitMeteor(boolean spawned) {
-
+        this.meteorSpawned = spawned;
     }
 
     @Override
     public void visitShadowOrbCount(int count) {
-
+        this.shadowOrbCount = count;
     }
 
     @Override
     public void visitAlterCount(int alterCount) {
-
+        this.alterCount = alterCount;
     }
 
     @Override
     public void visitHardmode(boolean hardmode) {
-
+        this.hardmode = hardmode;
     }
 
     @Override
     public void visitInvasion(int delay, int size, int type, double x) {
-
+        this.invasionDelay = delay;
+        this.invasionSize = size;
+        this.invasionType = type;
+        this.invasionX = x;
     }
 
     @Override
     public void visitSlimerainTime(double time) {
-
+        this.slimeRainTime = time;
     }
 
     @Override
     public void visitSundialCooldown(int cooldown) {
-
+        this.sundialCooldown = cooldown;
     }
 
     @Override
     public void visitRain(boolean raining, int time, float max) {
-
+        this.raining = raining;
+        this.rainTime = time;
+        this.maxRain = max;
     }
 
     @Override
     public void visitOreTiers1(int cobalt, int mythril, int adamantite) {
-
+        this.cobaltOreTier = cobalt;
+        this.mythrilOreTier = mythril;
+        this.adamantiteOreTier = adamantite;
     }
 
     @Override
     public void visitBG(int index, int value) {
-
+        this.bg[index] = value;
     }
 
     @Override
     public void visitClouds(float active, int num) {
-
+        this.cloudsActive = active;
+        this.cloudsCount = num;
     }
 
     @Override
     public void visitWindSpeedTarget(float target) {
-
+        this.windSpeedTarget = target;
     }
 
     @Override

@@ -4,6 +4,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.world.WorldReader;
+import me.mdbell.terranet.world.WorldVisitor;
+import me.mdbell.terranet.world.log.LoggingWorldVisitor;
 import me.mdbell.terranet.world.tree.WorldNode;
 import me.mdbell.terranet.world.util.ProgressListener;
 import me.mdbell.terranet.world.util.ProgressWorldVisitor;
@@ -25,20 +27,24 @@ public class WorldTest {
         //Buffer<?> worldBuffer = Buffer.wrap(new RandomAccessFile(file, "rw"));
         WorldNode world = new WorldNode();
 
-        //WorldVisitor visitor = new LoggingWorldVisitor(world);
-        ProgressWorldVisitor visitor = new ProgressWorldVisitor(world);
-        visitor.setListener(new ProgressListener() {
-            private int percent = -1;
+        WorldVisitor visitor = new LoggingWorldVisitor(world);
+        visitor = new ProgressWorldVisitor(visitor){
+            {
+                //for the love of god do not do this, it's terrible.
+                setListener(new ProgressListener() {
+                    private int percent = -1;
 
-            @Override
-            public void onProgress(int x, int width) {
-                int p = x * 100 / width;
-                if(p != percent) {
-                    percent = p;
-                    log.info("Loading Tile Data: {}%", p);
-                }
+                    @Override
+                    public void onProgress(int x, int width) {
+                        int p = x * 100 / width;
+                        if(p != percent) {
+                            percent = p;
+                            log.info("Loading Tile Data: {}%", p);
+                        }
+                    }
+                });
             }
-        });
+        };
         WorldReader reader = new WorldReader(worldBuffer);
 
         reader.accept(visitor);
