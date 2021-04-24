@@ -87,7 +87,7 @@ public class MetadataNode implements MetadataVisitor {
     }
 
     @Override
-    public void visitSize(int width, int height) {
+    public void visitSize(int height, int width) {
         this.width = width;
         this.height = height;
     }

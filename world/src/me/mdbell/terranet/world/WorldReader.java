@@ -265,6 +265,7 @@ public class WorldReader {
         visitor.visitStart();
 
         for (int index1 = 0; index1 < width; index1++) {
+            visitor.visitTileX(index1);
             for (int index2 = 0; index2 < height; ) {
                 int type = 0;
                 boolean active = false;

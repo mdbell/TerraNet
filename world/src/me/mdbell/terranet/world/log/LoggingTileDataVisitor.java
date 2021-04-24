@@ -23,6 +23,12 @@ public class LoggingTileDataVisitor extends AbstractTileDataVisitor {
     }
 
     @Override
+    public void visitTileX(int x) {
+        log.info("visitTileX({})", x);
+        super.visitTileX(x);
+    }
+
+    @Override
     public TileVisitor visitTile(int x, int y) {
         log.info("visitTile({}, {})", x, y);
         return new LoggingTileVisitor(super.visitTile(x, y));

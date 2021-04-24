@@ -20,6 +20,13 @@ public abstract class AbstractTileDataVisitor implements TileDataVisitor{
     }
 
     @Override
+    public void visitTileX(int x) {
+        if(visitor != null){
+            visitor.visitTileX(x);
+        }
+    }
+
+    @Override
     public TileVisitor visitTile(int x, int y) {
         if(visitor != null){
             return visitor.visitTile(x, y);

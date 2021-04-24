@@ -21,7 +21,6 @@ public class WorldNode implements WorldVisitor {
 
     @Override
     public void visitStart() {
-
     }
 
     @Override
@@ -44,7 +43,12 @@ public class WorldNode implements WorldVisitor {
         return new TileDataVisitor() {
             @Override
             public void visitStart() {
-                tiles = new TileNode[metadata.getHeight()][metadata.getWidth()];
+                tiles = new TileNode[metadata.getWidth()][metadata.getHeight()];
+            }
+
+            @Override
+            public void visitTileX(int x) {
+
             }
 
             @Override
