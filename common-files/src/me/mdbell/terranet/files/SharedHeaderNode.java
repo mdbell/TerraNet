@@ -46,5 +46,10 @@ public class SharedHeaderNode implements SharedHeaderVisitor {
     }
 
     public void accept(SharedHeaderVisitor visitor) {
+        visitor.visitStart();
+        visitor.visitMagic(magic);
+        visitor.visitType(type);
+        visitor.visitRevision(revision);
+        visitor.visitEnd();
     }
 }
