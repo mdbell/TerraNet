@@ -42,19 +42,16 @@ public class WorldWriter implements WorldVisitor, WorldFileConstants {
     }
 
     @Override
-    public void visitImportantFlags(boolean[] important) {
+    public void visitImportantFlags(BitSet important) {
 
         buffer.writeShortLE(offsets.length);
         countPosition = buffer.writerIndex();
         for(int i = 0; i < offsets.length; i++){
             buffer.writeInt(0);
         }
-        buffer.writeShortLE(important.length);
-        BitSet set = new BitSet();
-        for(int i = 0; i < important.length; i++) {
-            set.set(i, important[i]);
-        }
-        buffer.writeBytes(set.toByteArray());
+        byte[] data = important.toByteArray();
+        buffer.writeShortLE(important.length());
+        buffer.writeBytes(data);
     }
 
     @Override
@@ -66,7 +63,7 @@ public class WorldWriter implements WorldVisitor, WorldFileConstants {
     @Override
     public TileDataVisitor visitTileData() {
         offsets[TILES_OFFSET] = buffer.writerIndex();
-        return null;
+        return new TileDataWriter(getBuffer());
     }
 
     @Override

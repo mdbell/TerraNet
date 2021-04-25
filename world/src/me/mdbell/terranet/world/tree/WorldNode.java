@@ -10,6 +10,7 @@ import me.mdbell.terranet.files.SharedHeaderNode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
 
+import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class WorldNode implements WorldVisitor {
     private int version;
     private final SharedHeaderNode header = new SharedHeaderNode();
     private final MetadataNode metadata = new MetadataNode();
-    private boolean[] important;
+    private BitSet important;
     private TileNode[] tiles;
     private final List<ChestNode> chests = new LinkedList<>();
 
@@ -42,7 +43,7 @@ public class WorldNode implements WorldVisitor {
     }
 
     @Override
-    public void visitImportantFlags(boolean[] important) {
+    public void visitImportantFlags(BitSet important) {
         this.important = important;
     }
 

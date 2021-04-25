@@ -2,6 +2,8 @@ package me.mdbell.terranet.world;
 
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 
+import java.util.BitSet;
+
 public abstract class AbstractWorldVisitor implements WorldVisitor {
 
     private final WorldVisitor visitor;
@@ -37,7 +39,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor {
     }
 
     @Override
-    public void visitImportantFlags(boolean[] important) {
+    public void visitImportantFlags(BitSet important) {
         if (visitor != null) {
             visitor.visitImportantFlags(important);
         }

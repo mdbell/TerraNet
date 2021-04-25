@@ -2,6 +2,8 @@ package me.mdbell.terranet.world.util;
 
 import me.mdbell.terranet.world.*;
 
+import java.util.BitSet;
+
 public class CountingWorldVisitor extends AbstractWorldVisitor {
 
     private final int[] count = new int[1000];
@@ -18,7 +20,7 @@ public class CountingWorldVisitor extends AbstractWorldVisitor {
     }
 
     @Override
-    public void visitImportantFlags(boolean[] important) {
+    public void visitImportantFlags(BitSet important) {
         //ignored
     }
 

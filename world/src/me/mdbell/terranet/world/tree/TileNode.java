@@ -3,6 +3,7 @@ package me.mdbell.terranet.world.tree;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import me.mdbell.terranet.world.LiquidType;
 import me.mdbell.terranet.world.TileVisitor;
 
@@ -10,18 +11,18 @@ import me.mdbell.terranet.world.TileVisitor;
 @EqualsAndHashCode
 @Getter
 public class TileNode implements TileVisitor {
-    private int type;
-    private boolean active;
-    private int frameX, frameY;
-    private int color;
-    private int wall, wallColor;
+    private int type = 0;
+    private boolean active = false;
+    private int frameX = -1, frameY = -1;
+    private int color = 0;
+    private int wall = 0, wallColor = 0;
     private LiquidType liquidType = LiquidType.NONE;
-    private int liquidQuantity;
-    private int slope;
-    private boolean brick;
-    private boolean wire1, wire2, wire3, wire4;
-    private boolean hasActuator;
-    private boolean actuated;
+    private int liquidQuantity = 0;
+    private int slope = 0;
+    private boolean brick = false;
+    private boolean wire1 = false, wire2 = false, wire3 = false, wire4 = false;
+    private boolean actuatorPresent = false;
+    private boolean actuated = false;
 
     @Override
     public void visitStart() {
@@ -85,7 +86,7 @@ public class TileNode implements TileVisitor {
 
     @Override
     public void visitActuator(boolean inactive) {
-        this.hasActuator = true;
+        this.actuatorPresent = true;
         this.actuated = inactive;
     }
 
@@ -95,6 +96,22 @@ public class TileNode implements TileVisitor {
     }
 
     public void accept(TileVisitor visitor) {
-
+        visitor.visitStart();
+        visitor.visitActive(active);
+        visitor.visitType(type);
+        visitor.visitFrame(frameX, frameY);
+        visitor.visitColor(color);
+        visitor.visitWall(wall);
+        visitor.visitWallColor(wallColor);
+        visitor.visitLiquid(liquidType, liquidQuantity);
+        visitor.visitSlope(slope);
+        if(isBrick()) {
+            visitor.visitBrick();
+        }
+        visitor.visitWire(wire1, wire2, wire3, wire4);
+        if(actuatorPresent) {
+            visitor.visitActuator(actuated);
+        }
+        visitor.visitEnd();
     }
 }

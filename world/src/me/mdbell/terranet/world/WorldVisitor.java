@@ -2,6 +2,8 @@ package me.mdbell.terranet.world;
 
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 
+import java.util.BitSet;
+
 public interface WorldVisitor {
 
     void visitStart();
@@ -10,7 +12,7 @@ public interface WorldVisitor {
 
     SharedHeaderVisitor visitFileHeader();
 
-    void visitImportantFlags(boolean[] important);
+    void visitImportantFlags(BitSet important);
 
     MetadataVisitor visitMetadata();
 

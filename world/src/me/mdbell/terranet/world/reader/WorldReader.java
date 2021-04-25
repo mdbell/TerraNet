@@ -12,34 +12,25 @@ import me.mdbell.terranet.files.metadata.TileMetadataFactory;
 import me.mdbell.terranet.world.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
 
 @ExtensionMethod({IOUtil.class})
-public class WorldReader implements WorldFileConstants{
-
-    private static final int BIT_1_MASK = 1;
-    private static final int ACTIVE_BIT = 2;
-
-    private static final int WALL_BIT = 4;
-
-    private static final int WALL_COLOR_BIT = 16;
-
-    private static final int TILE_COLOR_BIT = 8;
-
-    private static final int WIDE_TYPE_BIT = 32;
+public class WorldReader implements WorldFileConstants {
 
     private final Buffer<?> buffer;
+    private final TileReader tileReader;
 
     private String name = null;
     private int id = -1;
     private int width, height;
     private double worldSurface;
 
-    private static TileMetadata[] tileMetadata = TileMetadataFactory.getDefaultFactory().getMetadata();
-
     public WorldReader(Buffer<?> buffer) {
         this.buffer = buffer;
+        this.tileReader = new TileReader(buffer);
     }
 
     public void accept(WorldVisitor visitor) throws ReaderException {
@@ -57,21 +48,7 @@ public class WorldReader implements WorldFileConstants{
             offsets[i] = buffer.readIntLE();
         }
         count = buffer.readUnsignedShortLE();
-        boolean[] important = new boolean[count];
-        byte somethingElse = 0;
-        byte something = (byte) 128;
-        for (int i = 0; i < count; i++) {
-            if (something == (byte) 128) {
-                somethingElse = buffer.readByte();
-                something = 1;
-            } else {
-                something <<= 1;
-            }
-            if ((something & somethingElse) == something) {
-                important[i] = true;
-            }
-        }
-
+        BitSet important = buffer.readBits(count / 8);
         visitor.visitImportantFlags(important);
 
         for (int i = 0; i < offsets.length; i++) {
@@ -265,152 +242,12 @@ public class WorldReader implements WorldFileConstants{
         item.visitEnd();
     }
 
-    private void visitTiles(TileDataVisitor visitor, int version, boolean[] important) {
+    private void visitTiles(TileDataVisitor visitor, int version, BitSet important) {
         visitor.visitStart();
-
-        for (int index1 = 0; index1 < width; index1++) {
-            visitor.visitTileX(index1);
-            for (int index2 = 0; index2 < height; ) {
-                int type = 0;
-                boolean active = false;
-                int frameX = -1, frameY = -1;
-                int color = -1;
-                int wall = -1, wallColor = -1;
-                int liquidQuantity = -1;
-                LiquidType liquidType = LiquidType.WATER;
-                boolean wire1 = false, wire2 = false, wire3 = false;
-                boolean halfBrick = false;
-                int slope = -1;
-                boolean actuator = false, inactive = false, wire4 = false;
-
-                int index3;
-                byte num2;
-                byte num3 = num2 = 0;
-
-                byte num4 = buffer.readByte();
-                if ((num4 & 1) == 1) {
-                    num3 = buffer.readByte();
-                    if ((num3 & 1) == 1) {
-                        num2 = buffer.readByte();
-                    }
-                }
-                if ((num4 & 2) == 2) {
-                    active = true;
-                    if ((num4 & 32) == 32) {
-                        index3 = buffer.readUnsignedShortLE();
-                    } else {
-                        index3 = buffer.readUnsignedByte();
-                    }
-                    type = index3;
-                    if (important[index3]) {
-                        frameX = buffer.readShort();
-                        frameY = buffer.readShort();
-                        if (frameY == 144) {
-                            frameY = 0;
-                        }
-                    } else {
-                        frameX = -1;
-                        frameY = -1;
-                    }
-                    if ((num2 & 8) == 8) {
-                        color = buffer.readByte();
-                    }
-                }
-                if ((num4 & 4) == 4) {
-                    wall = buffer.readByte();
-                    if ((num2 & 16) == 16) {
-                        wallColor = buffer.readByte();
-                    }
-                }
-                byte num6 = (byte) (((int) num4 & 24) >> 3);
-                if (num6 != 0) {
-                    liquidQuantity = buffer.readUnsignedByte();
-                    if (num6 > 1) {
-                        liquidType = LiquidType.LAVA;
-                    } else {
-                        liquidType = LiquidType.HONEY;
-                    }
-                }
-                if (num3 > 1) {
-                    if (((int) num3 & 2) == 2) {
-                        wire1 = true;
-                    }
-                    if (((int) num3 & 4) == 4) {
-                        wire2 = true;
-                    }
-                    if (((int) num3 & 8) == 8) {
-                        wire3 = true;
-                    }
-                    byte num5 = (byte) (((int) num3 & 112) >> 4);
-                    if (num5 != 0 && (tileMetadata[type].solid || tileMetadata[type].forceSaveSlope)) {
-                        if (num5 == (byte) 1) {
-                            halfBrick = true;
-                        } else {
-                            slope = num5 - 1;
-                        }
-                    }
-                }
-                if (num2 > 0) {
-                    if (((int) num2 & 2) == 2) {
-                        actuator = true;
-                    }
-                    if (((int) num2 & 4) == 4) {
-                        inactive = true;
-                    }
-                    if (((int) num2 & 32) == 32) {
-                        wire4 = true;
-                    }
-                    if ((num2 & 64) == 64) {
-                        byte num5 = buffer.readByte();
-                        wall <<= 8;
-                        wall |= num5;
-                        if (wall >= 316) {
-                            wall = 0;
-                        }
-                    }
-                }
-                int num7 = switch (((int) num4 & 192) >> 6) {
-                    case 0 -> 0;
-                    case 1 -> buffer.readUnsignedByte();
-                    default -> buffer.readUnsignedShortLE();
-                };
-                for (; num7 >= 0; --num7) {
-                    TileVisitor tv = visitor.visitTile(index1, index2);
-                    if (tv != null) {
-                        tv.visitStart();
-                        tv.visitActive(active);
-                        if (active) {
-                            tv.visitType(type);
-                            tv.visitFrame(frameX, frameY);
-                        }
-                        if (color != -1) {
-                            tv.visitColor(color);
-                        }
-                        if (wall != -1) {
-                            tv.visitWall(wall);
-                        }
-                        if (wallColor != -1) {
-                            tv.visitWallColor(wallColor);
-                        }
-                        if (liquidQuantity != -1) {
-                            tv.visitLiquid(liquidType, liquidQuantity);
-                        }
-                        if (slope != -1) {
-                            tv.visitSlope(slope);
-                        } else if (halfBrick) {
-                            tv.visitBrick();
-                        }
-                        tv.visitWire(wire1, wire2, wire3, wire4);
-                        if (actuator) {
-                            tv.visitActuator(inactive);
-                        }
-                        tv.visitEnd();
-                    }
-                    ++index2;
-                    //Main.tile[index1, index2].CopyFrom(from);
-                }
-            }
-        }
+        tileReader.setVisitor(visitor);
+        tileReader.setSize(width, height);
+        tileReader.setImportant(important);
+        tileReader.visitAllTiles();
         visitor.visitEnd();
     }
 

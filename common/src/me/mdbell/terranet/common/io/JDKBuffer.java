@@ -19,8 +19,9 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     @Override
     public Buffer<?> writeByte(int value) {
-        buffer.put(writeIndex++, (byte) value);
-        return null;
+        buffer.put(writeIndex, (byte) value);
+        writeIndex++;
+        return this;
     }
 
     @Override
@@ -95,12 +96,14 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     @Override
     public byte readByte() {
-        return buffer.get(readIndex++);
+        byte value = buffer.get(readIndex);
+        readIndex++;
+        return value;
     }
 
     @Override
     public int readUnsignedByte() {
-        return buffer.get(readIndex++) & 0xFF;
+        return Byte.toUnsignedInt(readByte());
     }
 
     @Override
@@ -160,14 +163,14 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     @Override
     protected Buffer<?> writeBuffer(int len) {
-        buffer.put(tmp.array(), 0, len);
+        buffer.put(writeIndex, tmp.array(), 0, len);
         writeIndex += len;
         return this;
     }
 
     @Override
     protected void readIntoBuffer(int len) {
-        buffer.get(tmp.array(), 0, len);
+        buffer.get(readIndex, tmp.array(), 0, len);
         readIndex += len;
     }
 }

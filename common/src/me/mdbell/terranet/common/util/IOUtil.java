@@ -7,6 +7,7 @@ import me.mdbell.terranet.common.io.Buffer;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.BitSet;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -88,6 +89,12 @@ public class IOUtil {
             res.sub(sub);
         }
         return res;
+    }
+
+    public BitSet readBits(Buffer<?> to, int byteCount){
+        byte[] data = new byte[byteCount];
+        to.readBytes(data);
+        return BitSet.valueOf(data);
     }
 
     public Buffer<?> writeText(Buffer<?> to, NetworkText text) {

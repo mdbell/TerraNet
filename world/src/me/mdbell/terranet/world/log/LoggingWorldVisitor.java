@@ -5,6 +5,8 @@ import me.mdbell.terranet.files.LoggingHeaderVisitor;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
 
+import java.util.BitSet;
+
 @Slf4j
 public class LoggingWorldVisitor extends AbstractWorldVisitor {
 
@@ -34,7 +36,7 @@ public class LoggingWorldVisitor extends AbstractWorldVisitor {
     }
 
     @Override
-    public void visitImportantFlags(boolean[] important) {
+    public void visitImportantFlags(BitSet important) {
         log.info("visitImportantFlags({})", important);
         super.visitImportantFlags(important);
     }
