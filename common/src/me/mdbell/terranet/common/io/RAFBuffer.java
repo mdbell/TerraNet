@@ -18,10 +18,7 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
     @SneakyThrows
     @Override
     public Buffer<?> writeBoolean(boolean value) {
-        buffer.seek(writeIndex);
-        buffer.writeBoolean(value);
-        writeIndex++;
-        return this;
+        return writeByte(value ? 1 : 0);
     }
 
     @SneakyThrows
@@ -65,7 +62,16 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
     public Buffer<?> writeLong(long value) {
         buffer.seek(writeIndex);
         buffer.writeLong(value);
-        writeIndex+= Short.BYTES;
+        writeIndex+= Long.BYTES;
+        return this;
+    }
+
+    @SneakyThrows
+    @Override
+    public Buffer<?> writeDouble(double value) {
+        buffer.seek(writeIndex);
+        buffer.writeDouble(value);
+        writeIndex+= Long.BYTES;
         return this;
     }
 

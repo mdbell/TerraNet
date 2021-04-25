@@ -1,11 +1,11 @@
 package me.mdbell.terranet.world.tree;
 
 import lombok.*;
+import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.MetadataVisitor;
 
 import java.util.List;
-import java.util.UUID;
 
 @EqualsAndHashCode
 @ToString
@@ -441,6 +441,48 @@ public class MetadataNode implements MetadataVisitor {
     }
 
     public void accept(MetadataVisitor visitor) {
+        visitor.visitStart();
 
+        visitor.visitName(name);
+        visitor.visitSeed(seed);
+        visitor.visitWorldGenVersion(worldGenVersion);
+        visitor.visitGuid(guid);
+        visitor.visitId(id);
+        visitor.visitDimensions(left, right, top, bottom);
+        visitor.visitSize(height, width);
+        visitor.visitGameMode(gameMode);
+        visitor.visitDrunkWorld(drunk);
+        visitor.visitGood(good);
+        visitor.visitCreationTime(creationTime);
+        visitor.visitMoonType(moonType);
+        for(int i = 0; i < treeX.length; i++){
+            visitor.visitTreeX(i, treeX[i]);
+        }
+        for(int i = 0; i < treeStyle.length; i++){
+            visitor.visitTreeStyle(i, treeStyle[i]);
+        }
+        for (int i = 0; i < 3; i++) {
+            visitor.visitCaveBackX(i, caveBackX[i]);
+        }
+        for (int i = 0; i < 4; i++) {
+            visitor.visitCaveBackStyle(i, caveBackStyle[i]);
+        }
+        visitor.visitIceBackStyle(iceBackStyle);
+        visitor.visitJungleBackStyle(jungleBackStyle);
+        visitor.visitHellBackStyle(helLBackStyle);
+        visitor.visitSpawnLocation(spawnX, spawnY);
+        visitor.visitSurface(surface);
+        visitor.visitRockLayer(rockLayer);
+        visitor.visitTime(time);
+        visitor.visitDaytime(daytime);
+        visitor.visitMoonPhase(moonPhase);
+        visitor.visitBloodmoon(bloodmoon);
+        visitor.visitEclipse(eclipse);
+        visitor.visitDungeonLocation(dungeonX, dungeonY);
+        visitor.visitCrimson(crimson);
+        visitor.visitNormalBossFlags(downedBoss1, downedBoss2, downedBoss3, downedQueenBee);
+        visitor.visitMechBossFlags(downedMechBoss1, downedMechBoss2, downedMechBoss3, downedMechAny);
+        visitor.visitHardmodeBossFlags(downedPantera, downedGolem, downedSlimeKing);
+        visitor.visitEnd();
     }
 }

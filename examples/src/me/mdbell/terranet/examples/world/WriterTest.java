@@ -3,32 +3,34 @@ package me.mdbell.terranet.examples.world;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.world.reader.WorldReader;
 import me.mdbell.terranet.world.WorldVisitor;
-import me.mdbell.terranet.world.log.LoggingWorldVisitor;
+import me.mdbell.terranet.world.reader.WorldReader;
 import me.mdbell.terranet.world.tree.WorldNode;
 import me.mdbell.terranet.world.util.ProgressListener;
 import me.mdbell.terranet.world.util.ProgressWorldVisitor;
+import me.mdbell.terranet.world.writer.WorldWriter;
 
 import java.io.FileInputStream;
+import java.io.RandomAccessFile;
 
 @Slf4j
-public class WorldTest {
+public class WriterTest {
 
-    private final String file;
+    private String fileIn, fileOut;
 
-    private WorldTest(String file) {
-        this.file = file;
+    public WriterTest(String in, String out){
+        this.fileIn = in;
+        this.fileOut = out;
     }
 
     @SneakyThrows
-    public void run() {
-        Buffer<?> worldBuffer = Buffer.wrap(new FileInputStream(file));
-        //Buffer<?> worldBuffer = Buffer.wrap(new RandomAccessFile(file, "rw"));
+    public void run(){
+        Buffer<?> worldBuffer = Buffer.wrap(new RandomAccessFile(fileIn, "r"));
+        Buffer<RandomAccessFile> outBuffer = Buffer.wrap(new RandomAccessFile(fileOut, "rw"));
+        outBuffer.getBuffer().setLength(0);
         WorldNode world = new WorldNode();
 
-        WorldVisitor visitor = new LoggingWorldVisitor(world);
-        visitor = new ProgressWorldVisitor(visitor){
+        WorldVisitor visitor = new ProgressWorldVisitor(world){
             {
                 //for the love of god do not do this, it's terrible.
                 setListener(new ProgressListener() {
@@ -46,12 +48,13 @@ public class WorldTest {
             }
         };
         WorldReader reader = new WorldReader(worldBuffer);
-
         reader.accept(visitor);
+        WorldWriter writer = new WorldWriter(outBuffer);
+
+        world.accept(writer);
     }
 
-    public static void main(String[] args) {
-        //new WorldTest("./local/The_Foundation_of_Deathweed.wld").run();
-        new WorldTest("./local/Fishing.wld").run();
+    public static void main(String[] args){
+        new WriterTest("./local/Fishing.wld", "./local/Fishing_2.wld").run();
     }
 }

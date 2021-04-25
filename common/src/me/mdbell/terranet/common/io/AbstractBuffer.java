@@ -71,6 +71,12 @@ abstract class AbstractBuffer<T> extends Buffer<T>{
         return writeBuffer(Long.BYTES);
     }
 
+    @Override
+    public final Buffer<?> writeDoubleLE(double value) {
+        tmp.putDouble(0, value);
+        return writeBuffer(Double.BYTES);
+    }
+
     protected abstract Buffer<?> writeBuffer(int len);
 
     @Override

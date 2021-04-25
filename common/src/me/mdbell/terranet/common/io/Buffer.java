@@ -89,6 +89,10 @@ public abstract class Buffer<T> {
 
     public abstract Buffer<?> writeLongLE(long value);
 
+    public abstract Buffer<?> writeDouble(double value);
+
+    public abstract Buffer<?> writeDoubleLE(double value);
+
     public abstract Buffer<?> writeBytes(byte[] bytes);
 
     public abstract Buffer<?> writeBytes(ByteBuffer bytes);

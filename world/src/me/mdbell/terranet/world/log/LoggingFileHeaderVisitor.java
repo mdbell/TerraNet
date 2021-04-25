@@ -1,12 +1,12 @@
 package me.mdbell.terranet.world.log;
 
 import lombok.extern.slf4j.Slf4j;
+import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.AbstractMetadataVisitor;
 import me.mdbell.terranet.world.MetadataVisitor;
 
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 public class LoggingFileHeaderVisitor extends AbstractMetadataVisitor {

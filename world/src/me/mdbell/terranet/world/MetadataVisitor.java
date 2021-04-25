@@ -1,9 +1,9 @@
 package me.mdbell.terranet.world;
 
+import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.GameMode;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface MetadataVisitor {
 

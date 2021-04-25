@@ -52,6 +52,13 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
     }
 
     @Override
+    public Buffer<?> writeDouble(double value) {
+        buffer.putDouble(writeIndex, value);
+        writeIndex += Double.BYTES;
+        return this;
+    }
+
+    @Override
     public Buffer<?> writeBytes(byte[] bytes) {
         int old = buffer.position();
         buffer.position(writeIndex);

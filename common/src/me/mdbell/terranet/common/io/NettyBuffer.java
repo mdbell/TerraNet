@@ -78,6 +78,18 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
+    public Buffer<?> writeDouble(double value) {
+        buffer.writeDouble(value);
+        return this;
+    }
+
+    @Override
+    public Buffer<?> writeDoubleLE(double value) {
+        buffer.writeDoubleLE(value);
+        return this;
+    }
+
+    @Override
     public Buffer<?> writeBytes(byte[] bytes) {
         buffer.writeBytes(bytes);
         return this;

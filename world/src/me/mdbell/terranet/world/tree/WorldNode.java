@@ -17,8 +17,10 @@ import java.util.List;
 @Getter
 public class WorldNode implements WorldVisitor {
 
+    private int version;
     private final SharedHeaderNode header = new SharedHeaderNode();
     private final MetadataNode metadata = new MetadataNode();
+    private boolean[] important;
     private TileNode[][] tiles;
     private final List<ChestNode> chests = new LinkedList<>();
 
@@ -28,12 +30,17 @@ public class WorldNode implements WorldVisitor {
 
     @Override
     public void visitVersion(int version) {
-
+        this.version = version;
     }
 
     @Override
     public SharedHeaderVisitor visitFileHeader() {
         return header;
+    }
+
+    @Override
+    public void visitImportantFlags(boolean[] important) {
+        this.important = important;
     }
 
     @Override
@@ -135,12 +142,14 @@ public class WorldNode implements WorldVisitor {
 
     public void accept(WorldVisitor visitor) {
         visitor.visitStart();
-
+        visitor.visitVersion(version);
         SharedHeaderVisitor headerVisitor = visitor.visitFileHeader();
 
         if (headerVisitor != null) {
             header.accept(headerVisitor);
         }
+
+        visitor.visitImportantFlags(important);
 
         MetadataVisitor metadataVisitor = visitor.visitMetadata();
 

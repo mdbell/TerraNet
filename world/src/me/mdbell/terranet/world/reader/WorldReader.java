@@ -1,35 +1,22 @@
-package me.mdbell.terranet.world;
+package me.mdbell.terranet.world.reader;
 
 import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.FileType;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.files.metadata.TileMetadata;
 import me.mdbell.terranet.files.metadata.TileMetadataFactory;
+import me.mdbell.terranet.world.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @ExtensionMethod({IOUtil.class})
-public class WorldReader {
-
-    public static final int SUPPORTED_VERSION = 237;
-
-    private static final int METADATA_OFFSET = 0;
-    private static final int TILES_OFFSET = 1;
-    private static final int CHESTS_OFFSET = 2;
-    private static final int SIGNS_OFFSET = 3;
-    private static final int NPC_OFFSET = 4;
-    private static final int ENTITIES_OFFSET = 5;
-    private static final int PRESSURE_PLATE_OFFSET = 6;
-    private static final int TOWN_OFFSET = 7;
-    private static final int BESTIARY_OFFSET = 8;
-    private static final int CREATIVE_OFFSET = 9;
-    private static final int FOOTER_OFFSET = 10;
+public class WorldReader implements WorldFileConstants{
 
     private static final int BIT_1_MASK = 1;
     private static final int ACTIVE_BIT = 2;
@@ -56,11 +43,12 @@ public class WorldReader {
     }
 
     public void accept(WorldVisitor visitor) throws ReaderException {
+        visitor.visitStart();
         int version = buffer.readIntLE();
         if (version > SUPPORTED_VERSION) {
             throw new ReaderException("Unsupported game version:" + version);
         }
-        visitor.visitStart();
+        visitor.visitVersion(version);
         SharedHeaderVisitor header = visitor.visitFileHeader();
         visitHeader(header);
         int count = buffer.readUnsignedShortLE();
@@ -83,6 +71,9 @@ public class WorldReader {
                 important[i] = true;
             }
         }
+
+        visitor.visitImportantFlags(important);
+
         for (int i = 0; i < offsets.length; i++) {
             int offset = offsets[i];
             if (buffer.readerIndex() != offset) {

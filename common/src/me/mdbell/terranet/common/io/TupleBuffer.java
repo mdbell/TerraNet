@@ -59,7 +59,7 @@ class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
     public Buffer<?> writeFloat(float value) {
         out().writeFloat(value);
         writeIndex += Float.BYTES;
-        return null;
+        return this;
     }
 
     @SneakyThrows
@@ -67,7 +67,15 @@ class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
     public Buffer<?> writeLong(long value) {
         out().writeLong(value);
         writeIndex += Long.BYTES;
-        return null;
+        return this;
+    }
+
+    @SneakyThrows
+    @Override
+    public Buffer<?> writeDouble(double value) {
+        out().writeDouble(value);
+        writeIndex += Double.BYTES;
+        return this;
     }
 
     @SneakyThrows
@@ -75,7 +83,7 @@ class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
     public Buffer<?> writeBytes(byte[] bytes) {
         out().write(bytes);
         writeIndex += bytes.length;
-        return null;
+        return this;
     }
 
     @Override

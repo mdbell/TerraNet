@@ -18,6 +18,11 @@ public class CountingWorldVisitor extends AbstractWorldVisitor {
     }
 
     @Override
+    public void visitImportantFlags(boolean[] important) {
+        //ignored
+    }
+
+    @Override
     public TileDataVisitor visitTileData() {
         return new AbstractTileDataVisitor(super.visitTileData()) {
             @Override

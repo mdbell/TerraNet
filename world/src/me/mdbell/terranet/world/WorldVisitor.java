@@ -10,6 +10,8 @@ public interface WorldVisitor {
 
     SharedHeaderVisitor visitFileHeader();
 
+    void visitImportantFlags(boolean[] important);
+
     MetadataVisitor visitMetadata();
 
     TileDataVisitor visitTileData();

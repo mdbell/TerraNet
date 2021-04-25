@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.files.metadata.TileMetadata;
 import me.mdbell.terranet.files.metadata.TileMetadataFactory;
-import me.mdbell.terranet.world.WorldReader;
+import me.mdbell.terranet.world.reader.WorldReader;
 import me.mdbell.terranet.world.tree.WorldNode;
 import me.mdbell.terranet.world.util.CountingWorldVisitor;
 

@@ -18,19 +18,25 @@ public class LoggingWorldVisitor extends AbstractWorldVisitor {
 
     @Override
     public void visitStart() {
-        log.debug("visitStart()");
+        log.info("visitStart()");
         super.visitStart();
     }
 
     @Override
     public void visitVersion(int version) {
-        log.debug("visitVersion({})", version);
+        log.info("visitVersion({})", version);
         super.visitVersion(version);
     }
 
     @Override
     public SharedHeaderVisitor visitFileHeader() {
         return new LoggingHeaderVisitor(super.visitFileHeader());
+    }
+
+    @Override
+    public void visitImportantFlags(boolean[] important) {
+        log.info("visitImportantFlags({})", important);
+        super.visitImportantFlags(important);
     }
 
     @Override

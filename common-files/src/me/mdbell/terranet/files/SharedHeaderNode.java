@@ -50,6 +50,7 @@ public class SharedHeaderNode implements SharedHeaderVisitor {
         visitor.visitMagic(magic);
         visitor.visitType(type);
         visitor.visitRevision(revision);
+        visitor.visitFavorite(favorite);
         visitor.visitEnd();
     }
 }

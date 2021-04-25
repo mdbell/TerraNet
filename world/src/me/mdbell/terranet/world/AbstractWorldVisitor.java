@@ -2,43 +2,50 @@ package me.mdbell.terranet.world;
 
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 
-public abstract class AbstractWorldVisitor implements WorldVisitor{
+public abstract class AbstractWorldVisitor implements WorldVisitor {
 
     private final WorldVisitor visitor;
 
-    public AbstractWorldVisitor(){
+    public AbstractWorldVisitor() {
         this(null);
     }
 
-    public AbstractWorldVisitor(WorldVisitor visitor){
+    public AbstractWorldVisitor(WorldVisitor visitor) {
         this.visitor = visitor;
     }
 
     @Override
     public void visitStart() {
-        if(visitor != null){
+        if (visitor != null) {
             visitor.visitStart();
         }
     }
 
     @Override
     public void visitVersion(int version) {
-        if(visitor != null){
+        if (visitor != null) {
             visitor.visitVersion(version);
         }
     }
 
     @Override
     public SharedHeaderVisitor visitFileHeader() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitFileHeader();
         }
         return null;
     }
 
     @Override
+    public void visitImportantFlags(boolean[] important) {
+        if (visitor != null) {
+            visitor.visitImportantFlags(important);
+        }
+    }
+
+    @Override
     public MetadataVisitor visitMetadata() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitMetadata();
         }
         return null;
@@ -46,7 +53,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public TileDataVisitor visitTileData() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitTileData();
         }
         return null;
@@ -54,7 +61,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public ChestDataVisitor visitChests() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitChests();
         }
         return null;
@@ -62,7 +69,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public SignsVisitor visitSigns() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitSigns();
         }
         return null;
@@ -70,7 +77,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public NPCVisitor visitNpcs() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitNpcs();
         }
         return null;
@@ -78,7 +85,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public DummiesVisitor visitDummies() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitDummies();
         }
         return null;
@@ -86,7 +93,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public TileEntitiesVisitor visitEntities() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitEntities();
         }
         return null;
@@ -94,7 +101,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public PressurePlatesVisitor visitPressurePlates() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitPressurePlates();
         }
         return null;
@@ -102,7 +109,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public TownVisitor visitTown() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitTown();
         }
         return null;
@@ -110,7 +117,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public BestiaryVistor visitBestiary() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitBestiary();
         }
         return null;
@@ -118,7 +125,7 @@ public abstract class AbstractWorldVisitor implements WorldVisitor{
 
     @Override
     public CreativePowersVisitor visitCreativePowers() {
-        if(visitor != null){
+        if (visitor != null) {
             return visitor.visitCreativePowers();
         }
         return null;
