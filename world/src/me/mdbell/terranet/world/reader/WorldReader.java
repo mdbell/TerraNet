@@ -283,7 +283,7 @@ public class WorldReader implements WorldFileConstants{
                 int slope = -1;
                 boolean actuator = false, inactive = false, wire4 = false;
 
-                int index3 = -1;
+                int index3;
                 byte num2;
                 byte num3 = num2 = 0;
 
@@ -369,36 +369,11 @@ public class WorldReader implements WorldFileConstants{
                         }
                     }
                 }
-                int num7;
-                switch (((int) num4 & 192) >> 6) {
-                    case 0:
-                        num7 = 0;
-                        break;
-                    case 1:
-                        num7 = buffer.readUnsignedByte();
-                        break;
-                    default:
-                        num7 = buffer.readUnsignedShortLE();
-                        break;
-                }
-//                if (index3 != -1)
-//                {
-//                    if ((double) index2 <= Main.worldSurface)
-//                    {
-//                        if ((double) (index2 + num7) <= Main.worldSurface)
-//                        {
-//                            WorldGen.tileCounts[index3] += (num7 + 1) * 5;
-//                        }
-//                        else
-//                        {
-//                            int num5 = (int) (Main.worldSurface - (double) index2 + 1.0);
-//                            int num8 = num7 + 1 - num5;
-//                            WorldGen.tileCounts[index3] += num5 * 5 + num8;
-//                        }
-//                    }
-//                    else
-//                        WorldGen.tileCounts[index3] += num7 + 1;
-//                }
+                int num7 = switch (((int) num4 & 192) >> 6) {
+                    case 0 -> 0;
+                    case 1 -> buffer.readUnsignedByte();
+                    default -> buffer.readUnsignedShortLE();
+                };
                 for (; num7 >= 0; --num7) {
                     TileVisitor tv = visitor.visitTile(index1, index2);
                     if (tv != null) {
