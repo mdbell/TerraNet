@@ -75,7 +75,7 @@ public interface MetadataVisitor {
 
     void visitSavedNpcsFlags(boolean goblin, boolean wizard, boolean mechanic);
 
-    void visitEventCompleteFlags(boolean goblen, boolean pumpkinMoon, boolean frostMoon, boolean pirates);
+    void visitEventCompleteFlags(boolean goblin, boolean pumpkinMoon, boolean frostMoon, boolean pirates);
 
     void visitShadowOrbSmashed(boolean smashed);
 
@@ -131,15 +131,11 @@ public interface MetadataVisitor {
 
     void visitDungeonDefense(boolean savedBartender, boolean invasionT1, boolean invasionT2, boolean invasionT3);
 
-    //setBG(8)
-    //setBG(9)
-    //setBG(10)
-    //setBG(11)
-    //setBG(12)
-
     void visitCombatBook(boolean used);
 
     void visitLantern(int cooldown, boolean genuine, boolean manual, boolean nextNightGenuine);
+
+    void visitTreetopStyleCount(int count);
 
     void visitTreetopStyle(int index, int style);
 

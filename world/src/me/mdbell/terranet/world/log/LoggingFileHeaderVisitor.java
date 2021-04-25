@@ -104,6 +104,12 @@ public class LoggingFileHeaderVisitor extends AbstractMetadataVisitor {
     }
 
     @Override
+    public void visitTreetopStyleCount(int count) {
+        log.info("visitTreetopStyleCount({})", count);
+        super.visitTreetopStyleCount(count);
+    }
+
+    @Override
     public void visitTreeStyle(int index, int value) {
         log.info("visitTreeStyle({}, {})", index, value);
         super.visitTreeStyle(index, value);
@@ -224,9 +230,9 @@ public class LoggingFileHeaderVisitor extends AbstractMetadataVisitor {
     }
 
     @Override
-    public void visitEventCompleteFlags(boolean goblen, boolean pumpkinMoon, boolean frostMoon, boolean pirates) {
-        log.info("visitEventCompleteFlags({}, {}, {}, {})", goblen, pumpkinMoon, frostMoon, pirates);
-        super.visitEventCompleteFlags(goblen, pumpkinMoon, frostMoon, pirates);
+    public void visitEventCompleteFlags(boolean goblin, boolean pumpkinMoon, boolean frostMoon, boolean pirates) {
+        log.info("visitEventCompleteFlags({}, {}, {}, {})", goblin, pumpkinMoon, frostMoon, pirates);
+        super.visitEventCompleteFlags(goblin, pumpkinMoon, frostMoon, pirates);
     }
 
     @Override

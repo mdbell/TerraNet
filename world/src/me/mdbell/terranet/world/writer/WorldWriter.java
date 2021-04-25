@@ -130,6 +130,10 @@ public class WorldWriter implements WorldVisitor, WorldFileConstants {
             buffer.writeIntLE(offsets[i]);
         }
         buffer.resetWriterIndex();
+        //writeFooter();
+    }
+
+    private void writeFooter() {
         buffer.writeBoolean(true);
         buffer.writeString(name);
         buffer.writeIntLE(id);

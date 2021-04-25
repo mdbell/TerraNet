@@ -1,10 +1,15 @@
 package me.mdbell.terranet.world.tree;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.MetadataVisitor;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @EqualsAndHashCode
@@ -64,8 +69,63 @@ public class MetadataNode implements MetadataVisitor {
     private float cloudsActive;
     private int cloudsCount;
     private float windSpeedTarget;
-
-
+    private final List<String> fishedPlayers = new LinkedList<>();
+    private int fishingQuest;
+    private boolean savedAngler;
+    private boolean savedStylist;
+    private boolean savedTaxCollector;
+    private boolean savedGolfer;
+    private int invasionSizeStart;
+    private int cultistDelay;
+    private final List<Integer> killCounts = new ArrayList<>();
+    private boolean fastForward;
+    private boolean downedFishron;
+    private boolean downedMartians;
+    private boolean downedAncientCultist;
+    private boolean downedMoonlord;
+    private boolean downedHalloweenKing;
+    private boolean downedHalloweenTree;
+    private boolean downedIceQueen;
+    private boolean downedSantank;
+    private boolean downedChristmasTree;
+    private boolean downedSolar;
+    private boolean downedVortex;
+    private boolean downedNebula;
+    private boolean downedStardust;
+    private boolean solarActive;
+    private boolean vortexActive;
+    private boolean nebulaActive;
+    private boolean stardustActive;
+    private boolean apocalypseOngoing;
+    private boolean partyOngoing;
+    private boolean partyReal;
+    private int partyCooldown;
+    private final List<Integer> partying = new ArrayList<>();
+    private boolean sandstormOngoing;
+    private int sandstormTimeRemaining;
+    private float sandstormSeverity;
+    private float sandstormIntendedSeverity;
+    private boolean savedBartender;
+    private boolean invasionT1;
+    private boolean invasionT2;
+    private boolean invasionT3;
+    private boolean combatBookUsed;
+    private int lanternsCooldown;
+    private boolean lanternsReal;
+    private boolean lanternsForced;
+    private boolean nextLanternsReal;
+    private int[] treeTopStyles;
+    private boolean forceHalloween;
+    private boolean forceChristmas;
+    private int copperOreTier;
+    private int ironOreTier;
+    private int silverOreTier;
+    private int goldOreTier;
+    private boolean boughtCat;
+    private boolean boughtDog;
+    private boolean boughtBunny;
+    private boolean downedEmpress;
+    private boolean downedSlimeQueen;
 
     @Override
     public void visitStart() {
@@ -336,102 +396,148 @@ public class MetadataNode implements MetadataVisitor {
 
     @Override
     public void visitAnglerQuest(List<String> finished, int current) {
-
+        this.fishedPlayers.clear();
+        fishedPlayers.addAll(finished);
+        this.fishingQuest = current;
     }
 
     @Override
     public void visitSavedNpcsFlags2(boolean angler, boolean stylist, boolean taxCollector, boolean golfer) {
-
+        this.savedAngler = angler;
+        this.savedStylist = stylist;
+        this.savedTaxCollector = taxCollector;
+        this.savedGolfer = golfer;
     }
 
     @Override
     public void visitInvasionSizeStart(int size) {
-
+        this.invasionSizeStart = size;
     }
 
     @Override
     public void visitCultistDelay(int delay) {
-
+        this.cultistDelay = delay;
     }
 
     @Override
     public void visitKillCounts(List<Integer> counts) {
-
+        this.killCounts.clear();
+        this.killCounts.addAll(counts);
     }
 
     @Override
     public void visitFastForward(boolean fastForward) {
-
+        this.fastForward = fastForward;
     }
 
     @Override
-    public void visitEndgameBossFlags(boolean fishron, boolean martians, boolean ancientCultist, boolean moonlord, boolean hallowenKing, boolean halloweenTree, boolean christmasIceQueen, boolean santank, boolean christmasTree) {
-
+    public void visitEndgameBossFlags(boolean fishron, boolean martians, boolean ancientCultist, boolean moonlord,
+                                      boolean hallowenKing, boolean halloweenTree, boolean christmasIceQueen,
+                                      boolean santank, boolean christmasTree) {
+        this.downedFishron = fishron;
+        this.downedMartians = martians;
+        this.downedAncientCultist = ancientCultist;
+        this.downedMoonlord = moonlord;
+        this.downedHalloweenKing = hallowenKing;
+        this.downedHalloweenTree = halloweenTree;
+        this.downedIceQueen = christmasIceQueen;
+        this.downedSantank = santank;
+        this.downedChristmasTree = christmasTree;
     }
 
     @Override
     public void visitDownedTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
-
+        this.downedSolar = solar;
+        this.downedVortex = vortex;
+        this.downedNebula = nebula;
+        this.downedStardust = stardust;
     }
 
     @Override
     public void visitActiveTowers(boolean solar, boolean vortex, boolean nebula, boolean stardust) {
-
+        this.solarActive = solar;
+        this.vortexActive = vortex;
+        this.nebulaActive = nebula;
+        this.stardustActive = stardust;
     }
 
     @Override
     public void visitApocalypse(boolean ongoing) {
-
+        this.apocalypseOngoing = ongoing;
     }
 
     @Override
     public void visitParty(boolean ongoing, boolean genuine, int cooldown, List<Integer> partying) {
-
+        this.partyOngoing = ongoing;
+        this.partyReal = genuine;
+        this.partyCooldown = cooldown;
+        this.partying.clear();
+        this.partying.addAll(partying);
     }
 
     @Override
     public void visitSandstorm(boolean happening, int timeLeft, float severity, float intendedSeverity) {
-
+        this.sandstormOngoing = happening;
+        this.sandstormTimeRemaining = timeLeft;
+        this.sandstormSeverity = severity;
+        this.sandstormIntendedSeverity = intendedSeverity;
     }
 
     @Override
     public void visitDungeonDefense(boolean savedBartender, boolean invasionT1, boolean invasionT2, boolean invasionT3) {
-
+        this.savedBartender = savedBartender;
+        this.invasionT1 = invasionT1;
+        this.invasionT2 = invasionT2;
+        this.invasionT3 = invasionT3;
     }
 
     @Override
     public void visitCombatBook(boolean used) {
-
+        this.combatBookUsed = used;
     }
 
     @Override
     public void visitLantern(int cooldown, boolean genuine, boolean manual, boolean nextNightGenuine) {
+        this.lanternsCooldown = cooldown;
+        this.lanternsReal = genuine;
+        this.lanternsForced = manual;
+        this.nextLanternsReal = nextNightGenuine;
+    }
 
+    public void visitTreetopStyleCount(int count){
+        this.treeTopStyles = new int[count];
     }
 
     @Override
     public void visitTreetopStyle(int index, int style) {
-
+        this.treeTopStyles[index] = style;
     }
 
     @Override
     public void visitForceEvents(boolean halloween, boolean christmas) {
-
+        this.forceHalloween = halloween;
+        this.forceChristmas = christmas;
     }
 
     @Override
     public void visitOreTiers2(int copper, int iron, int silver, int gold) {
-
+        this.copperOreTier = copper;
+        this.ironOreTier = iron;
+        this.silverOreTier = silver;
+        this.goldOreTier = gold;
     }
 
     @Override
     public void visitBoughtPets(boolean cat, boolean dog, boolean bunny) {
-
+        this.boughtCat = cat;
+        this.boughtDog = dog;
+        this.boughtBunny = bunny;
     }
 
     @Override
     public void visitHallowBosses(boolean empress, boolean slimeQueen) {
-
+        this.downedEmpress = empress;
+        this.downedSlimeQueen = slimeQueen;
     }
 
 
@@ -455,10 +561,10 @@ public class MetadataNode implements MetadataVisitor {
         visitor.visitGood(good);
         visitor.visitCreationTime(creationTime);
         visitor.visitMoonType(moonType);
-        for(int i = 0; i < treeX.length; i++){
+        for (int i = 0; i < treeX.length; i++) {
             visitor.visitTreeX(i, treeX[i]);
         }
-        for(int i = 0; i < treeStyle.length; i++){
+        for (int i = 0; i < treeStyle.length; i++) {
             visitor.visitTreeStyle(i, treeStyle[i]);
         }
         for (int i = 0; i < 3; i++) {
@@ -483,6 +589,72 @@ public class MetadataNode implements MetadataVisitor {
         visitor.visitNormalBossFlags(downedBoss1, downedBoss2, downedBoss3, downedQueenBee);
         visitor.visitMechBossFlags(downedMechBoss1, downedMechBoss2, downedMechBoss3, downedMechAny);
         visitor.visitHardmodeBossFlags(downedPantera, downedGolem, downedSlimeKing);
+        visitor.visitSavedNpcsFlags(savedGoblin, savedWizard, savedMechanic);
+        visitor.visitEventCompleteFlags(downedGoblinArmy, downedPumpkinMoon, downedFrostMoon, downedPirates);
+        visitor.visitShadowOrbSmashed(shadowOrbSmashed);
+        visitor.visitMeteor(meteorSpawned);
+        visitor.visitShadowOrbCount(shadowOrbCount);
+        visitor.visitAlterCount(alterCount);
+        visitor.visitHardmode(hardmode);
+        visitor.visitInvasion(invasionDelay, invasionSize, invasionType, invasionX);
+        visitor.visitSlimerainTime(slimeRainTime);
+        visitor.visitSundialCooldown(sundialCooldown);
+        visitor.visitRain(raining, rainTime, maxRain);
+        visitor.visitOreTiers1(cobaltOreTier, mythrilOreTier, adamantiteOreTier);
+        for (int i = 0; i < 8; i++) {
+            visitor.visitBG(i, bg[i]);
+        }
+        visitor.visitClouds(cloudsActive, cloudsCount);
+        visitor.visitWindSpeedTarget(windSpeedTarget);
+        visitor.visitAnglerQuest(fishedPlayers, fishingQuest);
+        visitor.visitSavedNpcsFlags2(savedAngler, savedStylist, savedTaxCollector, savedGolfer);
+        visitor.visitInvasionSizeStart(invasionSizeStart);
+        visitor.visitCultistDelay(cultistDelay);
+        visitor.visitKillCounts(killCounts);
+        visitor.visitFastForward(fastForward);
+        visitor.visitEndgameBossFlags(downedFishron,
+                downedMartians,
+                downedAncientCultist,
+                downedMoonlord,
+                downedHalloweenKing,
+                downedHalloweenTree,
+                downedIceQueen,
+                downedSantank,
+                downedChristmasTree);
+
+        visitor.visitDownedTowers(downedSolar,
+                downedVortex,
+                downedNebula,
+                downedStardust);
+
+        visitor.visitActiveTowers(solarActive,
+                vortexActive,
+                nebulaActive,
+                stardustActive);
+        visitor.visitApocalypse(apocalypseOngoing);
+        visitor.visitParty(partyOngoing, partyReal, partyCooldown, partying);
+        visitor.visitSandstorm(sandstormOngoing, sandstormTimeRemaining,
+                sandstormSeverity, sandstormIntendedSeverity);
+        visitor.visitDungeonDefense(savedBartender, invasionT1, invasionT2, invasionT3);
+        for(int i = 8; i < 13; i++){
+            visitor.visitBG(i, bg[i]);
+        }
+        visitor.visitCombatBook(combatBookUsed);
+        visitor.visitLantern(lanternsCooldown,
+                lanternsReal,
+                lanternsForced,
+                nextLanternsReal);
+        visitor.visitTreetopStyleCount(treeTopStyles.length);
+        for(int i = 0; i < treeTopStyles.length; i++){
+            visitor.visitTreetopStyle(i, treeTopStyles[i]);
+        }
+        visitor.visitForceEvents(forceHalloween, forceChristmas);
+        visitor.visitOreTiers2(copperOreTier,
+                ironOreTier,
+                silverOreTier,
+                goldOreTier);
+        visitor.visitBoughtPets(boughtCat, boughtDog, boughtBunny);
+        visitor.visitHallowBosses(downedEmpress, downedSlimeQueen);
         visitor.visitEnd();
     }
 }

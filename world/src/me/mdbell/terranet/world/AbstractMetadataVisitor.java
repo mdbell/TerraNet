@@ -116,6 +116,13 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
     }
 
     @Override
+    public void visitTreetopStyleCount(int count) {
+        if (visitor != null) {
+            visitor.visitTreetopStyleCount(count);
+        }
+    }
+
+    @Override
     public void visitTreeStyle(int index, int value) {
         if (visitor != null) {
             visitor.visitTreeStyle(index, value);
@@ -256,9 +263,9 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
     }
 
     @Override
-    public void visitEventCompleteFlags(boolean goblen, boolean pumpkinMoon, boolean frostMoon, boolean pirates) {
+    public void visitEventCompleteFlags(boolean goblin, boolean pumpkinMoon, boolean frostMoon, boolean pirates) {
         if (visitor != null) {
-            visitor.visitEventCompleteFlags(goblen, pumpkinMoon, frostMoon, pirates);
+            visitor.visitEventCompleteFlags(goblin, pumpkinMoon, frostMoon, pirates);
         }
     }
 
@@ -271,14 +278,14 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
 
     @Override
     public void visitMeteor(boolean spawned) {
-        if(visitor != null){
+        if (visitor != null) {
             visitor.visitMeteor(spawned);
         }
     }
 
     @Override
     public void visitShadowOrbCount(int count) {
-        if(visitor != null){
+        if (visitor != null) {
             visitor.visitShadowOrbCount(count);
         }
     }
@@ -492,7 +499,6 @@ public abstract class AbstractMetadataVisitor implements MetadataVisitor {
             visitor.visitHallowBosses(empress, slimeQueen);
         }
     }
-
 
 
     @Override

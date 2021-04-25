@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @UtilityClass
 public class IOUtil {
@@ -110,5 +111,12 @@ public class IOUtil {
         UUID res = new UUID();
         from.readBytes(res.getData());
         return res;
+    }
+
+    public static <T> T[] fill(T[] arr, Supplier<T> supplier) {
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = supplier.get();
+        }
+        return arr;
     }
 }

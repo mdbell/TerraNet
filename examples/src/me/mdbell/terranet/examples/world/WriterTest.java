@@ -55,6 +55,6 @@ public class WriterTest {
     }
 
     public static void main(String[] args){
-        new WriterTest("./local/Fishing.wld", "./local/Fishing_2.wld").run();
+        new WriterTest("./local/test.wld", "./local/test_2.wld").run();
     }
 }

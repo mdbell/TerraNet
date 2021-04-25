@@ -547,6 +547,7 @@ public class WorldReader implements WorldFileConstants{
         visitor.visitSavedNpcsFlags(buffer.readBoolean(),
                 buffer.readBoolean(),
                 buffer.readBoolean());
+
         visitor.visitEventCompleteFlags(buffer.readBoolean(),
                 buffer.readBoolean(),
                 buffer.readBoolean(),
@@ -737,6 +738,7 @@ public class WorldReader implements WorldFileConstants{
 
         if (version >= 211) {
             count = buffer.readIntLE();
+            visitor.visitTreetopStyleCount(count);
             for (int i = 0; i < count; i++) {
                 visitor.visitTreetopStyle(i, buffer.readIntLE());
             }

@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.ExtensionMethod;
+import me.mdbell.terranet.common.util.IOUtil;
 import me.mdbell.terranet.files.SharedHeaderNode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
@@ -15,13 +17,14 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @Getter
+@ExtensionMethod({IOUtil.class})
 public class WorldNode implements WorldVisitor {
 
     private int version;
     private final SharedHeaderNode header = new SharedHeaderNode();
     private final MetadataNode metadata = new MetadataNode();
     private boolean[] important;
-    private TileNode[][] tiles;
+    private TileNode[] tiles;
     private final List<ChestNode> chests = new LinkedList<>();
 
     @Override
@@ -51,9 +54,12 @@ public class WorldNode implements WorldVisitor {
     @Override
     public TileDataVisitor visitTileData() {
         return new TileDataVisitor() {
+            private int height;
             @Override
             public void visitStart() {
-                tiles = new TileNode[metadata.getWidth()][metadata.getHeight()];
+                this.height = metadata.getHeight();
+                tiles = new TileNode[metadata.getWidth() * metadata.getHeight()]
+                        .fill(TileNode::new);
             }
 
             @Override
@@ -63,7 +69,7 @@ public class WorldNode implements WorldVisitor {
 
             @Override
             public TileVisitor visitTile(int x, int y) {
-                return tiles[x][y] = new TileNode();
+                return tiles[y * height + x];
             }
 
             @Override
@@ -167,14 +173,15 @@ public class WorldNode implements WorldVisitor {
 
     private void accept(TileDataVisitor visitor) {
         visitor.visitStart();
-        for (int x = 0; x < tiles.length; x++) {
+        int height = metadata.getHeight();;
+        int width = metadata.getWidth();
+        for (int x = 0; x < width; x++) {
             visitor.visitTileX(x);
-            for (int y = 0; y < tiles[x].length; y++) {
-                if (tiles[x][y] != null) {
-                    TileVisitor tv = visitor.visitTile(x, y);
-                    if (tv != null) {
-                        tiles[x][y].accept(tv);
-                    }
+            for (int y = 0; y < height; y++) {
+                int index = y * height + x;
+                TileVisitor tv = visitor.visitTile(x, y);
+                if(tv != null){
+                    tiles[index].accept(tv);
                 }
             }
         }
