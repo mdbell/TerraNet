@@ -31,7 +31,7 @@ public class TestClient {
 
     @Subscribe
     public void onClientMessage(ClientMessageEvent<?> event) throws IOException {
-        log.info("Message Received from: {} Message:{}", event.source(), event.message());
+        log.info("Message Received from: {} Message:{}", event.source(), event.value());
         event.source().close();
     }
 

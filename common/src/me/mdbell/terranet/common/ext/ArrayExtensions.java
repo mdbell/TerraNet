@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 @UtilityClass
 public class ArrayExtensions {
+    
     public void copyTo(int[] source, int[] dest) {
         System.arraycopy(source, 0, dest, 0, source.length);
     }

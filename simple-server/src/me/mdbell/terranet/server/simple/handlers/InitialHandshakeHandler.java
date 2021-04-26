@@ -8,32 +8,33 @@ import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.server.ConnectionCtx;
-import me.mdbell.terranet.server.simple.ConnectionHandler;
-import me.mdbell.terranet.server.simple.HandshakeState;
-import me.mdbell.terranet.server.simple.SimpleAttributes;
+import me.mdbell.terranet.server.simple.ServerHandler;
+import me.mdbell.terranet.server.simple.data.HandshakeState;
+import me.mdbell.terranet.server.simple.data.Item;
+import me.mdbell.terranet.server.simple.engine.Player;
 
 @Slf4j
 @ExtensionMethod({ArrayExtensions.class})
 public class InitialHandshakeHandler implements Opcodes {
 
-    private final ConnectionHandler handler;
+    private final ServerHandler handler;
     private final String version;
     private final String password;
 
-    public InitialHandshakeHandler(ConnectionHandler conn) {
+    public InitialHandshakeHandler(ServerHandler conn) {
         this(conn, Opcodes.DEFAULT_VERSION, null);
     }
 
-    public InitialHandshakeHandler(ConnectionHandler conn, String version, String password) {
+    public InitialHandshakeHandler(ServerHandler conn, String version, String password) {
         this.handler = conn;
         this.version = version;
         this.password = password;
     }
 
     @Subscribe(priority = 10)
-    public void onMessage(GameMessageEvent<ConnectionCtx<SimpleAttributes>> event) {
-        ConnectionCtx<SimpleAttributes> ctx = event.source();
-        GameMessage message = event.message();
+    public void onMessage(GameMessageEvent<ConnectionCtx<Player>> event) {
+        ConnectionCtx<Player> ctx = event.source();
+        GameMessage message = event.value();
         boolean consume = switch (message.getOpcode()) {
             case OP_CONNECT -> onConnect(ctx, (ConnectionMessage) message);
             case OP_PASSWORD_RESPONSE -> onPassword(ctx, (PasswordResponseMessage) message);
@@ -42,6 +43,7 @@ public class InitialHandshakeHandler implements Opcodes {
             case OP_PLAYER_HP -> onHealth(ctx, (PlayerHealthMessage) message);
             case OP_PLAYER_MANA -> onMana(ctx, (PlayerManaMessage) message);
             case OP_UPDATE_BUFFS -> onBuffs(ctx, (UpdateBuffsMessage) message);
+            case OP_SET_INVENTORY_SLOT -> onItem(ctx, (SlotMessage) message);
             default -> false;
         };
         if (consume) {
@@ -51,17 +53,30 @@ public class InitialHandshakeHandler implements Opcodes {
         }
     }
 
-    private boolean onBuffs(ConnectionCtx<SimpleAttributes> ctx, UpdateBuffsMessage message) {
-        SimpleAttributes attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.MANA_SET) {
+    private boolean onItem(ConnectionCtx<Player> ctx, SlotMessage message) {
+        Player player = ctx.attrs();
+        if (player.getHandshakeState() != HandshakeState.BUFFS_SET) {
             return false;
         }
-        message.getBuffs().copyTo(attrs.getBuffs());
+        Item item = player.getItem(message.getSlot());
+        item.setId(message.getNetId());
+        item.setPrefix(message.getPrefix());
+        item.setCount(message.getCount());
         return true;
     }
 
-    private boolean onHealth(ConnectionCtx<SimpleAttributes> ctx, PlayerHealthMessage message) {
-        SimpleAttributes attrs = ctx.attrs();
+    private boolean onBuffs(ConnectionCtx<Player> ctx, UpdateBuffsMessage message) {
+        Player player = ctx.attrs();
+        if (player.getHandshakeState() != HandshakeState.MANA_SET) {
+            return false;
+        }
+        message.getBuffs().copyTo(player.getBuffs());
+        player.setHandshakeState(HandshakeState.BUFFS_SET);
+        return true;
+    }
+
+    private boolean onHealth(ConnectionCtx<Player> ctx, PlayerHealthMessage message) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() != HandshakeState.UUID_SET) {
             return false;
         }
@@ -71,8 +86,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return true;
     }
 
-    private boolean onMana(ConnectionCtx<SimpleAttributes> ctx, PlayerManaMessage message) {
-        SimpleAttributes attrs = ctx.attrs();
+    private boolean onMana(ConnectionCtx<Player> ctx, PlayerManaMessage message) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() != HandshakeState.HEALTH_SET) {
             return false;
         }
@@ -82,8 +97,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return true;
     }
 
-    private boolean onPassword(ConnectionCtx<SimpleAttributes> ctx, PasswordResponseMessage message) {
-        SimpleAttributes attrs = ctx.attrs();
+    private boolean onPassword(ConnectionCtx<Player> ctx, PasswordResponseMessage message) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() != HandshakeState.PASSWORD_REQUESTED) {
             ctx.disconnect();
             return true;
@@ -96,8 +111,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return registerConnection(ctx);
     }
 
-    public boolean onConnect(ConnectionCtx<SimpleAttributes> ctx, ConnectionMessage msg) {
-        SimpleAttributes attrs = ctx.attrs();
+    public boolean onConnect(ConnectionCtx<Player> ctx, ConnectionMessage msg) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() == HandshakeState.NEW) {
             if (!version.equals(msg.getVersion())) {
                 ctx.disconnect("Unsupported version:" + msg.getVersion());
@@ -113,8 +128,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return true;
     }
 
-    private boolean registerConnection(ConnectionCtx<SimpleAttributes> ctx) {
-        SimpleAttributes attrs = ctx.attrs();
+    private boolean registerConnection(ConnectionCtx<Player> ctx) {
+        Player attrs = ctx.attrs();
         int id = handler.addConnection(ctx);
         if (id == -1) {
             log.info("Disconnecting connection due to max players");
@@ -126,8 +141,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return true;
     }
 
-    public boolean onPlayerInfo(ConnectionCtx<SimpleAttributes> ctx, PlayerInfoMessage msg) {
-        SimpleAttributes attrs = ctx.attrs();
+    public boolean onPlayerInfo(ConnectionCtx<Player> ctx, PlayerInfoMessage msg) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() != HandshakeState.ASSIGNED_ID) {
             return false;
         }
@@ -136,8 +151,8 @@ public class InitialHandshakeHandler implements Opcodes {
         return true;
     }
 
-    private boolean onUuid(ConnectionCtx<SimpleAttributes> ctx, UUIDMessage message) {
-        SimpleAttributes attrs = ctx.attrs();
+    private boolean onUuid(ConnectionCtx<Player> ctx, UUIDMessage message) {
+        Player attrs = ctx.attrs();
         if (attrs.getHandshakeState() != HandshakeState.INFO_SET) {
             ctx.disconnect("");
             return true;

@@ -1,10 +1,11 @@
 package me.mdbell.terranet.server.simple;
 
 import me.mdbell.terranet.common.net.ConnectionAttributesFactory;
+import me.mdbell.terranet.server.simple.engine.Player;
 
-public class SimpleAttributesFactory extends ConnectionAttributesFactory<SimpleAttributes> {
+public class SimpleAttributesFactory extends ConnectionAttributesFactory<Player> {
     @Override
-    public SimpleAttributes newInstance() {
-        return new SimpleAttributes();
+    public Player newInstance() {
+        return new Player();
     }
 }

@@ -17,7 +17,7 @@ public class MITMProxyServer extends ProxyServer {
 
     @Override
     public void onIncomingMessage(ServerMessageEvent<?> event) {
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         if (message.getModId() == Opcodes.MOD_TEXT && !message.isServer()) {
             String text = ((IncomingChatMessage) message).getMessage();
             if ("/ping".equalsIgnoreCase(text)) {
@@ -34,9 +34,9 @@ public class MITMProxyServer extends ProxyServer {
 
     @Override
     public void onOutgoingMessage(ClientMessageEvent<?> event) {
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         if (message.getModId() == Opcodes.MOD_TEXT && message.isServer()) {
-            OutgoingChatMessage ocm = (OutgoingChatMessage) event.message();
+            OutgoingChatMessage ocm = (OutgoingChatMessage) event.value();
             NetworkText text = ocm.text();
             if (text.mode() == NetworkText.Mode.FORMAT && "{0} {1}!".equals(text.text())) {
                 ocm.text(NetworkText.literal("Welcome to the Jungle"));

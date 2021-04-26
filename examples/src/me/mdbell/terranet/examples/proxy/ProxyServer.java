@@ -57,7 +57,7 @@ public class ProxyServer {
 
     @Subscribe
     public void onServerConnectionEvent(ServerConnectionEvent<?> event) {
-        if (event.message() == ConnectionState.DEREGISTER) {
+        if (event.value() == ConnectionState.DEREGISTER) {
             ConnectionCtx<?> conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
@@ -78,7 +78,7 @@ public class ProxyServer {
 
     @Subscribe
     public void onIncomingMessage(ServerMessageEvent<?> event) {
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         ConnectionCtx<?> conn = event.source();
         ClientCtx<?> ctx;
         if (message.getOpcode() == Opcodes.OP_CONNECT) {
@@ -98,7 +98,7 @@ public class ProxyServer {
     @Subscribe
     public void onOutgoingMessage(ClientMessageEvent<?> event) {
         ClientCtx<?> ctx = event.source();
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         ConnectionCtx conn = proxyMap.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(ctx))

@@ -11,5 +11,6 @@
     <orderEntry type="module" module-name="server-netty" />
     <orderEntry type="module" module-name="world" />
     <orderEntry type="module" module-name="bus-greenrobot" />
+    <orderEntry type="module" module-name="common" />
   </component>
 </module>
