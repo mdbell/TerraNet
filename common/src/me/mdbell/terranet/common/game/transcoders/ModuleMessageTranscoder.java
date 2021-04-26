@@ -7,9 +7,9 @@ import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.FilteredMessageTranscoder;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class})
 public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModuleMessage> {
 
     public ModuleMessageTranscoder() {

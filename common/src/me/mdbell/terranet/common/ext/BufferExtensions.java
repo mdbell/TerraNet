@@ -1,27 +1,21 @@
-package me.mdbell.terranet.common.util;
+package me.mdbell.terranet.common.ext;
 
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import me.mdbell.terranet.common.io.Buffer;
+import me.mdbell.terranet.common.util.Color;
+import me.mdbell.terranet.common.util.NetworkText;
+import me.mdbell.terranet.common.util.UUID;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @UtilityClass
-public class IOUtil {
-
-    public void copyTo(int[] source, int[] dest) {
-        System.arraycopy(source, 0, dest, 0, source.length);
-    }
-
-    public void copyTo(byte[] source, byte[] dest) {
-        System.arraycopy(source, 0, dest, 0, source.length);
-    }
+public class BufferExtensions {
 
     public Buffer<?> readInto(Buffer<?> source, int[] array, Function<Buffer<?>, Integer> func) {
         for (int i = 0; i < array.length; i++) {
@@ -118,12 +112,5 @@ public class IOUtil {
         UUID res = new UUID();
         from.readBytes(res.getData());
         return res;
-    }
-
-    public static <T> T[] fill(T[] arr, Supplier<T> supplier) {
-        for(int i = 0; i < arr.length; i++){
-            arr[i] = supplier.get();
-        }
-        return arr;
     }
 }

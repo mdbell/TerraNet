@@ -3,9 +3,9 @@ package me.mdbell.terranet.common.game.transcoders;
 import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class})
 public final class DefaultTranscoder extends BufferTranscoder {
 
     @Override
@@ -17,7 +17,7 @@ public final class DefaultTranscoder extends BufferTranscoder {
                         .build();
             case OP_DISCONNECT:
                 return DisconnectMessage.builder()
-                        .reason(IOUtil.readText(buff))
+                        .reason(BufferExtensions.readText(buff))
                         .build();
             case OP_SET_USER_SLOT:
                 return UserSlotMessage.builder()
@@ -29,18 +29,18 @@ public final class DefaultTranscoder extends BufferTranscoder {
                         .id(buff.readUnsignedByte())
                         .skin(buff.readUnsignedByte())
                         .hair(buff.readUnsignedByte())
-                        .name(IOUtil.readString(buff))
+                        .name(BufferExtensions.readString(buff))
                         .hairDye(buff.readUnsignedByte())
                         .hideVisual1(buff.readUnsignedByte())
                         .hideVisual2(buff.readUnsignedByte())
                         .hideMisc(buff.readUnsignedByte())
-                        .hairColor(IOUtil.readColor(buff))
-                        .skinColor(IOUtil.readColor(buff))
-                        .eyeColor(IOUtil.readColor(buff))
-                        .shirtColor(IOUtil.readColor(buff))
-                        .underShirtColor(IOUtil.readColor(buff))
-                        .pantsColor(IOUtil.readColor(buff))
-                        .shoesColor(IOUtil.readColor(buff))
+                        .hairColor(BufferExtensions.readColor(buff))
+                        .skinColor(BufferExtensions.readColor(buff))
+                        .eyeColor(BufferExtensions.readColor(buff))
+                        .shirtColor(BufferExtensions.readColor(buff))
+                        .underShirtColor(BufferExtensions.readColor(buff))
+                        .pantsColor(BufferExtensions.readColor(buff))
+                        .shoesColor(BufferExtensions.readColor(buff))
                         .difficulty(buff.readUnsignedByte())
                         .torches(buff.readUnsignedByte())
                         .build();
@@ -115,7 +115,7 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeString(((ConnectionMessage) message).getVersion());
                 return true;
             case OP_DISCONNECT:
-                IOUtil.writeText(to, ((DisconnectMessage) message).getReason());
+                BufferExtensions.writeText(to, ((DisconnectMessage) message).getReason());
                 return true;
             case OP_SET_USER_SLOT:
                 to.writeByte(((UserSlotMessage) message).getSlot());

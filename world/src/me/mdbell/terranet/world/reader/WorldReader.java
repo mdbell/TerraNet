@@ -2,22 +2,19 @@ package me.mdbell.terranet.world.reader;
 
 import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
 import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.FileType;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
-import me.mdbell.terranet.files.metadata.TileMetadata;
-import me.mdbell.terranet.files.metadata.TileMetadataFactory;
 import me.mdbell.terranet.world.*;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class})
 public class WorldReader implements WorldFileConstants {
 
     private final Buffer<?> buffer;

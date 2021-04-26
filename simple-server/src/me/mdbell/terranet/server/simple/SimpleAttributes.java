@@ -12,5 +12,5 @@ public class SimpleAttributes implements ConnectionAttributes {
     String uuid;
     int currentHp, maxHp;
     int currentMana, maxMana;
-    final byte[] buffs = new byte[Opcodes.MAX_BUFFS];
+    final int[] buffs = new int[Opcodes.MAX_BUFFS];
 }

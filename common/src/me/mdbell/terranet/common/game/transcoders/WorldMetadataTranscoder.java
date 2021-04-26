@@ -5,9 +5,10 @@ import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.game.messages.WorldMetadataMessage;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.FilteredMessageTranscoder;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
+import me.mdbell.terranet.common.ext.ArrayExtensions;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class, ArrayExtensions.class})
 public class WorldMetadataTranscoder extends FilteredMessageTranscoder<WorldMetadataMessage> {
 
     public WorldMetadataTranscoder() {

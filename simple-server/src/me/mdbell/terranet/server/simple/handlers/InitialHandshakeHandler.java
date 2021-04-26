@@ -1,18 +1,19 @@
 package me.mdbell.terranet.server.simple.handlers;
 
+import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.*;
+import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.simple.ConnectionHandler;
 import me.mdbell.terranet.server.simple.HandshakeState;
 import me.mdbell.terranet.server.simple.SimpleAttributes;
 
-import java.util.function.BiFunction;
-
 @Slf4j
+@ExtensionMethod({ArrayExtensions.class})
 public class InitialHandshakeHandler implements Opcodes {
 
     private final ConnectionHandler handler;
@@ -38,6 +39,9 @@ public class InitialHandshakeHandler implements Opcodes {
             case OP_PASSWORD_RESPONSE -> onPassword(ctx, (PasswordResponseMessage) message);
             case OP_PLAYER_INFO -> onPlayerInfo(ctx, (PlayerInfoMessage) message);
             case OP_UUID -> onUuid(ctx, (UUIDMessage) message);
+            case OP_PLAYER_HP -> onHealth(ctx, (PlayerHealthMessage) message);
+            case OP_PLAYER_MANA -> onMana(ctx, (PlayerManaMessage) message);
+            case OP_UPDATE_BUFFS -> onBuffs(ctx, (UpdateBuffsMessage) message);
             default -> false;
         };
         if (consume) {
@@ -45,6 +49,37 @@ public class InitialHandshakeHandler implements Opcodes {
         } else {
             log.info("{}", message);
         }
+    }
+
+    private boolean onBuffs(ConnectionCtx<SimpleAttributes> ctx, UpdateBuffsMessage message) {
+        SimpleAttributes attrs = ctx.attrs();
+        if (attrs.getHandshakeState() != HandshakeState.MANA_SET) {
+            return false;
+        }
+        message.getBuffs().copyTo(attrs.getBuffs());
+        return true;
+    }
+
+    private boolean onHealth(ConnectionCtx<SimpleAttributes> ctx, PlayerHealthMessage message) {
+        SimpleAttributes attrs = ctx.attrs();
+        if (attrs.getHandshakeState() != HandshakeState.UUID_SET) {
+            return false;
+        }
+        attrs.setCurrentHp(message.getHp());
+        attrs.setMaxHp(message.getMaxHp());
+        attrs.setHandshakeState(HandshakeState.HEALTH_SET);
+        return true;
+    }
+
+    private boolean onMana(ConnectionCtx<SimpleAttributes> ctx, PlayerManaMessage message) {
+        SimpleAttributes attrs = ctx.attrs();
+        if (attrs.getHandshakeState() != HandshakeState.HEALTH_SET) {
+            return false;
+        }
+        attrs.setCurrentMana(message.getMana());
+        attrs.setMaxMana(message.getMaxMana());
+        attrs.setHandshakeState(HandshakeState.MANA_SET);
+        return true;
     }
 
     private boolean onPassword(ConnectionCtx<SimpleAttributes> ctx, PasswordResponseMessage message) {
