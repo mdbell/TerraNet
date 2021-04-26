@@ -3,6 +3,8 @@ package me.mdbell.terranet.server;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 
+import java.lang.reflect.InvocationTargetException;
+
 @Slf4j
 public abstract class ServerFactory<T extends ConnectionAttributes> {
 
@@ -35,8 +37,8 @@ public abstract class ServerFactory<T extends ConnectionAttributes> {
 
     public static <T extends ConnectionAttributes> ServerFactory<T> createDefaultFactory() {
         try {
-            return (ServerFactory<T>) defaultFactoryClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return (ServerFactory<T>) defaultFactoryClass.getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             log.error("Unable to create defualt factory", e);
             throw new RuntimeException(e);
         }
