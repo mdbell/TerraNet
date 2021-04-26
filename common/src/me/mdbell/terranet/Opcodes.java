@@ -2,7 +2,7 @@ package me.mdbell.terranet;
 
 public interface Opcodes {
 
-    int DEFAULT_REV = 236;
+    int DEFAULT_REV = 237;
 
     String DEFAULT_VERSION = "Terraria" + DEFAULT_REV;
 
@@ -31,6 +31,9 @@ public interface Opcodes {
     int OP_UPDATE_LOADING_STATUS = 9;
 
     int OP_PLAYER_HP = 16;
+
+    int OP_PASSWORD_REQUEST = 37;
+    int OP_PASSWORD_RESPONSE = 38;
 
     int OP_PLAYER_MANA = 42;
 

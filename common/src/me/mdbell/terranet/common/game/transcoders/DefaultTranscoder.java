@@ -81,6 +81,13 @@ public final class DefaultTranscoder extends BufferTranscoder {
                         .mana(buff.readShortLE())
                         .maxMana(buff.readShortLE())
                         .build();
+            case OP_PASSWORD_REQUEST:
+                return PasswordRequestMessage.builder()
+                        .build();
+            case OP_PASSWORD_RESPONSE:
+                return PasswordResponseMessage.builder()
+                        .password(buff.readString())
+                        .build();
             //TODO opcodes 43 - 49
             case OP_UPDATE_BUFFS:
                 UpdateBuffsMessage buffs = UpdateBuffsMessage.builder()
@@ -164,6 +171,11 @@ public final class DefaultTranscoder extends BufferTranscoder {
                 to.writeByte(php.getId());
                 to.writeShortLE(php.getHp());
                 to.writeShortLE(php.getMaxHp());
+                return true;
+            case OP_PASSWORD_REQUEST:
+                return true;
+            case OP_PASSWORD_RESPONSE:
+                to.writeString(((PasswordResponseMessage)message).getPassword());
                 return true;
             //TODO opcodes 17 - 41
             case OP_PLAYER_MANA:

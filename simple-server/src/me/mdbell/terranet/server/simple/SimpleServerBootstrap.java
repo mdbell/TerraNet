@@ -1,5 +1,6 @@
 package me.mdbell.terranet.server.simple;
 
+import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
@@ -8,11 +9,10 @@ import me.mdbell.terranet.server.simple.handlers.InitialHandshakeHandler;
 
 public class SimpleServerBootstrap {
 
-    private String version;
-    private int port;
 
-    public SimpleServerBootstrap(String version, int port) {
-        this.version = version;
+    private final int port;
+
+    public SimpleServerBootstrap(int port) {
         this.port = port;
     }
 
@@ -21,7 +21,7 @@ public class SimpleServerBootstrap {
         ServerCtx<SimpleAttributes> ctx = factory.newInstance();
         ctx.setAttributesFactory(new SimpleAttributesFactory());
         ConnectionHandler handler = new ConnectionHandler(16);
-        ConnectionCtx.bus().subscribe(new InitialHandshakeHandler(handler, version));
+        ConnectionCtx.bus().subscribe(new InitialHandshakeHandler(handler, Opcodes.DEFAULT_VERSION, "test"));
 
         ctx.bind(port);
     }
@@ -31,6 +31,6 @@ public class SimpleServerBootstrap {
     }
 
     public static void main(String[] args) {
-        new SimpleServerBootstrap("Terraria237", 1337).run();
+        new SimpleServerBootstrap(1337).run();
     }
 }

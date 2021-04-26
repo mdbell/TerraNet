@@ -2,10 +2,7 @@ package me.mdbell.terranet.common.net;
 
 import lombok.SneakyThrows;
 import me.mdbell.terranet.Opcodes;
-import me.mdbell.terranet.common.game.messages.ConnectionMessage;
-import me.mdbell.terranet.common.game.messages.DisconnectMessage;
-import me.mdbell.terranet.common.game.messages.GameMessage;
-import me.mdbell.terranet.common.game.messages.UserSlotMessage;
+import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.common.util.NetworkText;
 
 import java.io.Closeable;
@@ -54,5 +51,10 @@ public interface ISendable extends Opcodes, Closeable {
         if(close){
             close();
         }
+    }
+
+    default void requestPassword(){
+        send(PasswordRequestMessage.builder()
+        .build());
     }
 }
