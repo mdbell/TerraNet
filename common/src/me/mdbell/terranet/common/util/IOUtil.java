@@ -7,9 +7,10 @@ import me.mdbell.terranet.common.io.Buffer;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
+import java.util.BitSet;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @UtilityClass
 public class IOUtil {
@@ -90,6 +91,12 @@ public class IOUtil {
         return res;
     }
 
+    public BitSet readBits(Buffer<?> to, int byteCount){
+        byte[] data = new byte[byteCount];
+        to.readBytes(data);
+        return BitSet.valueOf(data);
+    }
+
     public Buffer<?> writeText(Buffer<?> to, NetworkText text) {
         to.writeByte(text.mode().ordinal());
         writeString(to, text.text());
@@ -104,13 +111,19 @@ public class IOUtil {
     }
 
     public Buffer<?> writeGuid(Buffer<?> to, UUID id){
-        return to.writeLong(id.getMostSignificantBits())
-                .writeLong(id.getLeastSignificantBits());
+        return to.writeBytes(id.getData());
     }
 
     public UUID readGuid(Buffer<?> from) {
-        byte[] data = new byte[16];
-        from.readBytes(data);
-        return UUID.nameUUIDFromBytes(data);
+        UUID res = new UUID();
+        from.readBytes(res.getData());
+        return res;
+    }
+
+    public static <T> T[] fill(T[] arr, Supplier<T> supplier) {
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = supplier.get();
+        }
+        return arr;
     }
 }

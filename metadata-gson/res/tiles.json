@@ -1,0 +1,5000 @@
+[
+  {
+    "id": 0,
+    "name": "Dirt",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 1,
+    "name": "Stone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 2,
+    "name": "Grass",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 3,
+    "name": "Plants",
+    "solid": false,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noAttach": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 4,
+    "name": "Torches",
+    "lighted": true,
+    "solid": false,
+    "frameImportant": true,
+    "waterDeath": true,
+    "noFail": true,
+    "noAttach": true,
+    "flame": true
+  },
+  {
+    "id": 5,
+    "name": "Trees",
+    "solid": false,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "axe": true
+  },
+  {
+    "id": 6,
+    "name": "Iron",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1150,
+    "shine2": true
+  },
+  {
+    "id": 7,
+    "name": "Copper",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1100,
+    "shine2": true
+  },
+  {
+    "id": 8,
+    "name": "Gold",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1000,
+    "shine2": true
+  },
+  {
+    "id": 9,
+    "name": "Silver",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1050,
+    "shine2": true
+  },
+  {
+    "id": 10,
+    "name": "ClosedDoor",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 11,
+    "name": "OpenDoor",
+    "solid": false,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 12,
+    "name": "Heart",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "shine": 300,
+    "shine2": true
+  },
+  {
+    "id": 13,
+    "name": "Bottles",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 14,
+    "name": "Tables",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 15,
+    "name": "Chairs",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 16,
+    "name": "Anvils",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 17,
+    "name": "Furnaces",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 18,
+    "name": "WorkBenches",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 19,
+    "name": "Platforms",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": false,
+    "obsidianKill": true
+  },
+  {
+    "id": 20,
+    "name": "Saplings",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 21,
+    "name": "Containers",
+    "frameImportant": true,
+    "noAttach": true,
+    "spelunker": true,
+    "container": true,
+    "shine": 1200,
+    "shine2": true
+  },
+  {
+    "id": 22,
+    "name": "Demonite",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1150,
+    "shine2": true
+  },
+  {
+    "id": 23,
+    "name": "CorruptGrass",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 24,
+    "name": "CorruptPlants",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 25,
+    "name": "Ebonstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 26,
+    "name": "DemonAltar",
+    "lighted": true,
+    "frameImportant": true,
+    "hammer": true
+  },
+  {
+    "id": 27,
+    "name": "Sunflower",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 28,
+    "name": "Pots",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 29,
+    "name": "PiggyBank",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 30,
+    "name": "WoodBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 31,
+    "name": "ShadowOrbs",
+    "lighted": true,
+    "frameImportant": true,
+    "hammer": true
+  },
+  {
+    "id": 32,
+    "name": "CorruptThorns",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 33,
+    "name": "Candles",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 34,
+    "name": "Chandeliers",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 35,
+    "name": "Jackolanterns",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 36,
+    "name": "Presents",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 37,
+    "name": "Meteorite",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true
+  },
+  {
+    "id": 38,
+    "name": "GrayBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 39,
+    "name": "RedBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 40,
+    "name": "ClayBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 41,
+    "name": "BlueDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "dungeon": true
+  },
+  {
+    "id": 42,
+    "name": "HangingLanterns",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 43,
+    "name": "GreenDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "dungeon": true
+  },
+  {
+    "id": 44,
+    "name": "PinkDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "dungeon": true
+  },
+  {
+    "id": 45,
+    "name": "GoldBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1900,
+    "shine2": true
+  },
+  {
+    "id": 46,
+    "name": "SilverBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 2000,
+    "shine2": true
+  },
+  {
+    "id": 47,
+    "name": "CopperBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 2100,
+    "shine2": true
+  },
+  {
+    "id": 48,
+    "name": "Spikes",
+    "solid": true,
+    "noSunlight": false
+  },
+  {
+    "id": 49,
+    "name": "WaterCandle",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 50,
+    "name": "Books",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 51,
+    "name": "Cobweb",
+    "blockLight": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 52,
+    "name": "Vines",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 53,
+    "name": "Sand",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "sand": true
+  },
+  {
+    "id": 54,
+    "name": "Glass",
+    "solid": true,
+    "brick": true,
+    "noSunlight": false
+  },
+  {
+    "id": 55,
+    "name": "Signs",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "sign": true
+  },
+  {
+    "id": 56,
+    "name": "Obsidian",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 57,
+    "name": "Ash",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 58,
+    "name": "Hellstone",
+    "lighted": true,
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 59,
+    "name": "Mud",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 60,
+    "name": "JungleGrass",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 61,
+    "name": "JunglePlants",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 62,
+    "name": "JungleVines",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 63,
+    "name": "Sapphire",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 64,
+    "name": "Ruby",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 65,
+    "name": "Emerald",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 66,
+    "name": "Topaz",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 67,
+    "name": "Amethyst",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 68,
+    "name": "Diamond",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 69,
+    "name": "JungleThorns",
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 70,
+    "name": "MushroomGrass",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 71,
+    "name": "MushroomPlants",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 72,
+    "name": "MushroomTrees",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "axe": true
+  },
+  {
+    "id": 73,
+    "name": "Plants2",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 74,
+    "name": "JunglePlants2",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 75,
+    "name": "ObsidianBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 76,
+    "name": "HellstoneBrick",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 77,
+    "name": "Hellforge",
+    "lighted": true,
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 78,
+    "name": "ClayPot",
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 79,
+    "name": "Beds",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 80,
+    "name": "Cactus",
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "axe": true
+  },
+  {
+    "id": 81,
+    "name": "Coral",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 82,
+    "name": "ImmatureHerbs",
+    "frameImportant": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true,
+    "alch": true
+  },
+  {
+    "id": 83,
+    "name": "MatureHerbs",
+    "lighted": true,
+    "frameImportant": true,
+    "noFail": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "cut": true,
+    "alch": true
+  },
+  {
+    "id": 84,
+    "name": "BloomingHerbs",
+    "lighted": true,
+    "frameImportant": true,
+    "noFail": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "cut": true,
+    "alch": true
+  },
+  {
+    "id": 85,
+    "name": "Tombstones",
+    "frameImportant": true,
+    "obsidianKill": true,
+    "sign": true
+  },
+  {
+    "id": 86,
+    "name": "Loom",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 87,
+    "name": "Pianos",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 88,
+    "name": "Dressers",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true,
+    "container": true
+  },
+  {
+    "id": 89,
+    "name": "Benches",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 90,
+    "name": "Bathtubs",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 91,
+    "name": "Banners",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 92,
+    "name": "Lampposts",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 93,
+    "name": "Lamps",
+    "lighted": true,
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 94,
+    "name": "Kegs",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 95,
+    "name": "ChineseLanterns",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 96,
+    "name": "CookingPots",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 97,
+    "name": "Safes",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 98,
+    "name": "SkullLanterns",
+    "lighted": true,
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 99,
+    "name": "TrashCan",
+    "frameImportant": true,
+    "noAttach": true
+  },
+  {
+    "id": 100,
+    "name": "Candelabras",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 101,
+    "name": "Bookcases",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 102,
+    "name": "Thrones",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 103,
+    "name": "Bowls",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 104,
+    "name": "GrandfatherClocks",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 105,
+    "name": "Statues",
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 106,
+    "name": "Sawmill",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 107,
+    "name": "Cobalt",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 950,
+    "shine2": true
+  },
+  {
+    "id": 108,
+    "name": "Mythril",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 109,
+    "name": "HallowedGrass",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 9000
+  },
+  {
+    "id": 110,
+    "name": "HallowedPlants",
+    "solid": false,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noAttach": true,
+    "obsidianKill": true,
+    "cut": true,
+    "shine": 9000
+  },
+  {
+    "id": 111,
+    "name": "Adamantite",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 850,
+    "shine2": true
+  },
+  {
+    "id": 112,
+    "name": "Ebonsand",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "sand": true
+  },
+  {
+    "id": 113,
+    "name": "HallowedPlants2",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 114,
+    "name": "TinkerersWorkbench",
+    "frameImportant": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true
+  },
+  {
+    "id": 115,
+    "name": "HallowedVines",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 116,
+    "name": "Pearlsand",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "sand": true,
+    "shine": 9000
+  },
+  {
+    "id": 117,
+    "name": "Pearlstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 9000,
+    "shine2": true
+  },
+  {
+    "id": 118,
+    "name": "PearlstoneBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 8000
+  },
+  {
+    "id": 119,
+    "name": "IridescentBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 120,
+    "name": "Mudstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 121,
+    "name": "CobaltBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1850,
+    "shine2": true
+  },
+  {
+    "id": 122,
+    "name": "MythrilBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1800,
+    "shine2": true
+  },
+  {
+    "id": 123,
+    "name": "Silt",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 124,
+    "name": "WoodenBeam"
+  },
+  {
+    "id": 125,
+    "name": "CrystalBall",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "shine": 600
+  },
+  {
+    "id": 126,
+    "name": "DiscoBall",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 127,
+    "name": "MagicalIceBlock",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 128,
+    "name": "Mannequin",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 129,
+    "name": "Crystals",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "noFail": true,
+    "noSunlight": true,
+    "glowMask": -2,
+    "obsidianKill": true,
+    "shine": 300
+  },
+  {
+    "id": 130,
+    "name": "ActiveStoneBlock",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true
+  },
+  {
+    "id": 131,
+    "name": "InactiveStoneBlock",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "forceSaveSlope": true
+  },
+  {
+    "id": 132,
+    "name": "Lever",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 133,
+    "name": "AdamantiteForge",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 134,
+    "name": "MythrilAnvil",
+    "solid": true,
+    "frameImportant": true,
+    "solidTop": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 135,
+    "name": "PressurePlates",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 136,
+    "name": "Switches",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 137,
+    "name": "Traps",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 138,
+    "name": "Boulder",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 139,
+    "name": "MusicBoxes",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 140,
+    "name": "DemoniteBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 141,
+    "name": "Explosives",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 142,
+    "name": "InletPump",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 143,
+    "name": "OutletPump",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 144,
+    "name": "Timers",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 145,
+    "name": "CandyCaneBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 146,
+    "name": "GreenCandyCaneBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 147,
+    "name": "SnowBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 148,
+    "name": "SnowBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 149,
+    "name": "HolidayLights",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 150,
+    "name": "AdamantiteBeam",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 151,
+    "name": "SandstoneBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 152,
+    "name": "EbonstoneBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 153,
+    "name": "RedStucco",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 154,
+    "name": "YellowStucco",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 155,
+    "name": "GreenStucco",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 156,
+    "name": "GrayStucco",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 157,
+    "name": "Ebonwood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 158,
+    "name": "RichMahogany",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 159,
+    "name": "Pearlwood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 160,
+    "name": "RainbowBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 161,
+    "name": "IceBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 162,
+    "name": "BreakableIce",
+    "solid": true,
+    "brick": true,
+    "blockLight": false,
+    "noFail": true,
+    "noSunlight": true
+  },
+  {
+    "id": 163,
+    "name": "CorruptIce",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 164,
+    "name": "HallowedIce",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 165,
+    "name": "Stalactite",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 166,
+    "name": "Tin",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1125,
+    "shine2": true
+  },
+  {
+    "id": 167,
+    "name": "Lead",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1075,
+    "shine2": true
+  },
+  {
+    "id": 168,
+    "name": "Tungsten",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1025,
+    "shine2": true
+  },
+  {
+    "id": 169,
+    "name": "Platinum",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 975,
+    "shine2": true
+  },
+  {
+    "id": 170,
+    "name": "PineTree",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 171,
+    "name": "ChristmasTree",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 172,
+    "name": "Sinks",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 173,
+    "name": "PlatinumCandelabra",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 174,
+    "name": "PlatinumCandle",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 175,
+    "name": "TinBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 176,
+    "name": "TungstenBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 177,
+    "name": "PlatinumBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 178,
+    "name": "ExposedGems",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "shine": 500,
+    "shine2": true
+  },
+  {
+    "id": 179,
+    "name": "GreenMoss",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "moss": true
+  },
+  {
+    "id": 180,
+    "name": "BrownMoss",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "moss": true
+  },
+  {
+    "id": 181,
+    "name": "RedMoss",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "moss": true
+  },
+  {
+    "id": 182,
+    "name": "BlueMoss",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "moss": true
+  },
+  {
+    "id": 183,
+    "name": "PurpleMoss",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "moss": true
+  },
+  {
+    "id": 184,
+    "name": "LongMoss",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 185,
+    "name": "SmallPiles",
+    "solid": true,
+    "frameImportant": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 186,
+    "name": "LargePiles",
+    "solid": true,
+    "frameImportant": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 187,
+    "name": "LargePiles2",
+    "solid": true,
+    "frameImportant": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 188,
+    "name": "CactusBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 189,
+    "name": "Cloud",
+    "solid": true,
+    "noSunlight": false
+  },
+  {
+    "id": 190,
+    "name": "MushroomBlock",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 191,
+    "name": "LivingWood",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 192,
+    "name": "LeafBlock",
+    "solid": true,
+    "blockLight": true,
+    "noFail": true,
+    "noSunlight": true
+  },
+  {
+    "id": 193,
+    "name": "SlimeBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 194,
+    "name": "BoneBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 195,
+    "name": "FleshBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 196,
+    "name": "RainCloud",
+    "solid": true,
+    "noSunlight": false
+  },
+  {
+    "id": 197,
+    "name": "FrozenSlimeBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 198,
+    "name": "Asphalt",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 199,
+    "name": "CrimsonGrass",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 200,
+    "name": "FleshIce",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 201,
+    "name": "CrimsonPlants",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 202,
+    "name": "Sunplate",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 203,
+    "name": "Crimstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 204,
+    "name": "Crimtane",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1150,
+    "shine2": true
+  },
+  {
+    "id": 205,
+    "name": "CrimsonVines",
+    "solid": true,
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 206,
+    "name": "IceBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 207,
+    "name": "WaterFountain",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 208,
+    "name": "Shadewood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 209,
+    "name": "Cannon",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "glowMask": 215,
+    "obsidianKill": true
+  },
+  {
+    "id": 210,
+    "name": "LandMine",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 211,
+    "name": "Chlorophyte",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 500,
+    "shine2": true
+  },
+  {
+    "id": 212,
+    "name": "SnowballLauncher",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 213,
+    "name": "Rope",
+    "solid": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "rope": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 214,
+    "name": "Chain",
+    "solid": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "rope": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 215,
+    "name": "Campfire",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 216,
+    "name": "Firework",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 217,
+    "name": "Blendomatic",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 218,
+    "name": "MeatGrinder",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 219,
+    "name": "Extractinator",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 220,
+    "name": "Solidifier",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 221,
+    "name": "Palladium",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 925,
+    "shine2": true
+  },
+  {
+    "id": 222,
+    "name": "Orichalcum",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 875,
+    "shine2": true
+  },
+  {
+    "id": 223,
+    "name": "Titanium",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 825,
+    "shine2": true
+  },
+  {
+    "id": 224,
+    "name": "Slush",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 225,
+    "name": "Hive",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 226,
+    "name": "LihzahrdBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 227,
+    "name": "DyePlants",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 228,
+    "name": "DyeVat",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 229,
+    "name": "HoneyBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 230,
+    "name": "CrispyHoneyBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 231,
+    "name": "Larva",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 232,
+    "name": "WoodenSpikes",
+    "solid": true,
+    "noAttach": true,
+    "noSunlight": false
+  },
+  {
+    "id": 233,
+    "name": "PlantDetritus",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 234,
+    "name": "Crimsand",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "sand": true
+  },
+  {
+    "id": 235,
+    "name": "Teleporter",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 236,
+    "name": "LifeFruit",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 237,
+    "name": "LihzahrdAltar",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 238,
+    "name": "PlanteraBulb",
+    "lighted": true,
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 239,
+    "name": "MetalBars",
+    "solid": true,
+    "frameImportant": true,
+    "solidTop": true,
+    "noSunlight": true,
+    "shine": 1100
+  },
+  {
+    "id": 240,
+    "name": "Painting3X3",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 241,
+    "name": "Painting4X3",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 242,
+    "name": "Painting6X4",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 243,
+    "name": "ImbuingStation",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 244,
+    "name": "BubbleMachine",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 245,
+    "name": "Painting2X3",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 246,
+    "name": "Painting3X2",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 247,
+    "name": "Autohammer",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 248,
+    "name": "PalladiumColumn",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 249,
+    "name": "BubblegumBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 250,
+    "name": "Titanstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 251,
+    "name": "PumpkinBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 252,
+    "name": "HayBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 253,
+    "name": "SpookyWood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 254,
+    "name": "Pumpkins",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 255,
+    "name": "AmethystGemsparkOff",
+    "solid": true,
+    "noSunlight": true
+  },
+  {
+    "id": 256,
+    "name": "TopazGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 257,
+    "name": "SapphireGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 258,
+    "name": "EmeraldGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 259,
+    "name": "RubyGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 260,
+    "name": "DiamondGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 261,
+    "name": "AmberGemsparkOff",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 262,
+    "name": "AmethystGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 263,
+    "name": "TopazGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 264,
+    "name": "SapphireGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 265,
+    "name": "EmeraldGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 266,
+    "name": "RubyGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 267,
+    "name": "DiamondGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 268,
+    "name": "AmberGemspark",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "shine2": true
+  },
+  {
+    "id": 269,
+    "name": "Womannequin",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 270,
+    "name": "FireflyinaBottle",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 271,
+    "name": "LightningBuginaBottle",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 272,
+    "name": "Cog",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 273,
+    "name": "StoneSlab",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1
+  },
+  {
+    "id": 274,
+    "name": "SandStoneSlab",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1
+  },
+  {
+    "id": 275,
+    "name": "BunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 276,
+    "name": "SquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 277,
+    "name": "MallardDuckCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 278,
+    "name": "DuckCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 279,
+    "name": "BirdCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 280,
+    "name": "BlueJay",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 281,
+    "name": "CardinalCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 282,
+    "name": "FishBowl",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 283,
+    "name": "HeavyWorkBench",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 284,
+    "name": "CopperPlating",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1
+  },
+  {
+    "id": 285,
+    "name": "SnailCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 286,
+    "name": "GlowingSnailCage",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 287,
+    "name": "AmmoBox",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 288,
+    "name": "MonarchButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 289,
+    "name": "PurpleEmperorButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 290,
+    "name": "RedAdmiralButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 291,
+    "name": "UlyssesButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 292,
+    "name": "SulphurButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 293,
+    "name": "TreeNymphButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 294,
+    "name": "ZebraSwallowtailButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 295,
+    "name": "JuliaButterflyJar",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 296,
+    "name": "ScorpionCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 297,
+    "name": "BlackScorpionCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 298,
+    "name": "FrogCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 299,
+    "name": "MouseCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 300,
+    "name": "BoneWelder",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 301,
+    "name": "FleshCloningVat",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 302,
+    "name": "GlassKiln",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 303,
+    "name": "LihzahrdFurnace",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 304,
+    "name": "LivingLoom",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 305,
+    "name": "SkyMill",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 306,
+    "name": "IceMachine",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 307,
+    "name": "SteampunkBoiler",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 308,
+    "name": "HoneyDispenser",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 309,
+    "name": "PenguinCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 310,
+    "name": "WormCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 311,
+    "name": "DynastyWood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 312,
+    "name": "RedDynastyShingles",
+    "solid": true,
+    "noSunlight": true
+  },
+  {
+    "id": 313,
+    "name": "BlueDynastyShingles",
+    "solid": true,
+    "noSunlight": true
+  },
+  {
+    "id": 314,
+    "name": "MinecartTrack",
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 315,
+    "name": "Coralstone",
+    "solid": true,
+    "mergeDirt": true,
+    "noSunlight": true
+  },
+  {
+    "id": 316,
+    "name": "BlueJellyfishBowl",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 317,
+    "name": "GreenJellyfishBowl",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 318,
+    "name": "PinkJellyfishBowl",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 319,
+    "name": "ShipInABottle",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 320,
+    "name": "SeaweedPlanter",
+    "frameImportant": true
+  },
+  {
+    "id": 321,
+    "name": "BorealWood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 322,
+    "name": "PalmWood",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 323,
+    "name": "PalmTree",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "axe": true
+  },
+  {
+    "id": 324,
+    "name": "BeachPiles",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 325,
+    "name": "TinPlating",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1
+  },
+  {
+    "id": 326,
+    "name": "Waterfall",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 327,
+    "name": "Lavafall",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 328,
+    "name": "Confetti",
+    "solid": true,
+    "brick": true,
+    "noSunlight": false
+  },
+  {
+    "id": 329,
+    "name": "ConfettiBlack",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 330,
+    "name": "CopperCoinPile",
+    "noFail": true,
+    "pile": true
+  },
+  {
+    "id": 331,
+    "name": "SilverCoinPile",
+    "noFail": true,
+    "pile": true
+  },
+  {
+    "id": 332,
+    "name": "GoldCoinPile",
+    "noFail": true,
+    "pile": true
+  },
+  {
+    "id": 333,
+    "name": "PlatinumCoinPile",
+    "noFail": true,
+    "pile": true
+  },
+  {
+    "id": 334,
+    "name": "WeaponsRack",
+    "frameImportant": true
+  },
+  {
+    "id": 335,
+    "name": "FireworksBox",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 336,
+    "name": "LivingFire",
+    "lighted": true
+  },
+  {
+    "id": 337,
+    "name": "AlphabetStatues",
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 338,
+    "name": "FireworkFountain",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 339,
+    "name": "GrasshopperCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 340,
+    "name": "LivingCursedFire",
+    "lighted": true
+  },
+  {
+    "id": 341,
+    "name": "LivingDemonFire",
+    "lighted": true
+  },
+  {
+    "id": 342,
+    "name": "LivingFrostFire",
+    "lighted": true
+  },
+  {
+    "id": 343,
+    "name": "LivingIchor",
+    "lighted": true
+  },
+  {
+    "id": 344,
+    "name": "LivingUltrabrightFire",
+    "lighted": true
+  },
+  {
+    "id": 345,
+    "name": "Honeyfall",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 346,
+    "name": "ChlorophyteBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 2000,
+    "shine2": true
+  },
+  {
+    "id": 347,
+    "name": "CrimtaneBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1900,
+    "shine2": true
+  },
+  {
+    "id": 348,
+    "name": "ShroomitePlating",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "shine": 1800,
+    "shine2": true
+  },
+  {
+    "id": 349,
+    "name": "MushroomStatue",
+    "lighted": true,
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 350,
+    "name": "MartianConduitPlating",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 94
+  },
+  {
+    "id": 351,
+    "name": "ChimneySmoke",
+    "forceSaveSlope": true
+  },
+  {
+    "id": 352,
+    "name": "CrimsonThorns",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 353,
+    "name": "VineRope",
+    "lavaDeath": true,
+    "rope": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 354,
+    "name": "BewitchingTable",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 355,
+    "name": "AlchemyTable",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 356,
+    "name": "Sundial",
+    "frameImportant": true
+  },
+  {
+    "id": 357,
+    "name": "MarbleBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1,
+    "blendAll": true
+  },
+  {
+    "id": 358,
+    "name": "GoldBirdCage",
+    "frameImportant": true
+  },
+  {
+    "id": 359,
+    "name": "GoldBunnyCage",
+    "frameImportant": true
+  },
+  {
+    "id": 360,
+    "name": "GoldButterflyCage",
+    "frameImportant": true
+  },
+  {
+    "id": 361,
+    "name": "GoldFrogCage",
+    "frameImportant": true
+  },
+  {
+    "id": 362,
+    "name": "GoldGrasshopperCage",
+    "frameImportant": true
+  },
+  {
+    "id": 363,
+    "name": "GoldMouseCage",
+    "frameImportant": true
+  },
+  {
+    "id": 364,
+    "name": "GoldWormCage",
+    "frameImportant": true
+  },
+  {
+    "id": 365,
+    "name": "SilkRope",
+    "rope": true
+  },
+  {
+    "id": 366,
+    "name": "WebRope",
+    "rope": true
+  },
+  {
+    "id": 367,
+    "name": "Marble",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 368,
+    "name": "Granite",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 369,
+    "name": "GraniteBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 370,
+    "name": "MeteoriteBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 111,
+    "shine": 1900,
+    "shine2": true
+  },
+  {
+    "id": 371,
+    "name": "PinkSlimeBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "bouncy": true
+  },
+  {
+    "id": 372,
+    "name": "PeaceCandle",
+    "lighted": true,
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "flame": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 373,
+    "name": "WaterDrip",
+    "frameImportant": true
+  },
+  {
+    "id": 374,
+    "name": "LavaDrip",
+    "frameImportant": true
+  },
+  {
+    "id": 375,
+    "name": "HoneyDrip",
+    "frameImportant": true
+  },
+  {
+    "id": 376,
+    "name": "FishingCrate",
+    "frameImportant": true,
+    "solidTop": true,
+    "table": true
+  },
+  {
+    "id": 377,
+    "name": "SharpeningStation",
+    "frameImportant": true
+  },
+  {
+    "id": 378,
+    "name": "TargetDummy",
+    "frameImportant": true
+  },
+  {
+    "id": 379,
+    "name": "Bubble",
+    "solid": true,
+    "noSunlight": false
+  },
+  {
+    "id": 380,
+    "name": "PlanterBox",
+    "solid": true,
+    "frameImportant": true,
+    "solidTop": true,
+    "table": true,
+    "noSunlight": true
+  },
+  {
+    "id": 381,
+    "name": "LavaMoss",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 126,
+    "moss": true
+  },
+  {
+    "id": 382,
+    "name": "VineFlowers",
+    "blockLight": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 383,
+    "name": "LivingMahogany",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 384,
+    "name": "LivingMahoganyLeaves",
+    "solid": true,
+    "blockLight": true,
+    "noFail": true,
+    "noSunlight": true
+  },
+  {
+    "id": 385,
+    "name": "CrystalBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 386,
+    "name": "TrapdoorOpen",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true
+  },
+  {
+    "id": 387,
+    "name": "TrapdoorClosed",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "noSunlight": true
+  },
+  {
+    "id": 388,
+    "name": "TallGateClosed",
+    "solid": true,
+    "blockLight": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "noSunlight": false
+  },
+  {
+    "id": 389,
+    "name": "TallGateOpen",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noSunlight": true
+  },
+  {
+    "id": 390,
+    "name": "LavaLamp",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "glowMask": 130,
+    "obsidianKill": true
+  },
+  {
+    "id": 391,
+    "name": "CageEnchantedNightcrawler",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 392,
+    "name": "CageBuggy",
+    "frameImportant": true
+  },
+  {
+    "id": 393,
+    "name": "CageGrubby",
+    "frameImportant": true
+  },
+  {
+    "id": 394,
+    "name": "CageSluggy",
+    "frameImportant": true
+  },
+  {
+    "id": 395,
+    "name": "ItemFrame",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 396,
+    "name": "Sandstone",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 397,
+    "name": "HardenedSand",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 398,
+    "name": "CorruptHardenedSand",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 399,
+    "name": "CrimsonHardenedSand",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 400,
+    "name": "CorruptSandstone",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 401,
+    "name": "CrimsonSandstone",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 402,
+    "name": "HallowHardenedSand",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 403,
+    "name": "HallowSandstone",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 404,
+    "name": "DesertFossil",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true
+  },
+  {
+    "id": 405,
+    "name": "Fireplace",
+    "lighted": true,
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true
+  },
+  {
+    "id": 406,
+    "name": "Chimney",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 407,
+    "name": "FossilOre",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 1000,
+    "shine2": true
+  },
+  {
+    "id": 408,
+    "name": "LunarOre",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 409,
+    "name": "LunarBrick",
+    "solid": true,
+    "brick": true,
+    "noSunlight": true,
+    "largeFrames": 2
+  },
+  {
+    "id": 410,
+    "name": "LunarMonolith",
+    "frameImportant": true,
+    "glowMask": 201
+  },
+  {
+    "id": 411,
+    "name": "Detonator",
+    "frameImportant": true,
+    "lavaDeath": false
+  },
+  {
+    "id": 412,
+    "name": "LunarCraftingStation",
+    "frameImportant": true
+  },
+  {
+    "id": 413,
+    "name": "SquirrelOrangeCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 414,
+    "name": "SquirrelGoldCage",
+    "frameImportant": true
+  },
+  {
+    "id": 415,
+    "name": "LunarBlockSolar",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 416,
+    "name": "LunarBlockVortex",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 417,
+    "name": "LunarBlockNebula",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 418,
+    "name": "LunarBlockStardust",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "noSunlight": true
+  },
+  {
+    "id": 419,
+    "name": "LogicGateLamp",
+    "frameImportant": true
+  },
+  {
+    "id": 420,
+    "name": "LogicGate",
+    "frameImportant": true
+  },
+  {
+    "id": 421,
+    "name": "ConveyorBeltLeft",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 422,
+    "name": "ConveyorBeltRight",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 423,
+    "name": "LogicSensor",
+    "frameImportant": true
+  },
+  {
+    "id": 424,
+    "name": "WirePipe",
+    "frameImportant": true
+  },
+  {
+    "id": 425,
+    "name": "AnnouncementBox",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "sign": true
+  },
+  {
+    "id": 426,
+    "name": "TeamBlockRed",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 427,
+    "name": "TeamBlockRedPlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 428,
+    "name": "WeightedPressurePlate",
+    "frameImportant": true
+  },
+  {
+    "id": 429,
+    "name": "WireBulb",
+    "lighted": true,
+    "frameImportant": true,
+    "glowMask": 214
+  },
+  {
+    "id": 430,
+    "name": "TeamBlockGreen",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 431,
+    "name": "TeamBlockBlue",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 432,
+    "name": "TeamBlockYellow",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 433,
+    "name": "TeamBlockPink",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 434,
+    "name": "TeamBlockWhite",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 435,
+    "name": "TeamBlockGreenPlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 436,
+    "name": "TeamBlockBluePlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 437,
+    "name": "TeamBlockYellowPlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 438,
+    "name": "TeamBlockPinkPlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 439,
+    "name": "TeamBlockWhitePlatform",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "noSunlight": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 440,
+    "name": "GemLocks",
+    "frameImportant": true
+  },
+  {
+    "id": 441,
+    "name": "FakeContainers",
+    "frameImportant": true,
+    "noAttach": true,
+    "spelunker": true,
+    "shine": 1200,
+    "shine2": true
+  },
+  {
+    "id": 442,
+    "name": "ProjectilePressurePad",
+    "frameImportant": true
+  },
+  {
+    "id": 443,
+    "name": "GeyserTrap",
+    "frameImportant": true
+  },
+  {
+    "id": 444,
+    "name": "BeeHive",
+    "frameImportant": true,
+    "cut": true
+  },
+  {
+    "id": 445,
+    "name": "PixelBox",
+    "frameImportant": true,
+    "glowMask": 214
+  },
+  {
+    "id": 446,
+    "name": "SillyBalloonPink",
+    "solid": true,
+    "noSunlight": true,
+    "bouncy": true
+  },
+  {
+    "id": 447,
+    "name": "SillyBalloonPurple",
+    "solid": true,
+    "noSunlight": true,
+    "bouncy": true
+  },
+  {
+    "id": 448,
+    "name": "SillyBalloonGreen",
+    "solid": true,
+    "noSunlight": true,
+    "bouncy": true
+  },
+  {
+    "id": 449,
+    "name": "SillyStreamerBlue",
+    "rope": true
+  },
+  {
+    "id": 450,
+    "name": "SillyStreamerGreen",
+    "rope": true
+  },
+  {
+    "id": 451,
+    "name": "SillyStreamerPink",
+    "rope": true
+  },
+  {
+    "id": 452,
+    "name": "SillyBalloonMachine",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 453,
+    "name": "SillyBalloonTile",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 454,
+    "name": "Pigronata",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "cut": true
+  },
+  {
+    "id": 455,
+    "name": "PartyMonolith",
+    "frameImportant": true
+  },
+  {
+    "id": 456,
+    "name": "PartyBundleOfBalloonTile",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 457,
+    "name": "PartyPresent",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 458,
+    "name": "SandFallBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 459,
+    "name": "SnowFallBlock",
+    "solid": true,
+    "brick": true,
+    "noSunlight": false
+  },
+  {
+    "id": 460,
+    "name": "SnowCloud",
+    "solid": true,
+    "noSunlight": false
+  },
+  {
+    "id": 461,
+    "name": "SandDrip",
+    "frameImportant": true
+  },
+  {
+    "id": 462,
+    "name": "DjinnLamp",
+    "frameImportant": true
+  },
+  {
+    "id": 463,
+    "name": "DefendersForge",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 464,
+    "name": "WarTable",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 465,
+    "name": "WarTableBanner",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 466,
+    "name": "ElderCrystalStand",
+    "frameImportant": true
+  },
+  {
+    "id": 467,
+    "name": "Containers2",
+    "frameImportant": true,
+    "noAttach": true,
+    "spelunker": true,
+    "container": true,
+    "shine": 1200,
+    "shine2": true
+  },
+  {
+    "id": 468,
+    "name": "FakeContainers2",
+    "frameImportant": true,
+    "noAttach": true,
+    "spelunker": true,
+    "shine": 1200,
+    "shine2": true
+  },
+  {
+    "id": 469,
+    "name": "Tables2",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "solidTop": true,
+    "table": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 470,
+    "name": "DisplayDoll",
+    "frameImportant": true,
+    "container": true
+  },
+  {
+    "id": 471,
+    "name": "WeaponsRack2",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 472,
+    "name": "IronBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 473,
+    "name": "LeadBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 474,
+    "name": "LesionBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 475,
+    "name": "HatRack",
+    "frameImportant": true,
+    "container": true
+  },
+  {
+    "id": 476,
+    "name": "GolfHole",
+    "solid": true,
+    "frameImportant": true,
+    "noSunlight": true
+  },
+  {
+    "id": 477,
+    "name": "GolfGrass",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 478,
+    "name": "CrimstoneBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 479,
+    "name": "SmoothSandstone",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 480,
+    "name": "BloodMoonMonolith",
+    "frameImportant": true
+  },
+  {
+    "id": 481,
+    "name": "CrackedBlueDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noFail": true,
+    "noSunlight": true,
+    "cracked": true
+  },
+  {
+    "id": 482,
+    "name": "CrackedGreenDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noFail": true,
+    "noSunlight": true,
+    "cracked": true
+  },
+  {
+    "id": 483,
+    "name": "CrackedPinkDungeonBrick",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noFail": true,
+    "noSunlight": true,
+    "cracked": true
+  },
+  {
+    "id": 484,
+    "name": "RollingCactus",
+    "solid": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "noSunlight": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 485,
+    "name": "AntlionLarva",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 486,
+    "name": "DrumSet",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 487,
+    "name": "PicnicTable",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 488,
+    "name": "FallenLog",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true,
+    "axe": true
+  },
+  {
+    "id": 489,
+    "name": "PinWheel",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 490,
+    "name": "WeatherVane",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 491,
+    "name": "VoidVault",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 492,
+    "name": "GolfGrassHallowed",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 493,
+    "name": "GolfCupFlag",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 494,
+    "name": "GolfTee",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 495,
+    "name": "ShellPile",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 496,
+    "name": "AntiPortalBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 497,
+    "name": "Toilets",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 498,
+    "name": "Spider",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 499,
+    "name": "LesionStation",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 500,
+    "name": "SolarBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 501,
+    "name": "VortexBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 502,
+    "name": "NebulaBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 503,
+    "name": "StardustBrick",
+    "lighted": true,
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 504,
+    "name": "MysticSnakeRope",
+    "rope": true
+  },
+  {
+    "id": 505,
+    "name": "GoldGoldfishBowl",
+    "frameImportant": true
+  },
+  {
+    "id": 506,
+    "name": "CatBast",
+    "frameImportant": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 507,
+    "name": "GoldStarryGlassBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 508,
+    "name": "BlueStarryGlassBlock",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 509,
+    "name": "VoidMonolith",
+    "frameImportant": true,
+    "glowMask": 265
+  },
+  {
+    "id": 510,
+    "name": "ArrowSign",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 511,
+    "name": "PaintedArrowSign",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 512,
+    "name": "GreenMossBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 513,
+    "name": "BrownMossBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 514,
+    "name": "RedMossBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 515,
+    "name": "BlueMossBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 516,
+    "name": "PurpleMossBrick",
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 517,
+    "name": "LavaMossBrick",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 258
+  },
+  {
+    "id": 518,
+    "name": "LilyPad",
+    "frameImportant": true,
+    "noFail": true,
+    "cut": true
+  },
+  {
+    "id": 519,
+    "name": "Cattail",
+    "lighted": true,
+    "frameImportant": true,
+    "noFail": true,
+    "cut": true
+  },
+  {
+    "id": 520,
+    "name": "FoodPlatter",
+    "frameImportant": true,
+    "lavaDeath": true
+  },
+  {
+    "id": 521,
+    "name": "BlackDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 522,
+    "name": "BlueDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 523,
+    "name": "GreenDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 524,
+    "name": "OrangeDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 525,
+    "name": "RedDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 526,
+    "name": "YellowDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 527,
+    "name": "GoldDragonflyJar",
+    "frameImportant": true
+  },
+  {
+    "id": 528,
+    "name": "MushroomVines",
+    "lighted": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 529,
+    "name": "SeaOats",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true,
+    "cut": true
+  },
+  {
+    "id": 530,
+    "name": "OasisPlants",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noFail": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 531,
+    "name": "BoulderStatue",
+    "frameImportant": true
+  },
+  {
+    "id": 532,
+    "name": "MaggotCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 533,
+    "name": "RatCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 534,
+    "name": "KryptonMoss",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 259,
+    "moss": true
+  },
+  {
+    "id": 535,
+    "name": "KryptonMossBrick",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 260
+  },
+  {
+    "id": 536,
+    "name": "XenonMoss",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 261,
+    "moss": true
+  },
+  {
+    "id": 537,
+    "name": "XenonMossBrick",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 262
+  },
+  {
+    "id": 538,
+    "name": "LadybugCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 539,
+    "name": "ArgonMoss",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 263,
+    "moss": true
+  },
+  {
+    "id": 540,
+    "name": "ArgonMossBrick",
+    "lighted": true,
+    "solid": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "glowMask": 264
+  },
+  {
+    "id": 541,
+    "name": "EchoBlock",
+    "solid": true,
+    "blockLight": false,
+    "noSunlight": false
+  },
+  {
+    "id": 542,
+    "name": "OwlCage",
+    "frameImportant": true
+  },
+  {
+    "id": 543,
+    "name": "PupfishBowl",
+    "frameImportant": true
+  },
+  {
+    "id": 544,
+    "name": "GoldLadybugCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 545,
+    "name": "LawnFlamingo",
+    "frameImportant": true
+  },
+  {
+    "id": 546,
+    "name": "Grate",
+    "solid": true,
+    "blockLight": false,
+    "noSunlight": false,
+    "obsidianKill": true
+  },
+  {
+    "id": 547,
+    "name": "PottedPlants1",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 548,
+    "name": "PottedPlants2",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 549,
+    "name": "Seaweed",
+    "blockLight": true,
+    "frameImportant": true,
+    "noFail": true,
+    "cut": true
+  },
+  {
+    "id": 550,
+    "name": "TurtleCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 551,
+    "name": "TurtleJungleCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 552,
+    "name": "Sandcastles",
+    "frameImportant": true,
+    "waterDeath": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 553,
+    "name": "GrebeCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 554,
+    "name": "SeagullCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 555,
+    "name": "WaterStriderCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 556,
+    "name": "GoldWaterStriderCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 557,
+    "name": "GrateClosed",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 558,
+    "name": "SeahorseCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 559,
+    "name": "GoldSeahorseCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 560,
+    "name": "GolfTrophies",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 561,
+    "name": "MarbleColumn"
+  },
+  {
+    "id": 562,
+    "name": "BambooBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 563,
+    "name": "LargeBambooBlock",
+    "solid": true,
+    "mergeDirt": true,
+    "brick": true,
+    "blockLight": true,
+    "noSunlight": true
+  },
+  {
+    "id": 564,
+    "name": "PlasmaLamp",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 565,
+    "name": "FogMachine",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 566,
+    "name": "AmberStoneBlock",
+    "solid": true,
+    "blockLight": true,
+    "stone": true,
+    "noSunlight": true,
+    "spelunker": true,
+    "shine": 900,
+    "shine2": true
+  },
+  {
+    "id": 567,
+    "name": "GardenGnome",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 568,
+    "name": "PinkFairyJar",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 569,
+    "name": "GreenFairyJar",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 570,
+    "name": "BlueFairyJar",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 571,
+    "name": "Bamboo",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 572,
+    "name": "SoulBottles",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 573,
+    "name": "TatteredWoodSign",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true,
+    "sign": true
+  },
+  {
+    "id": 574,
+    "name": "BorealBeam"
+  },
+  {
+    "id": 575,
+    "name": "RichMahoganyBeam"
+  },
+  {
+    "id": 576,
+    "name": "GraniteColumn"
+  },
+  {
+    "id": 577,
+    "name": "SandstoneColumn"
+  },
+  {
+    "id": 578,
+    "name": "MushroomBeam",
+    "lighted": true
+  },
+  {
+    "id": 579,
+    "name": "RockGolemHead",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 580,
+    "name": "HellButterflyJar",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 581,
+    "name": "LavaflyinaBottle",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 582,
+    "name": "MagmaSnailCage",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 583,
+    "name": "TreeTopaz",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 584,
+    "name": "TreeAmethyst",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 585,
+    "name": "TreeSapphire",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 586,
+    "name": "TreeEmerald",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 587,
+    "name": "TreeRuby",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 588,
+    "name": "TreeDiamond",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 589,
+    "name": "TreeAmber",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 590,
+    "name": "GemSaplings",
+    "frameImportant": true,
+    "noAttach": true
+  },
+  {
+    "id": 591,
+    "name": "PotsSuspended",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 592,
+    "name": "BrazierSuspended",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": false
+  },
+  {
+    "id": 593,
+    "name": "VolcanoSmall",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": false,
+    "noAttach": true
+  },
+  {
+    "id": 594,
+    "name": "VolcanoLarge",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": false,
+    "noAttach": true
+  },
+  {
+    "id": 595,
+    "name": "VanityTreeSakuraSaplings",
+    "frameImportant": true,
+    "noAttach": true
+  },
+  {
+    "id": 596,
+    "name": "VanityTreeSakura",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 597,
+    "name": "TeleportationPylon",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 598,
+    "name": "LavafishBowl",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 599,
+    "name": "AmethystBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 600,
+    "name": "TopazBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 601,
+    "name": "SapphireBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 602,
+    "name": "EmeraldBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 603,
+    "name": "RubyBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 604,
+    "name": "DiamondBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 605,
+    "name": "AmberBunnyCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 606,
+    "name": "AmethystSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 607,
+    "name": "TopazSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 608,
+    "name": "SapphireSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 609,
+    "name": "EmeraldSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 610,
+    "name": "RubySquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 611,
+    "name": "DiamondSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 612,
+    "name": "AmberSquirrelCage",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 613,
+    "name": "PottedLavaPlants",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 614,
+    "name": "PottedLavaPlantTendrils",
+    "lighted": true,
+    "frameImportant": true
+  },
+  {
+    "id": 615,
+    "name": "VanityTreeWillowSaplings",
+    "frameImportant": true,
+    "noAttach": true
+  },
+  {
+    "id": 616,
+    "name": "VanityTreeYellowWillow",
+    "frameImportant": true,
+    "axe": true
+  },
+  {
+    "id": 617,
+    "name": "MasterTrophyBase",
+    "frameImportant": true,
+    "shine": 400
+  },
+  {
+    "id": 618,
+    "name": "AccentSlab",
+    "solid": true,
+    "blockLight": true,
+    "noSunlight": true,
+    "largeFrames": 1
+  },
+  {
+    "id": 619,
+    "name": "TruffleWormCage",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 620,
+    "name": "EmpressButterflyJar",
+    "lighted": true,
+    "frameImportant": true,
+    "lavaDeath": true,
+    "noAttach": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 621,
+    "name": "SliceOfCake",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 622,
+    "name": "TeaKettle",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  },
+  {
+    "id": 623,
+    "name": "PottedCrystalPlants",
+    "frameImportant": true,
+    "lavaDeath": true,
+    "obsidianKill": true
+  }
+]

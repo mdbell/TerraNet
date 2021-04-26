@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
+import me.mdbell.terranet.common.util.UUID;
 
-import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -44,14 +44,15 @@ public final class WorldMetadataMessage extends GameMessage {
     float windSpeedTarget;
     int numClouds;
     final int[] treeX = new int[3];
-    final byte[] treeStyle = new byte[4];
+    final int[] treeStyle = new int[4];
     final int[] caveBackX = new int[3];
-    final byte[] caveBackStyle = new byte[4];
-    final byte[] treetopTypes = new byte[13];
+    final int[] caveBackStyle = new int[4];
+    final int[] treetopTypes = new int[13];
     float maxRaining;
     boolean shadowOrbSmashed;
     boolean downedBoss1, downedBoss2, downedBoss3;
     boolean hardmode;
+    boolean serverSideChar;
     boolean downedClown;
     boolean downedPlantera;
     boolean downedMechBoss1, downedMechBoss2, downedMechBoss3, downedMechBossAny;
@@ -88,7 +89,7 @@ public final class WorldMetadataMessage extends GameMessage {
     boolean freeCake;
     boolean drunkWorld;
     boolean downedEmpress;
-    boolean downedQueen;
+    boolean downedQueenSlime;
     boolean goodWorld;
     int copperOreTier;
     int ironOreTier;

@@ -1,11 +1,10 @@
 package me.mdbell.terranet.common.io;
 
 import io.netty.buffer.ByteBuf;
-import lombok.Getter;
-import lombok.Setter;
+import me.mdbell.terranet.common.util.Tuple;
 
+import java.io.*;
 import java.nio.ByteBuffer;
-import java.util.UUID;
 
 public abstract class Buffer<T> {
 
@@ -32,6 +31,42 @@ public abstract class Buffer<T> {
         return new JDKBuffer(buffer);
     }
 
+    public static Buffer<RandomAccessFile> wrap(RandomAccessFile raf) {
+        return new RAFBuffer(raf);
+    }
+
+    public static Buffer<Tuple<DataInput, DataOutput>> wrap(OutputStream out){
+        return wrap(null, out);
+    }
+
+    public static Buffer<Tuple<DataInput, DataOutput>> wrap(InputStream in){
+        return wrap(in, null);
+    }
+
+    public static Buffer<Tuple<DataInput, DataOutput>> wrap(InputStream in, OutputStream out) {
+        DataInput din = null;
+        DataOutput dout = null;
+        if (in != null) {
+            if (in instanceof DataInput) {
+                din = (DataInput) in;
+            } else {
+                din = new DataInputStream(in);
+            }
+        }
+        if (out != null) {
+            if (out instanceof DataOutput) {
+                dout = (DataOutput) out;
+            } else {
+                dout = new DataOutputStream(out);
+            }
+        }
+        return wrap(din, dout);
+    }
+
+    public static Buffer<Tuple<DataInput, DataOutput>> wrap(DataInput in, DataOutput out) {
+        return new TupleBuffer(in, out);
+    }
+
     public abstract T getBuffer();
 
     public abstract Buffer<?> writeBoolean(boolean value);
@@ -54,6 +89,10 @@ public abstract class Buffer<T> {
 
     public abstract Buffer<?> writeLongLE(long value);
 
+    public abstract Buffer<?> writeDouble(double value);
+
+    public abstract Buffer<?> writeDoubleLE(double value);
+
     public abstract Buffer<?> writeBytes(byte[] bytes);
 
     public abstract Buffer<?> writeBytes(ByteBuffer bytes);
@@ -61,14 +100,14 @@ public abstract class Buffer<T> {
     public abstract Buffer<?> writeBytes(ByteBuf bytes);
 
 
-    public Buffer<?> writeBit(boolean bit){
-        if(bitWritePos == Byte.SIZE) {
+    public Buffer<?> writeBit(boolean bit) {
+        if (bitWritePos == Byte.SIZE) {
             writeBits();
         }
         int mask = 1 << bitWritePos;
-        if(bit){
+        if (bit) {
             writeBitByte |= mask;
-        }else{
+        } else {
             mask ^= 0xFF;
             writeBitByte &= mask;
         }
@@ -76,7 +115,7 @@ public abstract class Buffer<T> {
         return this;
     }
 
-    public Buffer<?> writeBits(){
+    public Buffer<?> writeBits() {
         writeByte(writeBitByte); //TODO
         writeBitByte = 0;
         bitWritePos = 0;
@@ -128,6 +167,10 @@ public abstract class Buffer<T> {
 
     public abstract float readFloatLE();
 
+    public abstract double readDouble();
+
+    public abstract double readDoubleLE();
+
     public abstract long readLong();
 
     public abstract long readLongLE();
@@ -178,5 +221,4 @@ public abstract class Buffer<T> {
     public abstract Buffer<?> markReaderIndex();
 
     public abstract Buffer<?> resetReaderIndex();
-
 }

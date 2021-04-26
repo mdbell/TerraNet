@@ -3,22 +3,12 @@ package me.mdbell.terranet.common.io;
 import io.netty.buffer.ByteBuf;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
-final class JDKBuffer extends Buffer<ByteBuffer> {
-
-    private ByteBuffer buffer;
-    private int writeIndex, readIndex;
-    private int writeMark, readMark;
+final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     JDKBuffer(ByteBuffer buffer) {
-        this.buffer = buffer;
+        super(buffer);
         this.writeIndex = this.readIndex = buffer.position();
-    }
-
-    @Override
-    public ByteBuffer getBuffer() {
-        return buffer;
     }
 
     @Override
@@ -29,63 +19,43 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
 
     @Override
     public Buffer<?> writeByte(int value) {
-        buffer.put(writeIndex++, (byte) value);
-        return null;
-    }
-
-    @Override
-    public Buffer<?> writeShort(int value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putShort(writeIndex, (short) value);
-        writeIndex += Short.BYTES;
+        buffer.put(writeIndex, (byte) value);
+        writeIndex++;
         return this;
     }
 
     @Override
-    public Buffer<?> writeShortLE(int value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putShort(writeIndex, (short) value);
+    public Buffer<?> writeShort(int value) {
+        buffer.putShort(writeIndex, (short) value);
         writeIndex += Short.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeInt(int value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putInt(writeIndex, value);
-        writeIndex += Integer.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeIntLE(int value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putInt(writeIndex, value);
+        buffer.putInt(writeIndex, value);
         writeIndex += Integer.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeFloat(float value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putFloat(writeIndex, value);
-        writeIndex += Float.BYTES;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> writeFloatLE(float value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putFloat(writeIndex, value);
+        buffer.putFloat(writeIndex, value);
         writeIndex += Float.BYTES;
         return this;
     }
 
     @Override
     public Buffer<?> writeLong(long value) {
-        buffer.order(ByteOrder.BIG_ENDIAN).putLong(writeIndex, value);
+        buffer.putLong(writeIndex, value);
         writeIndex += Long.BYTES;
         return this;
     }
 
     @Override
-    public Buffer<?> writeLongLE(long value) {
-        buffer.order(ByteOrder.LITTLE_ENDIAN).putLong(writeIndex, value);
-        writeIndex += Long.BYTES;
+    public Buffer<?> writeDouble(double value) {
+        buffer.putDouble(writeIndex, value);
+        writeIndex += Double.BYTES;
         return this;
     }
 
@@ -120,95 +90,53 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     }
 
     @Override
-    public int writerIndex() {
-        return writeIndex;
-    }
-
-    @Override
-    public Buffer<?> writerIndex(int newIndex) {
-        this.writeIndex = newIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> markWriterIndex() {
-        writeMark = writeIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> resetWriterIndex() {
-        writeIndex = writeMark;
-        return this;
-    }
-
-    @Override
     public boolean isWritable() {
         return !buffer.isReadOnly();
     }
 
     @Override
     public byte readByte() {
-        return buffer.get(readIndex++);
-    }
-
-    @Override
-    public int readUnsignedByte() {
-        return buffer.get(readIndex++) & 0xFF;
-    }
-
-    @Override
-    public short readShort() {
-        short value = buffer.order(ByteOrder.BIG_ENDIAN).getShort(readIndex);
-        readIndex += Short.BYTES;
+        byte value = buffer.get(readIndex);
+        readIndex++;
         return value;
     }
 
     @Override
-    public short readShortLE() {
-        short value = buffer.order(ByteOrder.LITTLE_ENDIAN).getShort(readIndex);
+    public int readUnsignedByte() {
+        return Byte.toUnsignedInt(readByte());
+    }
+
+    @Override
+    public short readShort() {
+        short value = buffer.getShort(readIndex);
         readIndex += Short.BYTES;
         return value;
     }
 
     @Override
     public int readInt() {
-        int value = buffer.order(ByteOrder.BIG_ENDIAN).getInt(readIndex);
-        readIndex += Integer.BYTES;
-        return value;
-    }
-
-    @Override
-    public int readIntLE() {
-        int value = buffer.order(ByteOrder.LITTLE_ENDIAN).getInt(readIndex);
+        int value = buffer.getInt(readIndex);
         readIndex += Integer.BYTES;
         return value;
     }
 
     @Override
     public float readFloat() {
-        float value = buffer.order(ByteOrder.BIG_ENDIAN).getFloat(readIndex);
+        float value = buffer.getFloat(readIndex);
         readIndex += Float.BYTES;
         return value;
     }
 
     @Override
-    public float readFloatLE() {
-        float value = buffer.order(ByteOrder.LITTLE_ENDIAN).getFloat(readIndex);
-        readIndex += Float.BYTES;
+    public double readDouble() {
+        double value = buffer.getDouble(readIndex);
+        readIndex += Double.BYTES;
         return value;
     }
 
     @Override
     public long readLong() {
-        long value = buffer.order(ByteOrder.BIG_ENDIAN).getLong(readIndex);
-        readIndex += Long.BYTES;
-        return value;
-    }
-
-    @Override
-    public long readLongLE() {
-        long value = buffer.order(ByteOrder.LITTLE_ENDIAN).getLong(readIndex);
+        long value = buffer.getLong(readIndex);
         readIndex += Long.BYTES;
         return value;
     }
@@ -234,25 +162,15 @@ final class JDKBuffer extends Buffer<ByteBuffer> {
     }
 
     @Override
-    public int readerIndex() {
-        return readIndex;
-    }
-
-    @Override
-    public Buffer<?> readerIndex(int newIndex) {
-        readIndex = newIndex;
+    protected Buffer<?> writeBuffer(int len) {
+        buffer.put(writeIndex, tmp.array(), 0, len);
+        writeIndex += len;
         return this;
     }
 
     @Override
-    public Buffer<?> markReaderIndex() {
-        readMark = readIndex;
-        return this;
-    }
-
-    @Override
-    public Buffer<?> resetReaderIndex() {
-        readIndex = readMark;
-        return this;
+    protected void readIntoBuffer(int len) {
+        buffer.get(readIndex, tmp.array(), 0, len);
+        readIndex += len;
     }
 }
