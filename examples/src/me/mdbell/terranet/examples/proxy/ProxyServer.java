@@ -1,11 +1,13 @@
 package me.mdbell.terranet.examples.proxy;
 
+import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
+import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ConnectionState;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@ExtensionMethod({StringExtensions.class})
 public class ProxyServer {
 
     private final String remoteHost;
@@ -61,7 +64,7 @@ public class ProxyServer {
             ConnectionCtx<?> conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
-                ctx.disconnect("Remote server closed connection.");
+                ctx.disconnect("Remote server closed connection.".toLiteral());
                 ctx.close();
             } catch (IOException e) {
                 log.error("Exception closing remote", e);

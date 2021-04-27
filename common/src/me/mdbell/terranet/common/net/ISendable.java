@@ -33,17 +33,8 @@ public interface ISendable extends Opcodes, Closeable {
     }
 
     default void disconnect() {
-        disconnect("Disconnected.", true);
+        disconnect(StringExtensions.toLiteral("Disconnected."), true);
     }
-
-    default void disconnect(String reason){
-        disconnect(reason, true);
-    }
-
-    default void disconnect(String reason, boolean close) {
-        disconnect(StringExtensions.toLiteral(reason), close);
-    }
-
     default void disconnect(NetworkText reason){
         disconnect(reason, true);
     }
@@ -55,14 +46,6 @@ public interface ISendable extends Opcodes, Closeable {
         if(close){
             close();
         }
-    }
-
-    default void sendServerMessage(String message){
-        sendServerMessage(message, Color.YELLOW);
-    }
-
-    default void sendServerMessage(String message, Color color){
-        sendServerMessage(StringExtensions.toLiteral(message), color);
     }
 
     default void sendServerMessage(NetworkText message){

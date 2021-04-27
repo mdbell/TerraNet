@@ -1,7 +1,9 @@
 package me.mdbell.terranet.server.simple;
 
+import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
+import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.game.messages.WorldMetadataMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
@@ -14,6 +16,7 @@ import me.mdbell.terranet.server.simple.engine.Player;
 import java.io.IOException;
 
 @Slf4j
+@ExtensionMethod({StringExtensions.class})
 public class ServerHandler implements ISendable {
 
     private int connected = 0;
@@ -79,14 +82,14 @@ public class ServerHandler implements ISendable {
             Player p = event.source().attrs();
             log.info("Removing Player \"{}\" at {} (uuid: {})", p.getName(), p.getId(), p.getUuid());
             removeConnection(event.source());
-
-            sendServerMessage(p.getName() + " has left.");
+            sendServerMessage("{0} {1}".toFormatted(p.getName(), "has left."));
+            //sendServerMessage(p.getName() + " has left.");
         }
     }
 
     public void sendWorldInfo(ConnectionCtx<Player> ctx) {
         //TODO implement
-        ctx.disconnect("World Info Unimplemented");
+        sendServerMessage("{0} {1}".toFormatted("Goodbye", ctx.attrs().getName()));
     }
 
     @Override

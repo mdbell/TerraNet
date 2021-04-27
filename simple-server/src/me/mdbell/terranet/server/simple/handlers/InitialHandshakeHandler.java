@@ -117,7 +117,7 @@ public class InitialHandshakeHandler implements Opcodes {
         }
         if (!this.password.equals(message.getPassword())) {
             log.info("Received wrong password '{}'", message.getPassword());
-            ctx.disconnect("Incorrect password");
+            ctx.disconnect("Incorrect password".toLiteral());
             return true;
         }
         return registerConnection(ctx);
@@ -127,7 +127,7 @@ public class InitialHandshakeHandler implements Opcodes {
         Player attrs = ctx.attrs();
         if (attrs.getConnectionState() == ConnectionState.NEW) {
             if (!version.equals(msg.getVersion())) {
-                ctx.disconnect("Unsupported version:" + msg.getVersion());
+                ctx.disconnect("Unsupported version:{0}".toFormatted(msg.getVersion()));
             } else if (password != null) {
                 ctx.requestPassword();
                 attrs.setConnectionState(ConnectionState.PASSWORD_REQUESTED);
@@ -135,7 +135,7 @@ public class InitialHandshakeHandler implements Opcodes {
                 return registerConnection(ctx);
             }
         } else {
-            ctx.disconnect("Bad connection");
+            ctx.disconnect("Bad connection".toLiteral());
         }
         return true;
     }
@@ -145,7 +145,7 @@ public class InitialHandshakeHandler implements Opcodes {
         int id = handler.addConnection(ctx);
         if (id == -1) {
             log.info("Disconnecting connection due to max players");
-            ctx.disconnect("Server full!");
+            ctx.disconnect("Server full!".toLiteral());
         } else {
             ctx.slot(id, false);
             player.setId(id);
@@ -169,7 +169,7 @@ public class InitialHandshakeHandler implements Opcodes {
     private boolean onUuid(ConnectionCtx<Player> ctx, UUIDMessage message) {
         Player attrs = ctx.attrs();
         if (attrs.getConnectionState() != ConnectionState.INFO_SET) {
-            ctx.disconnect("");
+            ctx.disconnect("Bad State".toLiteral());
             return true;
         }
         String uuid = message.getUuid();
@@ -177,7 +177,7 @@ public class InitialHandshakeHandler implements Opcodes {
         if (connected != null) {
             Player p = connected.attrs();
             log.info("{} is already on the server!", p.getName());
-            ctx.disconnect(p.getName() + " is already on the server!");
+            ctx.disconnect("{0} {1}".toFormatted(p.getName(), "is already on the server"));
         } else {
             attrs.setUuid(uuid);
             attrs.setConnectionState(ConnectionState.UUID_SET);
