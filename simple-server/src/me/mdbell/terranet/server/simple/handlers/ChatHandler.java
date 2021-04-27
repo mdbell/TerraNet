@@ -9,6 +9,7 @@ import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
+import me.mdbell.terranet.common.util.NetworkText;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.simple.IHandler;
 import me.mdbell.terranet.server.simple.ServerHandler;
@@ -26,7 +27,7 @@ public class ChatHandler implements Opcodes, IHandler {
     private ServerHandler handler;
     private final Map<String, BiConsumer<ConnectionCtx<Player>, String>> commandHandlers = new HashMap<>();
 
-    public ChatHandler(){
+    public ChatHandler() {
 
     }
 
@@ -69,13 +70,11 @@ public class ChatHandler implements Opcodes, IHandler {
         GameMessage message = event.value();
         if (message instanceof OutgoingChatMessage) {
             OutgoingChatMessage ocm = (OutgoingChatMessage) message;
-            String author = "SERVER";
+            NetworkText author = "SERVER".toLiteral();
             int id = ocm.getAuthor();
             if (id != AUTHOR_SERVER) {
                 ConnectionCtx<Player> c = event.source().getPlayerById(id);
-                if (c != null) {
-                    author = c.attrs().getName() + "[" + id + "]";
-                }
+                author = "{0}[{1}]".toFormatted(c == null ? "UNKNOWN" : c.attrs().getName(), String.valueOf(id));
             }
             log.info("[{}]: {}", author, ocm.getText());
         }
