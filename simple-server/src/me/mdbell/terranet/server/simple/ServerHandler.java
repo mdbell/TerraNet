@@ -2,22 +2,23 @@ package me.mdbell.terranet.server.simple;
 
 import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
+import me.mdbell.bus.EventBusFactory;
+import me.mdbell.bus.IEventBus;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.GameMessage;
-import me.mdbell.terranet.common.game.messages.WorldMetadataMessage;
-import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.net.ISendable;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
 import me.mdbell.terranet.server.simple.engine.Player;
-
-import java.io.IOException;
+import me.mdbell.terranet.server.simple.events.GlobalMessageEvent;
 
 @Slf4j
 @ExtensionMethod({StringExtensions.class})
 public class ServerHandler implements ISendable {
+
+    private static final IEventBus<ServerHandler> bus = EventBusFactory.getDefaultFactory().getOrCreate(ServerHandler.class);
 
     private int connected = 0;
     private final ConnectionCtx<Player>[] connections;
@@ -48,7 +49,7 @@ public class ServerHandler implements ISendable {
     public ConnectionCtx<Player> getPlayerByUuid(String uuid) {
         for (int i = 0; i < connections.length; i++) {
             ConnectionCtx<Player> ctx = connections[i];
-            if(ctx == null){
+            if (ctx == null) {
                 continue;
             }
             Player p = ctx.attrs();
@@ -89,33 +90,36 @@ public class ServerHandler implements ISendable {
 
     public void sendWorldInfo(ConnectionCtx<Player> ctx) {
         //TODO implement
-        sendServerMessage("{0} {1}".toFormatted("Goodbye", ctx.attrs().getName()));
+        disconnect("Goodbye {0}".toFormatted(ctx.attrs().getName()));
     }
+
+    public ConnectionCtx<Player> getPlayerById(int id) {
+        for (ConnectionCtx<Player> connection : connections) {
+            if (connection != null && connection.attrs().getId() == id) {
+                return connection;
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public void send(GameMessage message) {
-        if(message instanceof OutgoingChatMessage){
-            OutgoingChatMessage ocm = (OutgoingChatMessage)message;
-            String author = "SERVER";
-            int id = ocm.getAuthor();
-            if(id != AUTHOR_SERVER) {
-                ConnectionCtx<Player> c = connections[id];
-                if(c != null){
-                    author = c.attrs().getName() + "[" + id + "]";
-                }
-            }
-            log.info("[CHAT] [{}]: {}", author, ocm.getText());
-        }
-        for(int i = 0; i < connections.length; i++){
-            if(connections[i] == null){
+        bus.post(new GlobalMessageEvent(bus, this, message));
+        for (ConnectionCtx<Player> connection : connections) {
+            if (connection == null) {
                 continue;
             }
-            connections[i].send(message);
+            connection.send(message);
         }
     }
 
     @Override
     public void close() {
         //ignored
+    }
+
+    public static IEventBus<ServerHandler> bus() {
+        return bus;
     }
 }

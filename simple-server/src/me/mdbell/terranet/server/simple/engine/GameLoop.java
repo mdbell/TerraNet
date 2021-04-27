@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.EventBusFactory;
 import me.mdbell.bus.IEventBus;
 import me.mdbell.terranet.server.simple.ServerHandler;
-import me.mdbell.terranet.server.simple.engine.events.TickEvent;
+import me.mdbell.terranet.server.simple.events.TickEvent;
 
 @Slf4j
 public class GameLoop implements Runnable {

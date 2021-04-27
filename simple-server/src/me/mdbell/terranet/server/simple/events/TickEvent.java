@@ -1,4 +1,4 @@
-package me.mdbell.terranet.server.simple.engine.events;
+package me.mdbell.terranet.server.simple.events;
 
 import me.mdbell.bus.AbstractBusEvent;
 import me.mdbell.bus.IEventBus;

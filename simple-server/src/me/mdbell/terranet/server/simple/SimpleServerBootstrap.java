@@ -8,6 +8,7 @@ import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.simple.engine.GameLoop;
 import me.mdbell.terranet.server.simple.engine.Player;
+import me.mdbell.terranet.server.simple.handlers.ChatHandler;
 import me.mdbell.terranet.server.simple.handlers.InitialHandshakeHandler;
 import me.mdbell.terranet.server.simple.util.WorldUtils;
 import me.mdbell.terranet.world.tree.WorldNode;
@@ -43,6 +44,10 @@ public class SimpleServerBootstrap {
         ConnectionCtx.bus().subscribe(handler);
 
         log.info("Loading event handlers...");
+        ChatHandler chat = new ChatHandler(handler);
+        ServerHandler.bus().subscribe(chat);
+        ConnectionCtx.bus().subscribe(chat);
+
         ConnectionCtx.bus().subscribe(new InitialHandshakeHandler(handler));
 
         log.info("Setting up main loop...");
