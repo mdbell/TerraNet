@@ -4,17 +4,18 @@ import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
+import me.mdbell.terranet.common.ext.ArrayExtensions;
+import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.*;
-import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.simple.ServerHandler;
-import me.mdbell.terranet.server.simple.data.HandshakeState;
+import me.mdbell.terranet.server.simple.data.ConnectionState;
 import me.mdbell.terranet.server.simple.data.Item;
 import me.mdbell.terranet.server.simple.engine.Player;
 
 @Slf4j
-@ExtensionMethod({ArrayExtensions.class})
+@ExtensionMethod({ArrayExtensions.class, StringExtensions.class})
 public class InitialHandshakeHandler implements Opcodes {
 
     private final ServerHandler handler;
@@ -44,18 +45,29 @@ public class InitialHandshakeHandler implements Opcodes {
             case OP_PLAYER_MANA -> onMana(ctx, (PlayerManaMessage) message);
             case OP_UPDATE_BUFFS -> onBuffs(ctx, (UpdateBuffsMessage) message);
             case OP_SET_INVENTORY_SLOT -> onItem(ctx, (SlotMessage) message);
+            case OP_REQUEST_WORLD -> onWorldRequest(ctx, (WorldDataRequestMessage) message);
             default -> false;
         };
         if (consume) {
             event.consume();
         } else {
-            log.info("{}", message);
+            log.info("{} - {}", message, ctx.attrs().getConnectionState());
         }
+    }
+
+    private boolean onWorldRequest(ConnectionCtx<Player> ctx, WorldDataRequestMessage message) {
+        Player player = ctx.attrs();
+        if (player.getConnectionState() != ConnectionState.BUFFS_SET) {
+            return false;
+        }
+        player.setConnectionState(ConnectionState.WORLD_REQUESTED);
+        handler.sendWorldInfo(ctx);
+        return true;
     }
 
     private boolean onItem(ConnectionCtx<Player> ctx, SlotMessage message) {
         Player player = ctx.attrs();
-        if (player.getHandshakeState() != HandshakeState.BUFFS_SET) {
+        if (player.getConnectionState() != ConnectionState.BUFFS_SET) {
             return false;
         }
         Item item = player.getItem(message.getSlot());
@@ -67,45 +79,45 @@ public class InitialHandshakeHandler implements Opcodes {
 
     private boolean onBuffs(ConnectionCtx<Player> ctx, UpdateBuffsMessage message) {
         Player player = ctx.attrs();
-        if (player.getHandshakeState() != HandshakeState.MANA_SET) {
+        if (player.getConnectionState() != ConnectionState.MANA_SET) {
             return false;
         }
         message.getBuffs().copyTo(player.getBuffs());
-        player.setHandshakeState(HandshakeState.BUFFS_SET);
+        player.setConnectionState(ConnectionState.BUFFS_SET);
         return true;
     }
 
     private boolean onHealth(ConnectionCtx<Player> ctx, PlayerHealthMessage message) {
         Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.UUID_SET) {
+        if (attrs.getConnectionState() != ConnectionState.UUID_SET) {
             return false;
         }
         attrs.setCurrentHp(message.getHp());
         attrs.setMaxHp(message.getMaxHp());
-        attrs.setHandshakeState(HandshakeState.HEALTH_SET);
+        attrs.setConnectionState(ConnectionState.HEALTH_SET);
         return true;
     }
 
     private boolean onMana(ConnectionCtx<Player> ctx, PlayerManaMessage message) {
-        Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.HEALTH_SET) {
+        Player player = ctx.attrs();
+        if (player.getConnectionState() != ConnectionState.HEALTH_SET) {
             return false;
         }
-        attrs.setCurrentMana(message.getMana());
-        attrs.setMaxMana(message.getMaxMana());
-        attrs.setHandshakeState(HandshakeState.MANA_SET);
+        player.setCurrentMana(message.getMana());
+        player.setMaxMana(message.getMaxMana());
+        player.setConnectionState(ConnectionState.MANA_SET);
         return true;
     }
 
     private boolean onPassword(ConnectionCtx<Player> ctx, PasswordResponseMessage message) {
-        Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.PASSWORD_REQUESTED) {
+        Player player = ctx.attrs();
+        if (player.getConnectionState() != ConnectionState.PASSWORD_REQUESTED || this.password == null) {
             ctx.disconnect();
             return true;
         }
         if (!this.password.equals(message.getPassword())) {
-            log.info("Recieved wrong password '{}'", message.getPassword());
-            ctx.disconnect("Bad password");
+            log.info("Received wrong password '{}'", message.getPassword());
+            ctx.disconnect("Incorrect password");
             return true;
         }
         return registerConnection(ctx);
@@ -113,12 +125,12 @@ public class InitialHandshakeHandler implements Opcodes {
 
     public boolean onConnect(ConnectionCtx<Player> ctx, ConnectionMessage msg) {
         Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() == HandshakeState.NEW) {
+        if (attrs.getConnectionState() == ConnectionState.NEW) {
             if (!version.equals(msg.getVersion())) {
                 ctx.disconnect("Unsupported version:" + msg.getVersion());
             } else if (password != null) {
                 ctx.requestPassword();
-                attrs.setHandshakeState(HandshakeState.PASSWORD_REQUESTED);
+                attrs.setConnectionState(ConnectionState.PASSWORD_REQUESTED);
             } else {
                 return registerConnection(ctx);
             }
@@ -129,36 +141,47 @@ public class InitialHandshakeHandler implements Opcodes {
     }
 
     private boolean registerConnection(ConnectionCtx<Player> ctx) {
-        Player attrs = ctx.attrs();
+        Player player = ctx.attrs();
         int id = handler.addConnection(ctx);
         if (id == -1) {
             log.info("Disconnecting connection due to max players");
             ctx.disconnect("Server full!");
         } else {
             ctx.slot(id, false);
-            attrs.setHandshakeState(HandshakeState.ASSIGNED_ID);
+            player.setId(id);
+            player.setConnectionState(ConnectionState.ASSIGNED_ID);
         }
         return true;
     }
 
     public boolean onPlayerInfo(ConnectionCtx<Player> ctx, PlayerInfoMessage msg) {
-        Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.ASSIGNED_ID) {
+        Player player = ctx.attrs();
+        if (player.getConnectionState() != ConnectionState.ASSIGNED_ID) {
             return false;
         }
         //TODO set user info
-        attrs.setHandshakeState(HandshakeState.INFO_SET);
+        player.update(msg);
+        player.setConnectionState(ConnectionState.INFO_SET);
+        handler.sendServerMessage("{0} {1}".toFormatted(msg.getName(), "has joined!"));
         return true;
     }
 
     private boolean onUuid(ConnectionCtx<Player> ctx, UUIDMessage message) {
         Player attrs = ctx.attrs();
-        if (attrs.getHandshakeState() != HandshakeState.INFO_SET) {
+        if (attrs.getConnectionState() != ConnectionState.INFO_SET) {
             ctx.disconnect("");
             return true;
         }
-        attrs.setUuid(message.getUuid());
-        attrs.setHandshakeState(HandshakeState.UUID_SET);
+        String uuid = message.getUuid();
+        ConnectionCtx<Player> connected = handler.getPlayerByUuid(uuid);
+        if (connected != null) {
+            Player p = connected.attrs();
+            log.info("{} is already on the server!", p.getName());
+            ctx.disconnect(p.getName() + " is already on the server!");
+        } else {
+            attrs.setUuid(uuid);
+            attrs.setConnectionState(ConnectionState.UUID_SET);
+        }
         return true;
     }
 }

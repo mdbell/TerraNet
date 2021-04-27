@@ -5,8 +5,8 @@ import me.mdbell.bus.IEventBus;
 import me.mdbell.terranet.server.simple.engine.GameLoop;
 import me.mdbell.terranet.server.simple.ServerHandler;
 
-public class TickEvent extends AbstractBusEvent<GameLoop, Long> {
-    public TickEvent(IEventBus bus, GameLoop source, Long value) {
+public class TickEvent extends AbstractBusEvent<GameLoop, ServerHandler> {
+    public TickEvent(IEventBus bus, GameLoop source, ServerHandler value) {
         super(bus, source, value);
     }
 }

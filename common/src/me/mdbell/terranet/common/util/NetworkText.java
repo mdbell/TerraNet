@@ -1,49 +1,42 @@
 package me.mdbell.terranet.common.util;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.experimental.Accessors;
+
+import java.text.MessageFormat;
 import java.util.Arrays;
 
+@Builder
+@Accessors(fluent = true)
+@Getter
 public final class NetworkText {
 
+    @Builder.Default
     private Mode mode = Mode.LITERAL;
+    @Builder.Default
     private String text = "";
-    private NetworkText[] sub;
+    @Builder.Default
+    private NetworkText[] sub = new NetworkText[0];
 
-    public NetworkText mode(Mode mode) {
-        this.mode = mode;
-        return this;
-    }
-
-    public Mode mode() {
-        return mode;
-    }
-
-    public NetworkText text(String text) {
-        if (text == null) {
-            text = "";
-        }
-        this.text = text;
-        return this;
-    }
-
-    public String text() {
-        return text;
-    }
-
-    public NetworkText[] sub() {
-        return sub;
-    }
-
-    public NetworkText sub(NetworkText[] sub) {
-        this.sub = sub;
-        return this;
-    }
-
-    public static NetworkText literal(String text) {
-        return new NetworkText().mode(Mode.LITERAL).text(text);
-    }
-
-    @Override
     public String toString() {
+        switch (mode) {
+            case LITERAL:
+                return text;
+            case FORMAT:
+                return toStringFormatted();
+            default:
+                return toObjectString();
+        }
+//        MessageFormat format
+    }
+
+    private String toStringFormatted() {
+        MessageFormat format = new MessageFormat(text);
+        return format.format(sub);
+    }
+
+    public String toObjectString() {
         return "NetworkText{" +
                 "mode=" + mode +
                 ", text='" + text + '\'' +

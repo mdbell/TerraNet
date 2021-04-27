@@ -73,16 +73,16 @@ public class BufferExtensions {
         int m = buffer.readUnsignedByte();
         String text = readString(buffer);
         NetworkText.Mode mode = NetworkText.Mode.values()[m];
-        NetworkText res = new NetworkText().mode(mode).text(text);
+        NetworkText.NetworkTextBuilder builder = NetworkText.builder().mode(mode).text(text);
         if (mode != NetworkText.Mode.LITERAL) {
             int subLen = buffer.readUnsignedByte();
             NetworkText[] sub = new NetworkText[subLen];
             for (int i = 0; i < subLen; i++) {
                 sub[i] = readText(buffer);
             }
-            res.sub(sub);
+            builder.sub(sub);
         }
-        return res;
+        return builder.build();
     }
 
     public BitSet readBits(Buffer<?> to, int byteCount){

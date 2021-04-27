@@ -2,21 +2,21 @@ package me.mdbell.terranet.server.simple;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
-import me.mdbell.terranet.server.simple.engine.Player;
 import me.mdbell.terranet.server.simple.engine.GameLoop;
-import me.mdbell.terranet.server.simple.engine.events.TickEvent;
+import me.mdbell.terranet.server.simple.engine.Player;
 import me.mdbell.terranet.server.simple.handlers.InitialHandshakeHandler;
 import me.mdbell.terranet.server.simple.util.WorldUtils;
 import me.mdbell.terranet.world.tree.WorldNode;
 import me.mdbell.terranet.world.util.ProgressListener;
 
 import java.io.RandomAccessFile;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class SimpleServerBootstrap {
@@ -38,7 +38,9 @@ public class SimpleServerBootstrap {
         ServerFactory<Player> factory = ServerFactory.createDefaultFactory();
         ServerCtx<Player> ctx = factory.newInstance();
         ctx.setAttributesFactory(new SimpleAttributesFactory());
+
         ServerHandler handler = new ServerHandler(16);
+        ConnectionCtx.bus().subscribe(handler);
 
         log.info("Loading event handlers...");
         ConnectionCtx.bus().subscribe(new InitialHandshakeHandler(handler));
@@ -49,8 +51,6 @@ public class SimpleServerBootstrap {
         GameLoop loop = new GameLoop(handler);
         executor.scheduleAtFixedRate(loop, 0, GameLoop.MS_PER_TICK, TimeUnit.MILLISECONDS);
 
-        GameLoop.bus().subscribe(this);
-
         log.info("Starting Server on port {}", port);
         ctx.bind(port);
 
@@ -58,13 +58,6 @@ public class SimpleServerBootstrap {
 
         ctx.awaitClose();
         executor.shutdown();
-    }
-
-    @SneakyThrows
-    @Subscribe
-    public void onTick(TickEvent event){
-        log.info("Tick {}", event.value());
-        Thread.sleep(50);
     }
 
     @SneakyThrows
@@ -84,7 +77,7 @@ public class SimpleServerBootstrap {
         });
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         new SimpleServerBootstrap(1337, "./local/test.wld").run();
     }
 }
