@@ -49,7 +49,7 @@ public interface ISendable extends Opcodes, Closeable {
     }
 
     default void sendServerMessage(NetworkText message){
-        sendServerMessage(message, Color.YELLOW);
+        sendServerMessage(message, Color.WHITE);
     }
 
     default void sendServerMessage(NetworkText message, Color color){

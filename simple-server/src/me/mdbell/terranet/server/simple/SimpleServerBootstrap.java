@@ -8,13 +8,14 @@ import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.simple.engine.GameLoop;
 import me.mdbell.terranet.server.simple.engine.Player;
-import me.mdbell.terranet.server.simple.handlers.ChatHandler;
-import me.mdbell.terranet.server.simple.handlers.InitialHandshakeHandler;
 import me.mdbell.terranet.server.simple.util.WorldUtils;
 import me.mdbell.terranet.world.tree.WorldNode;
 import me.mdbell.terranet.world.util.ProgressListener;
 
 import java.io.RandomAccessFile;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ServiceLoader;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -40,15 +41,17 @@ public class SimpleServerBootstrap {
         ServerCtx<Player> ctx = factory.newInstance();
         ctx.setAttributesFactory(new SimpleAttributesFactory());
 
-        ServerHandler handler = new ServerHandler(16);
+        ServerHandler handler = new ServerHandler(16, world);
         ConnectionCtx.bus().subscribe(handler);
 
         log.info("Loading event handlers...");
-        ChatHandler chat = new ChatHandler(handler);
-        ServerHandler.bus().subscribe(chat);
-        ConnectionCtx.bus().subscribe(chat);
 
-        ConnectionCtx.bus().subscribe(new InitialHandshakeHandler(handler));
+        ServiceLoader<IHandler> loader = ServiceLoader.load(IHandler.class);
+        List<IHandler> handlers = new LinkedList<>();
+        loader.forEach(h -> {
+            handlers.add(h);
+            h.init(handler);
+        });
 
         log.info("Setting up main loop...");
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -62,6 +65,9 @@ public class SimpleServerBootstrap {
         log.info("Server is ready!");
 
         ctx.awaitClose();
+
+        handlers.forEach(IHandler::shutdown);
+
         executor.shutdown();
     }
 

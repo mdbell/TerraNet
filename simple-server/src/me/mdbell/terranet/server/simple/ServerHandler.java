@@ -13,6 +13,11 @@ import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
 import me.mdbell.terranet.server.simple.engine.Player;
 import me.mdbell.terranet.server.simple.events.GlobalMessageEvent;
+import me.mdbell.terranet.server.simple.util.WorldUtils;
+import me.mdbell.terranet.world.tree.WorldNode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @ExtensionMethod({StringExtensions.class})
@@ -20,11 +25,14 @@ public class ServerHandler implements ISendable {
 
     private static final IEventBus<ServerHandler> bus = EventBusFactory.getDefaultFactory().getOrCreate(ServerHandler.class);
 
+    private WorldNode world;
+
     private int connected = 0;
     private final ConnectionCtx<Player>[] connections;
 
-    public ServerHandler(int max) {
+    public ServerHandler(int max, WorldNode world) {
         connections = new ConnectionCtx[max];
+        this.world = world;
     }
 
     public int getMaxConnections() {
@@ -90,7 +98,8 @@ public class ServerHandler implements ISendable {
 
     public void sendWorldInfo(ConnectionCtx<Player> ctx) {
         //TODO implement
-        disconnect("Goodbye {0}".toFormatted(ctx.attrs().getName()));
+        //disconnect("Goodbye {0}".toFormatted(ctx.attrs().getName()));
+        ctx.send(WorldUtils.deriveMessageFrom(world));
     }
 
     public ConnectionCtx<Player> getPlayerById(int id) {

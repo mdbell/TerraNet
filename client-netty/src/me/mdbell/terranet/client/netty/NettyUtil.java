@@ -31,7 +31,8 @@ final class NettyUtil {
         return new Bootstrap().group(group)
                 .channel(NioSocketChannel.class)
                 .handler(new ClientInitializer(transcoders))
-                .option(ChannelOption.AUTO_READ, true);
+                .option(ChannelOption.AUTO_READ, true)
+                .option(ChannelOption.TCP_NODELAY, true);
     }
 
     public static void shutdownGraceFully() {

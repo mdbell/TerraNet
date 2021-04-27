@@ -10,6 +10,7 @@ import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
+import me.mdbell.terranet.server.simple.IHandler;
 import me.mdbell.terranet.server.simple.ServerHandler;
 import me.mdbell.terranet.server.simple.engine.Player;
 import me.mdbell.terranet.server.simple.events.GlobalMessageEvent;
@@ -20,21 +21,30 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @ExtensionMethod({StringExtensions.class})
-public class ChatHandler implements Opcodes {
+public class ChatHandler implements Opcodes, IHandler {
 
-    private final ServerHandler handler;
+    private ServerHandler handler;
     private final Map<String, BiConsumer<ConnectionCtx<Player>, String>> commandHandlers = new HashMap<>();
 
-    public ChatHandler(ServerHandler handler) {
-        this.handler = handler;
-        init();
+    public ChatHandler(){
+
     }
 
-    public void init() {
+    public void init(ServerHandler handler) {
+        this.handler = handler;
+        commandHandlers.clear();
         commandHandlers.put("Say", (ctx, text) -> {
             Player p = ctx.attrs();
             handler.sendChatMessage(p.getId(), text.toLiteral(), p.getChatColor());
         });
+        ServerHandler.bus().subscribe(this);
+        ConnectionCtx.bus().subscribe(this);
+    }
+
+    @Override
+    public void shutdown() {
+        ServerHandler.bus().unsubscribe(this);
+        ConnectionCtx.bus().unsubscribe(this);
     }
 
     @Subscribe
@@ -47,7 +57,7 @@ public class ChatHandler implements Opcodes {
             String text = icm.getMessage();
             if (!commandHandlers.containsKey(command)) {
                 log.warn("Unknown command:'{}' message:'{}'", command, text);
-                ctx.sendServerMessage("Unknown command '{0}'".toFormatted((command)));
+                ctx.sendServerMessage("Unknown command '{0}'".toFormatted(command));
             } else {
                 commandHandlers.get(command).accept(ctx, text);
             }

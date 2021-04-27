@@ -76,7 +76,7 @@ public final class WorldMetadataMessage extends GameMessage {
     boolean downedGolemBoss;
     boolean birthdayParty;
     boolean downedPirates;
-    boolean downedFrontmoon;
+    boolean downedFrostMoon;
     boolean downedGoblins;
     boolean sandstorm;
     boolean invasionOngoing;

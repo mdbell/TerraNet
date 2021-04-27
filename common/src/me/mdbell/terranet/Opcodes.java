@@ -27,7 +27,7 @@ public interface Opcodes {
     int OP_SET_INVENTORY_SLOT = 5;
     int OP_REQUEST_WORLD = 6;
     int OP_WORLD_METADATA = 7;
-    int OP_ESSENTIAL_TILES = 8;
+    int OP_REQUEST_SPAWN = 8;
     int OP_UPDATE_LOADING_STATUS = 9;
 
     int OP_PLAYER_HP = 16;

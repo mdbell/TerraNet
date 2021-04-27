@@ -9,6 +9,7 @@ import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.server.ConnectionCtx;
+import me.mdbell.terranet.server.simple.IHandler;
 import me.mdbell.terranet.server.simple.ServerHandler;
 import me.mdbell.terranet.server.simple.data.ConnectionState;
 import me.mdbell.terranet.server.simple.data.Item;
@@ -16,23 +17,28 @@ import me.mdbell.terranet.server.simple.engine.Player;
 
 @Slf4j
 @ExtensionMethod({ArrayExtensions.class, StringExtensions.class})
-public class InitialHandshakeHandler implements Opcodes {
+public class ConnectionHandshakeHandler implements Opcodes, IHandler {
 
-    private final ServerHandler handler;
-    private final String version;
-    private final String password;
+    private ServerHandler handler;
+    private final String version = Opcodes.DEFAULT_VERSION;
+    private String password = null; //TODO get this is a property somehow
 
-    public InitialHandshakeHandler(ServerHandler conn) {
-        this(conn, Opcodes.DEFAULT_VERSION, null);
+    public ConnectionHandshakeHandler(){
+
     }
 
-    public InitialHandshakeHandler(ServerHandler conn, String version, String password) {
-        this.handler = conn;
-        this.version = version;
-        this.password = password;
+    @Override
+    public void init(ServerHandler handler) {
+        this.handler = handler;
+        ConnectionCtx.bus().subscribe(this);
     }
 
-    @Subscribe(priority = 10)
+    @Override
+    public void shutdown() {
+        ConnectionCtx.bus().unsubscribe(this);
+    }
+
+    @Subscribe
     public void onMessage(GameMessageEvent<ConnectionCtx<Player>> event) {
         ConnectionCtx<Player> ctx = event.source();
         GameMessage message = event.value();
@@ -46,6 +52,7 @@ public class InitialHandshakeHandler implements Opcodes {
             case OP_UPDATE_BUFFS -> onBuffs(ctx, (UpdateBuffsMessage) message);
             case OP_SET_INVENTORY_SLOT -> onItem(ctx, (SlotMessage) message);
             case OP_REQUEST_WORLD -> onWorldRequest(ctx, (WorldDataRequestMessage) message);
+            case OP_REQUEST_SPAWN -> onSpawnRequest(ctx, (RequestSpawnTilesMessage) message);
             default -> false;
         };
         if (consume) {
@@ -53,6 +60,17 @@ public class InitialHandshakeHandler implements Opcodes {
         } else {
             log.info("{} - {}", message, ctx.attrs().getConnectionState());
         }
+    }
+
+    private boolean onSpawnRequest(ConnectionCtx<Player> ctx, RequestSpawnTilesMessage message) {
+        Player player = ctx.attrs();
+        if(player.getConnectionState() != ConnectionState.WORLD_REQUESTED) {
+            return false;
+        }
+        //49 = loading complete, spawn player
+        BufferedMessage msg = new BufferedMessage(49, 0);
+        ctx.send(msg);
+        return true;
     }
 
     private boolean onWorldRequest(ConnectionCtx<Player> ctx, WorldDataRequestMessage message) {

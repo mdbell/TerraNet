@@ -55,8 +55,8 @@ public final class DefaultTranscoder extends BufferTranscoder {
             case OP_REQUEST_WORLD:
                 return WorldDataRequestMessage.builder()
                         .build();
-            case OP_ESSENTIAL_TILES:
-                return EssentialTilesMessage.builder()
+            case OP_REQUEST_SPAWN:
+                return RequestSpawnTilesMessage.builder()
                         .x(buff.readIntLE())
                         .y(buff.readIntLE())
                         .build();
@@ -152,8 +152,8 @@ public final class DefaultTranscoder extends BufferTranscoder {
             case OP_REQUEST_WORLD:
                 return true;
             //TODO opcode 7
-            case OP_ESSENTIAL_TILES:
-                EssentialTilesMessage ess = (EssentialTilesMessage) message;
+            case OP_REQUEST_SPAWN:
+                RequestSpawnTilesMessage ess = (RequestSpawnTilesMessage) message;
                 to.writeIntLE(ess.getX());
                 to.writeIntLE(ess.getY());
                 return true;
