@@ -92,7 +92,6 @@ public class ServerHandler implements ISendable {
             log.info("Removing Player \"{}\" at {} (uuid: {})", p.getName(), p.getId(), p.getUuid());
             removeConnection(event.source());
             sendServerMessage("{0} {1}".toFormatted(p.getName(), "has left."));
-            //sendServerMessage(p.getName() + " has left.");
         }
     }
 
