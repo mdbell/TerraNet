@@ -2,14 +2,14 @@ package me.mdbell.terranet.world.writer;
 
 import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
 import me.mdbell.terranet.common.util.UUID;
 import me.mdbell.terranet.files.GameMode;
 import me.mdbell.terranet.world.MetadataVisitor;
 
 import java.util.List;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class})
 class MetadataWriterVisitor implements MetadataVisitor {
 
     private final Buffer<?> buffer;

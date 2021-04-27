@@ -19,7 +19,7 @@ public class InternalBusTest {
 
     @Subscribe
     public void testEvent(TestEvent event) {
-        System.out.println(event.message());
+        System.out.println(event.value());
     }
 
     public static void main(String[] args) {

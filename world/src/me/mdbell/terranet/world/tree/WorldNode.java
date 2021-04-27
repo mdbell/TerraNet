@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.ExtensionMethod;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
+import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.files.SharedHeaderNode;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
@@ -18,7 +19,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @Getter
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class, ArrayExtensions.class})
 public class WorldNode implements WorldVisitor {
 
     private int version;

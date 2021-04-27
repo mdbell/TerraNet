@@ -1,5 +1,7 @@
 package me.mdbell.terranet.common.util;
 
+import lombok.Data;
+@Data
 public final class Color {
 
     private final int red;
@@ -10,32 +12,8 @@ public final class Color {
     public static final Color GREEN = new Color(0, 255, 0);
     public static final Color BLUE = new Color(0, 0, 255);
 
+    public static final Color YELLOW = new Color(255, 255, 0);
+
     public static final Color BLACK = new Color(0, 0, 0);
-
-    public Color(int red, int green, int blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-    }
-
-    public int getRed() {
-        return red;
-    }
-
-    public int getGreen() {
-        return green;
-    }
-
-    public int getBlue() {
-        return blue;
-    }
-
-    @Override
-    public String toString() {
-        return "NetworkColor{" +
-                "red=" + red +
-                ", green=" + green +
-                ", blue=" + blue +
-                '}';
-    }
+    public static final Color WHITE = new Color(255, 255, 255);
 }

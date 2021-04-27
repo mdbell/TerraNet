@@ -6,6 +6,8 @@ module me.mdbell.terranet.common {
     exports me.mdbell.terranet.common.game.events;
     exports me.mdbell.terranet.common.net.netty;
     exports me.mdbell.terranet.common.util;
+    exports me.mdbell.terranet.common.ext;
+    exports me.mdbell.terranet.common.game.messages.modules;
     requires me.mdbell.bus;
     requires io.netty.all;
     requires slf4j.api;

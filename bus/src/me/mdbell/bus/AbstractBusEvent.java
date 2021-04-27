@@ -26,7 +26,7 @@ public abstract class AbstractBusEvent<S, V> implements IBusEvent<S, V> {
     }
 
     @Override
-    public final V message() {
+    public final V value() {
         return value;
     }
 

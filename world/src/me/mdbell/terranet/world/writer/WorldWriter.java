@@ -2,14 +2,14 @@ package me.mdbell.terranet.world.writer;
 
 import lombok.experimental.ExtensionMethod;
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.common.util.IOUtil;
+import me.mdbell.terranet.common.ext.BufferExtensions;
 import me.mdbell.terranet.files.HeaderWriterVisitor;
 import me.mdbell.terranet.files.SharedHeaderVisitor;
 import me.mdbell.terranet.world.*;
 
 import java.util.BitSet;
 
-@ExtensionMethod({IOUtil.class})
+@ExtensionMethod({BufferExtensions.class})
 public class WorldWriter implements WorldVisitor, WorldFileConstants {
 
     private final Buffer<?> buffer;

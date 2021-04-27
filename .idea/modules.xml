@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/metadata-gson/metadata-gson.iml" filepath="$PROJECT_DIR$/metadata-gson/metadata-gson.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
       <module fileurl="file://$PROJECT_DIR$/server-netty/server-netty.iml" filepath="$PROJECT_DIR$/server-netty/server-netty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simple-server/simple-server.iml" filepath="$PROJECT_DIR$/simple-server/simple-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/world/world.iml" filepath="$PROJECT_DIR$/world/world.iml" />
     </modules>
   </component>

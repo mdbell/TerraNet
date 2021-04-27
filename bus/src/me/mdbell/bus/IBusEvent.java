@@ -6,5 +6,5 @@ public interface IBusEvent<S, V> {
 
     S source();
 
-    V message();
+    V value();
 }

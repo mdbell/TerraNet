@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="common-files" />
+    <orderEntry type="module" module-name="common-files" exported="" />
     <orderEntry type="library" name="org.projectlombok:lombok:1.18.20" level="project" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.6" level="project" />

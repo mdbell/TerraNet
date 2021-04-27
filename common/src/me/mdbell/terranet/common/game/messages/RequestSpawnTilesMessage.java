@@ -10,11 +10,11 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Data
-public final class EssentialTilesMessage extends GameMessage {
+public final class RequestSpawnTilesMessage extends GameMessage {
     int x, y;
 
     @Override
     public int getOpcode() {
-        return OP_ESSENTIAL_TILES;
+        return OP_REQUEST_SPAWN;
     }
 }

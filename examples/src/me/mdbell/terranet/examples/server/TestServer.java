@@ -31,12 +31,12 @@ public class TestServer {
 
     @Subscribe
     public void onMessage(ServerMessageEvent event) {
-        log.info("New message from: {} Message: {}", event.source(), event.message());
+        log.info("New message from: {} Message: {}", event.source(), event.value());
     }
 
     @Subscribe
     public void onConnectionEvent(ServerConnectionEvent event) {
-        log.info("Connection state for {} Changed to {}", event.source(), event.message());
+        log.info("Connection state for {} Changed to {}", event.source(), event.value());
     }
 
     public static void main(String[] args) throws Exception {

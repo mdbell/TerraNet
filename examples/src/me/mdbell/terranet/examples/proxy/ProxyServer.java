@@ -1,11 +1,13 @@
 package me.mdbell.terranet.examples.proxy;
 
+import lombok.experimental.ExtensionMethod;
 import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.client.ClientCtx;
 import me.mdbell.terranet.client.ClientFactory;
 import me.mdbell.terranet.client.events.ClientMessageEvent;
+import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ConnectionState;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@ExtensionMethod({StringExtensions.class})
 public class ProxyServer {
 
     private final String remoteHost;
@@ -57,11 +60,11 @@ public class ProxyServer {
 
     @Subscribe
     public void onServerConnectionEvent(ServerConnectionEvent<?> event) {
-        if (event.message() == ConnectionState.DEREGISTER) {
+        if (event.value() == ConnectionState.DEREGISTER) {
             ConnectionCtx<?> conn = event.source();
             ClientCtx ctx = proxyMap.get(conn);
             try {
-                ctx.disconnect("Remote server closed connection.");
+                ctx.disconnect("Remote server closed connection.".toLiteral());
                 ctx.close();
             } catch (IOException e) {
                 log.error("Exception closing remote", e);
@@ -78,7 +81,7 @@ public class ProxyServer {
 
     @Subscribe
     public void onIncomingMessage(ServerMessageEvent<?> event) {
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         ConnectionCtx<?> conn = event.source();
         ClientCtx<?> ctx;
         if (message.getOpcode() == Opcodes.OP_CONNECT) {
@@ -98,7 +101,7 @@ public class ProxyServer {
     @Subscribe
     public void onOutgoingMessage(ClientMessageEvent<?> event) {
         ClientCtx<?> ctx = event.source();
-        GameMessage message = event.message();
+        GameMessage message = event.value();
         ConnectionCtx conn = proxyMap.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(ctx))

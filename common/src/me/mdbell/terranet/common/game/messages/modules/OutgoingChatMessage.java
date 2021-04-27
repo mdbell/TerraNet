@@ -3,6 +3,8 @@ package me.mdbell.terranet.common.game.messages.modules;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.ExtensionMethod;
+import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 import me.mdbell.terranet.common.util.Color;
 import me.mdbell.terranet.common.util.NetworkText;
@@ -10,6 +12,7 @@ import me.mdbell.terranet.common.util.NetworkText;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
+@ExtensionMethod({StringExtensions.class})
 public class OutgoingChatMessage extends NetModuleMessage {
     private int author;
     private NetworkText text;
@@ -34,7 +37,7 @@ public class OutgoingChatMessage extends NetModuleMessage {
     }
 
     public OutgoingChatMessage text(String text) {
-        this.text = NetworkText.literal(text);
+        this.text = text.toLiteral();
         return this;
     }
 
