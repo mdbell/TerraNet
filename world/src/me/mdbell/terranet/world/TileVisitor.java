@@ -1,5 +1,7 @@
 package me.mdbell.terranet.world;
 
+import me.mdbell.terranet.common.game.scene.LiquidType;
+
 public interface TileVisitor {
 
     void visitStart();

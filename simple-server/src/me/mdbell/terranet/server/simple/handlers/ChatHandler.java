@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.common.ext.StringExtensions;
-import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.util.NetworkText;
 import me.mdbell.terranet.server.ConnectionCtx;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 import me.mdbell.terranet.server.simple.IHandler;
 import me.mdbell.terranet.server.simple.ServerHandler;
 import me.mdbell.terranet.server.simple.engine.Player;
@@ -31,6 +31,7 @@ public class ChatHandler implements Opcodes, IHandler {
 
     }
 
+    @Override
     public void init(ServerHandler handler) {
         this.handler = handler;
         commandHandlers.clear();
@@ -38,6 +39,7 @@ public class ChatHandler implements Opcodes, IHandler {
             Player p = ctx.attrs();
             handler.sendChatMessage(p.getId(), text.toLiteral(), p.getChatColor());
         });
+        commandHandlers.put("Help", this::help);
         ServerHandler.bus().subscribe(this);
         ConnectionCtx.bus().subscribe(this);
     }
@@ -48,8 +50,18 @@ public class ChatHandler implements Opcodes, IHandler {
         ConnectionCtx.bus().unsubscribe(this);
     }
 
+    public void help(ConnectionCtx<Player> ctx, String text){
+        Player p = ctx.attrs();
+        ctx.sendServerMessage("Name: {0} Id: {1}".toFormatted(p.getName(), p.getId()));
+        ctx.sendServerMessage("UUID: {0}".toFormatted(p.getUuid()));
+        ctx.sendServerMessage("Position: {0}".toFormatted(p.getPosition()));
+        ctx.sendServerMessage("Health: {0}/{1}".toFormatted(p.getCurrentHp(), p.getMaxHp()));
+        ctx.sendServerMessage("Mana: {0}/{1}".toFormatted(p.getCurrentMana(), p.getMaxMana()));
+        ctx.sendServerMessage("Last Tick: {0} Current: {1}".toFormatted(p.getLastMessage(), handler.getLoop().getTick()));
+    }
+
     @Subscribe
-    public void onMessage(GameMessageEvent<ConnectionCtx<Player>> event) {
+    public void onMessage(IncomingMessageEvent<Player> event) {
         ConnectionCtx<Player> ctx = event.source();
         GameMessage message = event.value();
         if (message.getModId() == Opcodes.MOD_TEXT) {

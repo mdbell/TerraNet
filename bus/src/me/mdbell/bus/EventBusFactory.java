@@ -3,10 +3,11 @@ package me.mdbell.bus;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
 @Slf4j
 public abstract class EventBusFactory {
-
 
     private static final String[] DEFAULT_FACTORY_CLASS_NAMES = {
             "me.mdbell.bus.robot.RobotEventBusFactory",
@@ -20,6 +21,12 @@ public abstract class EventBusFactory {
     }
 
     private static void createDefaultFactory() {
+        ServiceLoader<EventBusFactoryProvider> loader = ServiceLoader.load(EventBusFactoryProvider.class);
+        for(EventBusFactoryProvider provider : loader){
+            defaultFactory = provider.getFactory();
+            log.debug("Factory found via service! Factory: {}", defaultFactory.getClass().getName());
+            return;
+        }
         Class<?> factory = null;
         for (int i = 0; i < DEFAULT_FACTORY_CLASS_NAMES.length; i++) {
             String name = DEFAULT_FACTORY_CLASS_NAMES[i];

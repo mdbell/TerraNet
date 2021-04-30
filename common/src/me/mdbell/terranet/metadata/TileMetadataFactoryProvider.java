@@ -1,4 +1,4 @@
-package me.mdbell.terranet.files.metadata;
+package me.mdbell.terranet.metadata;
 
 public interface TileMetadataFactoryProvider {
 

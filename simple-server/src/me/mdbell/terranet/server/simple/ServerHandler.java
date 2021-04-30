@@ -7,17 +7,19 @@ import me.mdbell.bus.IEventBus;
 import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.common.ext.StringExtensions;
 import me.mdbell.terranet.common.game.messages.GameMessage;
+import me.mdbell.terranet.common.game.messages.TileSectionMessage;
+import me.mdbell.terranet.common.game.messages.modules.PingModule;
+import me.mdbell.terranet.common.game.scene.Tile;
 import me.mdbell.terranet.common.net.ISendable;
+import me.mdbell.terranet.common.util.Vector2;
 import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
+import me.mdbell.terranet.server.simple.engine.GameLoop;
 import me.mdbell.terranet.server.simple.engine.Player;
 import me.mdbell.terranet.server.simple.events.GlobalMessageEvent;
 import me.mdbell.terranet.server.simple.util.WorldUtils;
 import me.mdbell.terranet.world.tree.WorldNode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @ExtensionMethod({StringExtensions.class})
@@ -27,12 +29,19 @@ public class ServerHandler implements ISendable {
 
     private WorldNode world;
 
+    private GameLoop loop;
+
     private int connected = 0;
     private final ConnectionCtx<Player>[] connections;
 
     public ServerHandler(int max, WorldNode world) {
         connections = new ConnectionCtx[max];
         this.world = world;
+        this.loop = new GameLoop(this);
+    }
+
+    public GameLoop getLoop() {
+        return loop;
     }
 
     public int getMaxConnections() {
@@ -66,6 +75,10 @@ public class ServerHandler implements ISendable {
             }
         }
         return null;
+    }
+
+    public ConnectionCtx<Player>[] getPlayers() {
+        return connections;
     }
 
     private void removeConnection(ConnectionCtx<Player> source) {
@@ -129,5 +142,38 @@ public class ServerHandler implements ISendable {
 
     public static IEventBus<ServerHandler> bus() {
         return bus;
+    }
+
+    public void sendWorldSection(ConnectionCtx<Player> ctx, int x, int y) {
+        if (x == -1) {
+            x = 0;
+            y = 0;
+        }
+        int width = 200;
+        int height = 150;
+        int endX = x + width;
+        int endY = y + height;
+        Tile[] t = new Tile[width * height];
+        for (int w = x; w <= width; w++) {
+            for (int h = y; h <= height; h++) {
+                t[h * height + x] = Tile.builder().active(true).type(0).build();
+
+            }
+        }
+        TileSectionMessage tsm = TileSectionMessage.builder()
+                .x(x).y(y)
+                .width(width).height(height)
+                .tiles(t).build();
+        log.info("Sending world data from {}, {} to {}, {}", x, y, endX, endY);
+        ctx.send(tsm);
+    }
+
+    public void ping(ConnectionCtx<Player> ctx) {
+        Player p = ctx.attrs();
+        Vector2 pos = p.getPosition();
+        log.debug("Pinging {} location {}", p.getName(), p.getPosition());
+        ctx.send(PingModule.builder()
+                .position(pos)
+                .build());
     }
 }

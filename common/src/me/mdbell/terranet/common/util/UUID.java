@@ -1,5 +1,6 @@
 package me.mdbell.terranet.common.util;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -7,7 +8,7 @@ import lombok.ToString;
 import java.util.Random;
 
 @EqualsAndHashCode
-@Getter
+@Data
 @ToString
 public class UUID {
 

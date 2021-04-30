@@ -7,6 +7,7 @@ import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.util.Color;
 import me.mdbell.terranet.common.util.NetworkText;
 import me.mdbell.terranet.common.util.UUID;
+import me.mdbell.terranet.common.util.Vector2;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -63,7 +64,7 @@ public class BufferExtensions {
         return new Color(red, green, blue);
     }
 
-    public Buffer<?> writeColor(Buffer<?> to, @NonNull Color color) {
+    public Buffer<?> writeColor(Buffer<?> to, Color color) {
         return to.writeByte(color.getRed())
                 .writeByte(color.getGreen())
                 .writeByte(color.getBlue());
@@ -85,12 +86,6 @@ public class BufferExtensions {
         return builder.build();
     }
 
-    public BitSet readBits(Buffer<?> to, int byteCount){
-        byte[] data = new byte[byteCount];
-        to.readBytes(data);
-        return BitSet.valueOf(data);
-    }
-
     public Buffer<?> writeText(Buffer<?> to, NetworkText text) {
         to.writeByte(text.mode().ordinal());
         writeString(to, text.text());
@@ -102,6 +97,20 @@ public class BufferExtensions {
             }
         }
         return to;
+    }
+
+    public BitSet readBits(Buffer<?> to, int byteCount){
+        byte[] data = new byte[byteCount];
+        to.readBytes(data);
+        return BitSet.valueOf(data);
+    }
+
+    public Vector2 readVector(Buffer<?> buffer){
+        return new Vector2(buffer.readFloatLE(), buffer.readFloatLE());
+    }
+
+    public Buffer<?> writeVector(Buffer<?> to, Vector2 vector){
+        return to.writeFloatLE(vector.getX()).writeFloatLE(vector.getY());
     }
 
     public Buffer<?> writeGuid(Buffer<?> to, UUID id){

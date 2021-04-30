@@ -6,8 +6,8 @@ import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.server.ConnectionCtx;
 
-public class ServerMessageEvent<T extends ConnectionAttributes> extends GameMessageEvent<ConnectionCtx<T>> {
-    public ServerMessageEvent(IEventBus<ConnectionCtx<T>> bus, ConnectionCtx<T> source, GameMessage value) {
+public class OutgoingMessageEvent<T extends ConnectionAttributes> extends GameMessageEvent<ConnectionCtx<T>> {
+    public OutgoingMessageEvent(IEventBus<ConnectionCtx<T>> bus, ConnectionCtx<T> source, GameMessage value) {
         super(bus, source, value);
     }
 }

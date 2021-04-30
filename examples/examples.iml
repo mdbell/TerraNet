@@ -14,6 +14,5 @@
     <orderEntry type="module" module-name="bus-internal" />
     <orderEntry type="module" module-name="world" />
     <orderEntry type="module" module-name="metadata-gson" />
-    <orderEntry type="module" module-name="common-files" />
   </component>
 </module>

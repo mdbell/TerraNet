@@ -80,9 +80,9 @@ class TupleBuffer extends AbstractBuffer<Tuple<DataInput, DataOutput>> {
 
     @SneakyThrows
     @Override
-    public Buffer<?> writeBytes(byte[] bytes) {
-        out().write(bytes);
-        writeIndex += bytes.length;
+    public Buffer<?> writeBytes(byte[] bytes, int offset, int len) {
+        out().write(bytes, offset, len);
+        writeIndex += len;
         return this;
     }
 

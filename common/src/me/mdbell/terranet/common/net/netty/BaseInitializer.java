@@ -21,7 +21,7 @@ public abstract class BaseInitializer extends ChannelInitializer<SocketChannel> 
         ChannelPipeline pipeline = socketChannel.pipeline();
         MessageDecoder decoder = new MessageDecoder(transcoders);
         MessageEncoder encoder = new MessageEncoder(transcoders);
-        pipeline.addLast(new ReadTimeoutHandler(10)); //TODO make this timeout configurable
+        //pipeline.addLast(new ReadTimeoutHandler(10)); //TODO make this timeout configurable
         pipeline.addLast(decoder);
         pipeline.addLast(encoder);
     }

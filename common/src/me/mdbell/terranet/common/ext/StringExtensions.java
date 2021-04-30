@@ -12,6 +12,10 @@ public class StringExtensions {
         return NetworkText.builder().text(str).build();
     }
 
+    public NetworkText toFormatted(String format, Object... args){
+        return toFormatted(format, args.map(String.class, Object::toString));
+    }
+
     public NetworkText toFormatted(String format, String... args){
         return toFormatted(format, args.map(NetworkText.class, StringExtensions::toLiteral));
     }

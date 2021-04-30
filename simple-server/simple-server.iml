@@ -11,7 +11,7 @@
     <orderEntry type="module" module-name="metadata-gson" />
     <orderEntry type="module" module-name="server-netty" />
     <orderEntry type="module" module-name="world" />
-    <orderEntry type="module" module-name="bus-greenrobot" />
     <orderEntry type="module" module-name="common" />
+    <orderEntry type="module" module-name="bus-greenrobot" />
   </component>
 </module>

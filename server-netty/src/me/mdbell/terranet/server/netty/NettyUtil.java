@@ -33,8 +33,7 @@ public final class NettyUtil {
         return new ServerBootstrap().group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ServerInitializer(server, transcoders))
-                .childOption(ChannelOption.SO_KEEPALIVE, true)
-                .childOption(ChannelOption.TCP_NODELAY, true);
+                .childOption(ChannelOption.SO_KEEPALIVE, true);
     }
 
     public static void shutdownGraceFully() {

@@ -1,5 +1,6 @@
 package me.mdbell.terranet.world;
 
+import me.mdbell.terranet.common.game.scene.LiquidType;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.world.reader.TileReader;
 import me.mdbell.terranet.world.tree.TileNode;
@@ -111,7 +112,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, quantity};
         TileNode node = loadTile(data);
         assertEquals(LiquidType.WATER, node.getLiquidType());
-        assertEquals(quantity, node.getLiquidQuantity());
+        assertEquals(quantity, node.getLiquid());
     }
 
     @Test
@@ -121,7 +122,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, quantity};
         TileNode node = loadTile(data);
         assertEquals(LiquidType.LAVA, node.getLiquidType());
-        assertEquals(quantity, node.getLiquidQuantity());
+        assertEquals(quantity, node.getLiquid());
     }
 
     @Test
@@ -131,7 +132,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, quantity};
         TileNode node = loadTile(data);
         assertEquals(LiquidType.HONEY, node.getLiquidType());
-        assertEquals(quantity, node.getLiquidQuantity());
+        assertEquals(quantity, node.getLiquid());
     }
 
     @Test
@@ -142,7 +143,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, flag2, id};
         TileNode node = loadTile(data);
         assertEquals(0, node.getType());
-        assertTrue(node.isBrick());
+        assertTrue(node.isHalfBrick());
     }
 
     @Test
@@ -156,7 +157,7 @@ public class TileReaderTest implements WorldFileConstants {
         TileNode node = loadTile(data);
 
         assertEquals(id, node.getType());
-        assertFalse(node.isBrick());
+        assertFalse(node.isHalfBrick());
         assertEquals(slopeId, node.getSlope());
     }
 
@@ -168,8 +169,8 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, flag2, flag3};
         TileNode node = loadTile(data);
 
-        assertTrue(node.isActuatorPresent());
-        assertFalse(node.isActuated());
+        assertTrue(node.isActuator());
+        assertFalse(node.isInActive());
     }
 
     @Test
@@ -180,8 +181,8 @@ public class TileReaderTest implements WorldFileConstants {
         byte[] data = {flag1, flag2, flag3};
         TileNode node = loadTile(data);
 
-        assertTrue(node.isActuatorPresent());
-        assertTrue(node.isActuated());
+        assertTrue(node.isActuator());
+        assertTrue(node.isInActive());
     }
 
     @Test
@@ -190,7 +191,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte flag2 = TILE_WIRE_1_MASK;
         byte[] data = {flag1, flag2};
         TileNode node = loadTile(data);
-        assertTrue(node.isWire1());
+        assertTrue(node.isWire());
         assertFalse(node.isWire2());
         assertFalse(node.isWire3());
         assertFalse(node.isWire4());
@@ -202,7 +203,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte flag2 = TILE_WIRE_2_MASK;
         byte[] data = {flag1, flag2};
         TileNode node = loadTile(data);
-        assertFalse(node.isWire1());
+        assertFalse(node.isWire());
         assertTrue(node.isWire2());
         assertFalse(node.isWire3());
         assertFalse(node.isWire4());
@@ -214,7 +215,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte flag2 = TILE_WIRE_3_MASK;
         byte[] data = {flag1, flag2};
         TileNode node = loadTile(data);
-        assertFalse(node.isWire1());
+        assertFalse(node.isWire());
         assertFalse(node.isWire2());
         assertTrue(node.isWire3());
         assertFalse(node.isWire4());
@@ -227,7 +228,7 @@ public class TileReaderTest implements WorldFileConstants {
         byte flag3 = TILE_WIRE_4_MASK;
         byte[] data = {flag1, flag2, flag3};
         TileNode node = loadTile(data);
-        assertFalse(node.isWire1());
+        assertFalse(node.isWire());
         assertFalse(node.isWire2());
         assertFalse(node.isWire3());
         assertTrue(node.isWire4());
@@ -247,15 +248,15 @@ public class TileReaderTest implements WorldFileConstants {
         assertEquals(0, node.getWall());
         assertEquals(0, node.getWallColor());
         assertEquals(LiquidType.NONE, node.getLiquidType());
-        assertEquals(0, node.getLiquidQuantity());
+        assertEquals(0, node.getLiquid());
         assertEquals(0, node.getSlope());
-        assertFalse(node.isBrick());
-        assertFalse(node.isWire1());
+        assertFalse(node.isHalfBrick());
+        assertFalse(node.isWire());
         assertTrue(node.isWire2());
         assertFalse(node.isWire3());
         assertTrue(node.isWire4());
-        assertFalse(node.isActuatorPresent());
-        assertFalse(node.isActuated());
+        assertFalse(node.isActuator());
+        assertFalse(node.isInActive());
     }
 
     @Test

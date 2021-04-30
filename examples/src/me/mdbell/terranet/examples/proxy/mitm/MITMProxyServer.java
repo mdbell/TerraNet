@@ -10,7 +10,7 @@ import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
 import me.mdbell.terranet.common.util.Color;
 import me.mdbell.terranet.common.util.NetworkText;
 import me.mdbell.terranet.examples.proxy.ProxyServer;
-import me.mdbell.terranet.server.events.ServerMessageEvent;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 
 @ExtensionMethod({StringExtensions.class})
 public class MITMProxyServer extends ProxyServer {
@@ -19,7 +19,7 @@ public class MITMProxyServer extends ProxyServer {
     }
 
     @Override
-    public void onIncomingMessage(ServerMessageEvent<?> event) {
+    public void onIncomingMessage(IncomingMessageEvent<?> event) {
         GameMessage message = event.value();
         if (message.getModId() == Opcodes.MOD_TEXT && !message.isServer()) {
             String text = ((IncomingChatMessage) message).getMessage();

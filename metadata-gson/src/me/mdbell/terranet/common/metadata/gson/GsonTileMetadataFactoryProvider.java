@@ -1,7 +1,8 @@
-package me.mdbell.terranet.files.metadata.gson;
+package me.mdbell.terranet.common.metadata.gson;
 
-import me.mdbell.terranet.files.metadata.TileMetadataFactory;
-import me.mdbell.terranet.files.metadata.TileMetadataFactoryProvider;
+
+import me.mdbell.terranet.metadata.TileMetadataFactory;
+import me.mdbell.terranet.metadata.TileMetadataFactoryProvider;
 
 public class GsonTileMetadataFactoryProvider implements TileMetadataFactoryProvider {
     @Override

@@ -1,6 +1,7 @@
 package me.mdbell.terranet.world.log;
 
 import lombok.extern.slf4j.Slf4j;
+import me.mdbell.terranet.common.game.scene.LiquidType;
 import me.mdbell.terranet.world.*;
 
 @Slf4j

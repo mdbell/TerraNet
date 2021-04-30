@@ -1,9 +1,9 @@
 package me.mdbell.terranet.world.reader;
 
 import me.mdbell.terranet.common.io.Buffer;
-import me.mdbell.terranet.files.metadata.TileMetadata;
-import me.mdbell.terranet.files.metadata.TileMetadataFactory;
-import me.mdbell.terranet.world.LiquidType;
+import me.mdbell.terranet.metadata.TileMetadata;
+import me.mdbell.terranet.metadata.TileMetadataFactory;
+import me.mdbell.terranet.common.game.scene.LiquidType;
 import me.mdbell.terranet.world.TileDataVisitor;
 import me.mdbell.terranet.world.TileVisitor;
 import me.mdbell.terranet.world.WorldFileConstants;

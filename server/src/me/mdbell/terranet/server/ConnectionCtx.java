@@ -6,7 +6,7 @@ import me.mdbell.terranet.common.game.messages.GameMessage;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.common.net.IReceivable;
 import me.mdbell.terranet.common.net.ISendable;
-import me.mdbell.terranet.server.events.ServerMessageEvent;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 
 import java.io.Closeable;
 
@@ -40,7 +40,7 @@ public abstract class ConnectionCtx<T extends ConnectionAttributes> implements I
 
     @Override
     public final void receive(GameMessage message) {
-        ServerMessageEvent event = new ServerMessageEvent(bus, this, message);
+        IncomingMessageEvent event = new IncomingMessageEvent(bus, this, message);
         bus.post(event);
     }
 }

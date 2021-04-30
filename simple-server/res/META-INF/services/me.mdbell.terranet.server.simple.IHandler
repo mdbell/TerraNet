@@ -1,2 +1,4 @@
 me.mdbell.terranet.server.simple.handlers.ChatHandler
 me.mdbell.terranet.server.simple.handlers.ConnectionHandshakeHandler
+me.mdbell.terranet.server.simple.handlers.LocationHandler
+me.mdbell.terranet.server.simple.handlers.IdleHandler

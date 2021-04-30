@@ -77,10 +77,10 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
 
     @SneakyThrows
     @Override
-    public Buffer<?> writeBytes(byte[] bytes) {
+    public Buffer<?> writeBytes(byte[] bytes, int off, int len) {
         buffer.seek(writeIndex);
-        buffer.write(bytes);
-        writeIndex += bytes.length;
+        buffer.write(bytes, off, len);
+        writeIndex += len;
         return this;
     }
 
@@ -105,11 +105,6 @@ final class RAFBuffer extends AbstractBuffer<RandomAccessFile> {
         buffer.seek(readIndex);
         readIndex++;
         return buffer.readByte();
-    }
-
-    @Override
-    public int readUnsignedByte() {
-        return readByte() & 0xFF;
     }
 
     @SneakyThrows

@@ -1,4 +1,4 @@
-package me.mdbell.terranet.files.metadata;
+package me.mdbell.terranet.metadata;
 
 import lombok.extern.slf4j.Slf4j;
 

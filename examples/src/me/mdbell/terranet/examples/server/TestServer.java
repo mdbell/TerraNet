@@ -6,7 +6,7 @@ import me.mdbell.terranet.server.ConnectionCtx;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
-import me.mdbell.terranet.server.events.ServerMessageEvent;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 
 @Slf4j
 public class TestServer {
@@ -30,7 +30,7 @@ public class TestServer {
     }
 
     @Subscribe
-    public void onMessage(ServerMessageEvent event) {
+    public void onMessage(IncomingMessageEvent event) {
         log.info("New message from: {} Message: {}", event.source(), event.value());
     }
 

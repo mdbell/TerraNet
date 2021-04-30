@@ -5,6 +5,7 @@ import me.mdbell.terranet.common.game.messages.NetModuleMessage;
 import me.mdbell.terranet.common.game.messages.modules.BufferedModule;
 import me.mdbell.terranet.common.game.messages.modules.IncomingChatMessage;
 import me.mdbell.terranet.common.game.messages.modules.OutgoingChatMessage;
+import me.mdbell.terranet.common.game.messages.modules.PingModule;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.common.net.FilteredMessageTranscoder;
 import me.mdbell.terranet.common.ext.BufferExtensions;
@@ -34,6 +35,10 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
                             .color(buff.readColor())
                             .build();
                 }
+            case MOD_PING:
+                return PingModule.builder()
+                        .position(buff.readVector())
+                        .build();
             default:
                 BufferedModule mod = new BufferedModule(modId, size);
                 buff.readBytes(mod.buffer());
@@ -58,6 +63,10 @@ public class ModuleMessageTranscoder extends FilteredMessageTranscoder<NetModule
                 to.writeByte(text.author())
                         .writeText(text.text())
                         .writeColor(text.color());
+                return true;
+            case MOD_PING:
+                PingModule ping = (PingModule) mod;
+                to.writeVector(ping.getPosition());
                 return true;
             default:
                 if (!(mod instanceof BufferedModule)) {

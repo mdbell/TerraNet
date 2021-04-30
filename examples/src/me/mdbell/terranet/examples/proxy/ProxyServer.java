@@ -14,7 +14,7 @@ import me.mdbell.terranet.server.ConnectionState;
 import me.mdbell.terranet.server.ServerCtx;
 import me.mdbell.terranet.server.ServerFactory;
 import me.mdbell.terranet.server.events.ServerConnectionEvent;
-import me.mdbell.terranet.server.events.ServerMessageEvent;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public class ProxyServer {
     }
 
     @Subscribe
-    public void onIncomingMessage(ServerMessageEvent<?> event) {
+    public void onIncomingMessage(IncomingMessageEvent<?> event) {
         GameMessage message = event.value();
         ConnectionCtx<?> conn = event.source();
         ClientCtx<?> ctx;

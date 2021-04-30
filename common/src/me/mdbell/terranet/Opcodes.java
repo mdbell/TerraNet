@@ -29,6 +29,7 @@ public interface Opcodes {
     int OP_WORLD_METADATA = 7;
     int OP_REQUEST_SPAWN = 8;
     int OP_UPDATE_LOADING_STATUS = 9;
+    int OP_TILE_SECTION = 10;
 
     int OP_PLAYER_HP = 16;
 

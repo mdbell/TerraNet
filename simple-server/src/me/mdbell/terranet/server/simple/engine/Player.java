@@ -7,6 +7,7 @@ import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.common.game.messages.PlayerInfoMessage;
 import me.mdbell.terranet.common.net.ConnectionAttributes;
 import me.mdbell.terranet.common.util.Color;
+import me.mdbell.terranet.common.util.Vector2;
 import me.mdbell.terranet.server.simple.data.ConnectionState;
 import me.mdbell.terranet.server.simple.data.Item;
 
@@ -15,6 +16,9 @@ import me.mdbell.terranet.server.simple.data.Item;
 public class Player implements ConnectionAttributes {
 
     ConnectionState connectionState = ConnectionState.NEW;
+
+    private long lastMessage = 0;
+    private final Vector2 position = new Vector2(0, 0);
 
     int id = -1;
     String name;
@@ -36,5 +40,9 @@ public class Player implements ConnectionAttributes {
     public void update(PlayerInfoMessage msg) {
         setName(msg.getName());
         //TODO get rest of the info
+    }
+
+    public void setLastMessageTick(long tick) {
+        lastMessage = tick;
     }
 }

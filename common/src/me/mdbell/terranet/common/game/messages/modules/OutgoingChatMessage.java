@@ -27,11 +27,6 @@ public class OutgoingChatMessage extends NetModuleMessage {
         return author;
     }
 
-    public OutgoingChatMessage author(int author) {
-        this.author = author;
-        return this;
-    }
-
     public NetworkText text() {
         return text;
     }

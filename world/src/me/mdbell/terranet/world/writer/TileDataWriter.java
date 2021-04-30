@@ -1,6 +1,7 @@
 package me.mdbell.terranet.world.writer;
 
 import lombok.extern.slf4j.Slf4j;
+import me.mdbell.terranet.common.game.scene.LiquidType;
 import me.mdbell.terranet.common.io.Buffer;
 import me.mdbell.terranet.world.TileDataVisitor;
 import me.mdbell.terranet.world.TileVisitor;
@@ -78,13 +79,13 @@ public class TileDataWriter implements TileDataVisitor, WorldFileConstants {
         if(prev.isWire4()) {
             flag3 |= TILE_WIRE_4_MASK;
         }
-        if (prev.isActuated()) {
+        if (prev.isActuator()) {
             flag3 |= TILE_ACTUATED_MASK;
         }
-        if (prev.isActuatorPresent()) {
+        if (prev.isInActive()) {
             flag3 |= TILE_ACTUATOR_MASK;
         }
-        if (prev.isBrick()) {
+        if (prev.isHalfBrick()) {
             flag2 |= TILE_SLOPE_BRICK_MASK;
         } else if (prev.getSlope() > 0) {
             flag2 |= (prev.getSlope() + 1) << 4;
@@ -98,12 +99,12 @@ public class TileDataWriter implements TileDataVisitor, WorldFileConstants {
             flag2 |= TILE_WIRE_2_MASK;
         }
 
-        if (prev.isWire1()) {
+        if (prev.isWire()) {
             flag2 |= TILE_WIRE_1_MASK;
         }
 
-        if (prev.getLiquidQuantity() > 0) {
-            flag1 |= (prev.getLiquidType().ordinal() - 1) << 3;
+        if (prev.getLiquidType() != LiquidType.NONE) {
+            flag1 |= prev.getLiquidType().getMask();
         }
         if (prev.getWallColor() != 0) {
             flag3 |= TILE_WALL_COLOR_MASK;
@@ -162,8 +163,8 @@ public class TileDataWriter implements TileDataVisitor, WorldFileConstants {
                 buffer.writeByte(prev.getWallColor());
             }
         }
-        if (prev.getLiquidQuantity() > 0) {
-            buffer.writeByte(prev.getLiquidQuantity());
+        if (prev.getLiquid() > 0) {
+            buffer.writeByte(prev.getLiquid());
         }
 
         if (prev.getWall() > 255) {

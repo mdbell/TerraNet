@@ -189,4 +189,8 @@ public class WorldNode implements WorldVisitor {
         }
         visitor.visitEnd();
     }
+
+    public TileNode getTile(int x, int y) {
+        return tiles[y * metadata.getHeight() + x];
+    }
 }

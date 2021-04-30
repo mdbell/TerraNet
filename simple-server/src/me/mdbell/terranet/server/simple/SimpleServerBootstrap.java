@@ -55,9 +55,7 @@ public class SimpleServerBootstrap {
 
         log.info("Setting up main loop...");
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-
-        GameLoop loop = new GameLoop(handler);
-        executor.scheduleAtFixedRate(loop, 0, GameLoop.MS_PER_TICK, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(handler.getLoop(), 0, GameLoop.MS_PER_TICK, TimeUnit.MILLISECONDS);
 
         log.info("Starting Server on port {}", port);
         ctx.bind(port);
@@ -89,6 +87,6 @@ public class SimpleServerBootstrap {
     }
 
     public static void main(String[] args) throws Exception {
-        new SimpleServerBootstrap(1337, "./local/test.wld").run();
+        new SimpleServerBootstrap(1337, "./local/Fishing.wld").run();
     }
 }

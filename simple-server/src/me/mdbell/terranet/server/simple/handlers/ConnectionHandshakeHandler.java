@@ -6,9 +6,9 @@ import me.mdbell.bus.Subscribe;
 import me.mdbell.terranet.Opcodes;
 import me.mdbell.terranet.common.ext.ArrayExtensions;
 import me.mdbell.terranet.common.ext.StringExtensions;
-import me.mdbell.terranet.common.game.events.GameMessageEvent;
 import me.mdbell.terranet.common.game.messages.*;
 import me.mdbell.terranet.server.ConnectionCtx;
+import me.mdbell.terranet.server.events.IncomingMessageEvent;
 import me.mdbell.terranet.server.simple.IHandler;
 import me.mdbell.terranet.server.simple.ServerHandler;
 import me.mdbell.terranet.server.simple.data.ConnectionState;
@@ -38,8 +38,8 @@ public class ConnectionHandshakeHandler implements Opcodes, IHandler {
         ConnectionCtx.bus().unsubscribe(this);
     }
 
-    @Subscribe
-    public void onMessage(GameMessageEvent<ConnectionCtx<Player>> event) {
+    @Subscribe(priority = 10)
+    public void onMessage(IncomingMessageEvent<Player> event) {
         ConnectionCtx<Player> ctx = event.source();
         GameMessage message = event.value();
         boolean consume = switch (message.getOpcode()) {
@@ -58,7 +58,7 @@ public class ConnectionHandshakeHandler implements Opcodes, IHandler {
         if (consume) {
             event.consume();
         } else {
-            log.info("{} - {}", message, ctx.attrs().getConnectionState());
+            //log.info("{} - {}", message, ctx.attrs().getConnectionState());
         }
     }
 
@@ -67,8 +67,11 @@ public class ConnectionHandshakeHandler implements Opcodes, IHandler {
         if(player.getConnectionState() != ConnectionState.WORLD_REQUESTED) {
             return false;
         }
+        handler.sendWorldSection(ctx, message.getX(), message.getY());
+        BufferedMessage msg = new BufferedMessage(129, 0);
+        ctx.send(msg);
         //49 = loading complete, spawn player
-        BufferedMessage msg = new BufferedMessage(49, 0);
+        msg = new BufferedMessage(49, 0);
         ctx.send(msg);
         return true;
     }

@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.SneakyThrows;
-import me.mdbell.terranet.files.metadata.TileMetadata;
+import me.mdbell.terranet.metadata.TileMetadata;
 
 import java.io.FileWriter;
 
@@ -2928,7 +2928,7 @@ public class Main{
         tiles[493].lavaDeath = true;
         for (int index = 0; index < 624; ++index)
         {
-            if (tiles[index].lavaDeath != null && tiles[index].lavaDeath)
+            if (tiles[index].lavaDeath)
                 tiles[index].obsidianKill = true;
         }
         tiles[546].obsidianKill = true;
@@ -3049,7 +3049,7 @@ public class Main{
         tiles[389].noSunlight = true;
         for (int index = 0; index < 624; ++index)
         {
-            if (tiles[index].solid != null && tiles[index].solid)
+            if (tiles[index].solid)
                 tiles[index].noSunlight = true;
         }
         tiles[546].noSunlight = false;

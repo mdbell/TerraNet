@@ -60,12 +60,12 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
     }
 
     @Override
-    public Buffer<?> writeBytes(byte[] bytes) {
+    public Buffer<?> writeBytes(byte[] bytes, int off, int len) {
         int old = buffer.position();
         buffer.position(writeIndex);
-        buffer.put(bytes);
-        writeIndex += buffer.position() - old;
+        buffer.put(bytes, off, len);
         buffer.position(old);
+        writeIndex += len;
         return this;
     }
 
@@ -99,11 +99,6 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
         byte value = buffer.get(readIndex);
         readIndex++;
         return value;
-    }
-
-    @Override
-    public int readUnsignedByte() {
-        return Byte.toUnsignedInt(readByte());
     }
 
     @Override
@@ -143,7 +138,9 @@ final class JDKBuffer extends AbstractBuffer<ByteBuffer> {
 
     @Override
     public Buffer<?> readBytes(byte[] data) {
-        throw new UnsupportedOperationException("Unimplemented");
+        buffer.get(readIndex, data);
+        readIndex += data.length;
+        return this;
     }
 
     @Override

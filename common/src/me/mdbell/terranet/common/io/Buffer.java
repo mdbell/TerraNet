@@ -24,7 +24,11 @@ public abstract class Buffer<T> {
     }
 
     public static Buffer<ByteBuffer> wrap(byte[] b) {
-        return wrap(ByteBuffer.wrap(b));
+        return wrap(b, 0, b.length);
+    }
+
+    public static Buffer<ByteBuffer> wrap(byte[] b, int offset, int length) {
+        return wrap(ByteBuffer.wrap(b, offset, length));
     }
 
     public static Buffer<ByteBuffer> wrap(ByteBuffer buffer) {
@@ -93,7 +97,11 @@ public abstract class Buffer<T> {
 
     public abstract Buffer<?> writeDoubleLE(double value);
 
-    public abstract Buffer<?> writeBytes(byte[] bytes);
+    public final Buffer<?> writeBytes(byte[] bytes){
+        return writeBytes(bytes, 0, bytes.length);
+    }
+
+    public abstract Buffer<?> writeBytes(byte[] bytes, int offset, int len);
 
     public abstract Buffer<?> writeBytes(ByteBuffer bytes);
 
@@ -145,7 +153,9 @@ public abstract class Buffer<T> {
 
     public abstract byte readByte();
 
-    public abstract int readUnsignedByte();
+    public int readUnsignedByte(){
+        return Byte.toUnsignedInt(readByte());
+    }
 
     public abstract short readShort();
 
@@ -221,4 +231,13 @@ public abstract class Buffer<T> {
     public abstract Buffer<?> markReaderIndex();
 
     public abstract Buffer<?> resetReaderIndex();
+
+    public InputStream asInputStream(){
+        return new InputStream() {
+            @Override
+            public int read() throws IOException {
+                return readByte();
+            }
+        };
+    }
 }

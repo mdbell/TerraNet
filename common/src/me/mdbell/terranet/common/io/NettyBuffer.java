@@ -90,8 +90,8 @@ final class NettyBuffer extends Buffer<ByteBuf> {
     }
 
     @Override
-    public Buffer<?> writeBytes(byte[] bytes) {
-        buffer.writeBytes(bytes);
+    public Buffer<?> writeBytes(byte[] bytes, int off, int len) {
+        buffer.writeBytes(bytes, off, len);
         return this;
     }
 
